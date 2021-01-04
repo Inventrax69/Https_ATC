@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:clickable="true"
+    android:weightSum="3"
+    android:id="@+id/nav_drawer_row_relative_layout"
+    android:focusable="true">
+
+
+    <TextView
+        android:id="@+id/FromSloc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="2dp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/AvaQty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:padding="2dp"
+        android:textStyle="normal" />
+
+    <RelativeLayout
+        android:layout_weight="1"
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_check"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

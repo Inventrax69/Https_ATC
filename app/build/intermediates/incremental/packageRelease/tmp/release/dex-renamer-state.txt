@@ -1,0 +1,4 @@
+#Mon Jan 04 11:27:03 IST 2021
+base.0=E\:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
+path.0=classes.dex
+renamed.0=classes.dex

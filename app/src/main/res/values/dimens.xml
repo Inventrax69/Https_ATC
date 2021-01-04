@@ -1,0 +1,488 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="app_bar_top_padding">24dp</dimen>
+
+
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+
+    <dimen name="design_navigation_separator_vertical_padding">0dp</dimen>
+    <!-- Navigation Drawer  -->
+
+    <dimen name="drawer_margin_top">48dp</dimen>
+    <dimen name="nav_drawer_width">260dp</dimen>
+
+    <dimen name="nav_account_logo_width">70dp</dimen>
+    <dimen name="nav_account_logo_height">70dp</dimen>
+
+    <dimen name="nav_account_height">140dp</dimen>
+    <dimen name="nav_row_padding_left">30dp</dimen>
+    <dimen name="nav_row_padding_top">10dp</dimen>
+    <dimen name="nav_row_padding_bottom">10dp</dimen>
+    <dimen name="nav_row_padding_right">10dp</dimen>
+    <dimen name="nav_row_text_size">15dp</dimen>
+    <dimen name="nav_recycler_view_margin_top">15dp</dimen>
+    <dimen name="nav_imgtitleicon_margin_left">12dp</dimen>
+    <dimen name="nav_imgtitleicon_margin_right">12dp</dimen>
+
+    <!-- Navigation Drawer  -->
+
+    <dimen name="main_container_body_height">0dp</dimen>
+
+    <!-- Splash Screen  -->
+
+    <dimen name="splash_progress_bar_margin_top">25dp</dimen>
+    <dimen name="splash_txt_powered_by_text_size">16sp</dimen>
+    <dimen name="splash_inventrax_logo_margin_bottom">30dp</dimen>
+    <dimen name="splash_txt_inventrax_site_margin_bottom">5dp</dimen>
+    <dimen name="splash_txt_inventrax_site_text_size">16sp</dimen>
+
+    <!-- Splash Screen -->
+
+
+    <!-- Login Screen  -->
+
+    <dimen name="login_chk_remember_margin_top">10dp</dimen>
+    <dimen name="login_button_margin_top">10dp</dimen>
+    <dimen name="login_button_text_size">20sp</dimen>
+    <dimen name="activity_login_padding_left">20dp</dimen>
+    <dimen name="activity_login_padding_right">20dp</dimen>
+    <dimen name="activity_login_padding_top">60dp</dimen>
+    <dimen name="txt_login_user_name">10dp</dimen>
+    <dimen name="txt_login_user_name_top_margin">10dp</dimen>
+    <dimen name="txt_login_user_size">12sp</dimen>
+
+    <!-- Login Screen  -->
+
+    <!-- Activity Main -->
+
+    <dimen name="activity_main_bottom_bar_text_size">16sp</dimen>
+    <dimen name="activity_main_bottom_bar_padding">5dp</dimen>
+
+    <dimen name="activity_main_top_bar_text_size">16sp</dimen>
+    <dimen name="activity_main_top_bar_padding">5dp</dimen>
+
+    <dimen name="activity_main_red_bar_height">5dp</dimen>
+
+    <!-- Activity Main -->
+
+
+    <!-- Dashboard -->
+
+    <!-- Dashboard -->
+
+    <!-- Outlet List -->
+
+    <dimen name="size_byte">16dp</dimen>
+    <dimen name="size_word">8dp</dimen>
+    <dimen name="outlet_list_row_outlet_code_size">18sp</dimen>
+    <dimen name="outlet_list_row_txt_view_size">15sp</dimen>
+    <dimen name="outlet_list_row_card_corner_radius">5dp</dimen>
+    <dimen name="outlet_list_channel_code_margin_top">14dp</dimen>
+    <dimen name="outlet_list_landmark_margin_top">14dp</dimen>
+    <dimen name="outlet_list_txt_outlet_name_margin_top">14dp</dimen>
+
+    <dimen name="fragment_outlet_list_recycler_height">0dp</dimen>
+    <dimen name="fragment_outlet_list_recycler_margin">5dp</dimen>
+
+    <dimen name="fragment_outlet_list_header_text_size">16sp</dimen>
+    <dimen name="fragment_outlet_list_header_padding">5dp</dimen>
+
+    <!-- Outlet List -->
+
+
+    <!-- Order History -->
+
+    <dimen name="order_history_size_byte">16dp</dimen>
+    <dimen name="order_history_size_word">8dp</dimen>
+    <dimen name="order_history_list_row_outlet_code_size">18sp</dimen>
+    <dimen name="order_history_list_row_txt_view_size">15sp</dimen>
+    <dimen name="order_history_list_row_card_corner_radius">5dp</dimen>
+    <dimen name="order_history_list_channel_code_margin_top">14dp</dimen>
+    <dimen name="order_history_list_landmark_margin_top">14dp</dimen>
+    <dimen name="order_history_list_txt_outlet_name_margin_top">14dp</dimen>
+
+    <dimen name="fragment_order_history_list_recycler_height">0dp</dimen>
+    <dimen name="fragment_order_history_list_recycler_margin">5dp</dimen>
+
+    <dimen name="fragment_order_history_list_header_text_size">16sp</dimen>
+    <dimen name="fragment_order_history_list_header_padding">5dp</dimen>
+
+    <!-- Order History -->
+
+    <!-- Delivery List -->
+
+    <dimen name="delivery_size_byte">16dp</dimen>
+    <dimen name="delivery_size_word">8dp</dimen>
+    <dimen name="delivery_list_row_outlet_code_size">18sp</dimen>
+    <dimen name="delivery_list_row_txt_view_size">15sp</dimen>
+    <dimen name="delivery_list_row_card_corner_radius">5dp</dimen>
+    <dimen name="delivery_list_channel_code_margin_top">14dp</dimen>
+    <dimen name="delivery_list_landmark_margin_top">14dp</dimen>
+    <dimen name="delivery_list_txt_outlet_name_margin_top">14dp</dimen>
+
+    <dimen name="fragment_delivery_list_recycler_height">0dp</dimen>
+    <dimen name="fragment_delivery_list_recycler_margin">5dp</dimen>
+
+    <dimen name="fragment_delivery_list_header_text_size">16sp</dimen>
+    <dimen name="fragment_delivery_list_header_padding">5dp</dimen>
+
+    <!-- Delivery List -->
+
+    <!-- SKU List -->
+
+    <dimen name="sku_list_row_card_corner_radius">5dp</dimen>
+    <dimen name="sku_list_size_word">16dp</dimen>
+    <dimen name="sku_list_size_text_primary">16sp</dimen>
+    <dimen name="sku_list_size_text_secondary">14sp</dimen>
+    <dimen name="sku_list_size_half_byte">4dp</dimen>
+    <dimen name="sku_list_size_byte">8dp</dimen>
+    <dimen name="sku_list_thumbnail_width">64dp</dimen>
+    <dimen name="sku_list_thumbnail_height">90dp</dimen>
+    <dimen name="sku_list_txt_brand_name_margin_left">56dp</dimen>
+
+    <dimen name="fragment_sku_list_recycler_height">0dp</dimen>
+    <dimen name="fragment_sku_list_recycler_margin">5dp</dimen>
+
+    <dimen name="fragment_sku_list_header_text_size">16sp</dimen>
+    <dimen name="fragment_sku_list_header_padding">5dp</dimen>
+
+    <dimen name="sku_list_img_thumbnail_margin_right">20dp</dimen>
+    <dimen name="sku_list_img_thumbnail_margin_left">10dp</dimen>
+
+    <dimen name="sku_list_btn_add_to_cart_drawable_padding">0dp</dimen>
+
+    <dimen name="sku_list_txt_bottle_quantity_margin_left">20dp</dimen>
+    <dimen name="sku_list_txt_case_quantity_margin_left">30dp</dimen>
+
+    <dimen name="sku_list_txt_case_quantity_width">60dp</dimen>
+    <dimen name="sku_list_txt_bottle_quantity_width">70dp</dimen>
+
+    <dimen name="sku_list_spinner_item_uom_margin">0dp</dimen>
+    <dimen name="sku_list_spinner_item_uom_padding">0dp</dimen>
+    <dimen name="sku_list_spinner_item_uom_width">90dp</dimen>
+    <dimen name="sku_list_spinner_item_uom_height">30dp</dimen>
+
+    <dimen name="sku_list_txt_case_quantity_margin_bottom">5dp</dimen>
+    <dimen name="sku_list_txt_case_quantity_margin_top">5dp</dimen>
+
+    <dimen name="sku_list_txt_quantity_padding">5dp</dimen>
+
+    <dimen name="sku_list_refresh_layout_margin_bottom">70dp</dimen>
+    <dimen name="sku_list_bottom_bar_margin_top">70dp</dimen>
+    <dimen name="sku_list_bottom_bar_padding">10dp</dimen>
+    <dimen name="sku_list_txt_cart_total_text_size">13sp</dimen>
+    <dimen name="sku_list_txt_cart_total_margin_left">30dp</dimen>
+    <dimen name="sku_list_txt_total_price_text_size">16sp</dimen>
+    <dimen name="sku_list_txt_total_price_margin_left">30dp</dimen>
+    <dimen name="sku_list_btn_checkout_text_size">16sp</dimen>
+    <dimen name="sku_list_btn_checkout_padding_left">10dp</dimen>
+    <dimen name="sku_list_btn_checkout_padding_right">10dp</dimen>
+    <dimen name="sku_list_btn_add_to_cart_width">60dp</dimen>
+
+    <dimen name="sku_list_text_trade_price_margin_left">10dp</dimen>
+
+    <dimen name="sku_list_btn_add_to_cart_margin_left">20dp</dimen>
+
+    <!-- SKU List -->
+
+    <!-- Outlet Registration -->
+
+    <dimen name="fragment_outlet_registration_header_text_size">16sp</dimen>
+    <dimen name="fragment_outlet_registration_header_padding">5dp</dimen>
+
+    <!-- Outlet Registration -->
+
+    <!-- Complaint Registration -->
+
+    <dimen name="fragment_complaint_registration_header_text_size">16sp</dimen>
+    <dimen name="fragment_complaint_registration_header_padding">5dp</dimen>
+
+
+    <!-- Complaint Registration -->
+
+    <!-- Order Booking -->
+
+    <!-- Order Booking -->
+
+    <!-- Outlet Dashboard -->
+
+    <dimen name="fragment_outlet_menu_recycler_height">0dp</dimen>
+    <dimen name="fragment_outlet_menu_recycler_margin">15dp</dimen>
+    <dimen name="fragment_outlet_dashboard_layout_outlet_info_margin_left">15dp</dimen>
+    <dimen name="fragment_outlet_dashboard_layout_outlet_info_margin_right">15dp</dimen>
+    <dimen name="fragment_outlet_dashboard_textview_padding_left">15dp</dimen>
+    <dimen name="fragment_outlet_dashboard_inner_layout_padding">10dp</dimen>
+    <dimen name="fragment_outlet_dashboard_text_view_size">16sp</dimen>
+
+
+    <dimen name="fragment_outlet_dashboard_table_layout_padding">15dp</dimen>
+    <dimen name="fragment_outlet_dashboard_text_view_column_margin_left">5dp</dimen>
+    <dimen name="fragment_outlet_dashboard_text_view_column_margin_right">5dp</dimen>
+    <dimen name="fragment_outlet_dashboard_table_row_padding">10dp</dimen>
+
+
+    <!-- Outlet Dashboard -->
+
+    <!-- Outlet Menu -->
+
+
+    <dimen name="outlet_menu_row_card_corner_radius">5dp</dimen>
+
+    <dimen name="outlet_menu_size_half_byte">4dp</dimen>
+    <dimen name="outlet_menu_size_byte">8dp</dimen>
+    <dimen name="outlet_menu_size_word">16dp</dimen>
+    <dimen name="outlet_menu_row_padding_top">8dp</dimen>
+    <dimen name="outlet_menu_row_padding_bottom">8dp</dimen>
+    <dimen name="outlet_menu_row_padding_left">8dp</dimen>
+    <dimen name="outlet_menu_row_padding_right">8dp</dimen>
+    <dimen name="outlet_menu_row_menu_item_size">13sp</dimen>
+    <dimen name="outlet_menu_row_margin_top">10dp</dimen>
+    <dimen name="outlet_menu_row_margin_bottom">5dp</dimen>
+
+
+    <!-- Outlet Menu -->
+
+    <!-- Order Summary Items Row -->
+
+    <dimen name="order_summary_items_row_card_corner_radius">5dp</dimen>
+    <dimen name="order_summary_items_row_layout_padding">5dp</dimen>
+    <dimen name="order_summary_items_layout_payable_amount_margin_top">10dp</dimen>
+    <dimen name="order_summary_items_layout_payable_amount_text_view_margin_left">20dp</dimen>
+    <dimen name="order_summary_items_layout_under_line_margin_top">8dp</dimen>
+    <dimen name="order_summary_items_layout_under_line_view_margin_left">80dp</dimen>
+    <dimen name="order_summary_items_layout_under_line_view_height">1dp</dimen>
+    <dimen name="order_summary_items_layout_product_quantity_margin_top">10dp</dimen>
+    <dimen name="order_summary_items_layout_product_quantity_text_view_margin_left">10dp</dimen>
+    <dimen name="order_summary_items_layout_product_discount_margin_top">10dp</dimen>
+    <dimen name="order_summary_items_layout_product_discount_text_view_margin_left">20dp</dimen>
+    <dimen name="order_summary_items_layout_product_price_margin_top">20dp</dimen>
+    <dimen name="order_summary_items_layout_product_price_text_view_margin_left">20dp</dimen>
+    <dimen name="order_summary_items_layout_text_view_margin_left">5dp</dimen>
+
+    <dimen name="order_summary_recycler_text_view_size">16sp</dimen>
+    <dimen name="order_summary_recycler_text_view_product_name_size">20sp</dimen>
+
+    <!-- Order Summary Items Row -->
+
+    <!-- Order Summary List -->
+
+    <dimen name="fragment_order_summary_recycler_margin">15dp</dimen>
+    <dimen name="order_summary_footer_padding">10dp</dimen>
+    <dimen name="order_summary_footer_text_view_total_amount_margin_left">5dp</dimen>
+    <dimen name="order_summary_footer_text_view_bottles_margin_left">10dp</dimen>
+    <dimen name="order_summary_footer_text_view_frees_margin_left">10dp</dimen>
+    <dimen name="order_summary_footer_button_confirm_order_margin_left">10dp</dimen>
+    <dimen name="order_summary_footer_button_confirm_order_margin_right">10dp</dimen>
+    <dimen name="order_summary_footer_table_row_confirm_order_margin_bottom">5dp</dimen>
+    <dimen name="order_summary_footer_table_row_confirm_order_margin_top">10dp</dimen>
+    <dimen name="order_summary_footer_table_row_quantity_summary_margin_top">5dp</dimen>
+    <dimen name="order_summary_footer_text_view_size">16sp</dimen>
+
+
+    <dimen name="fragment_order_view_summary_table_row_padding">10dp</dimen>
+    <dimen name="fragment_order_view_summary_text_view_size">18sp</dimen>
+    <dimen name="fragment_order_view_summary_text_view_margin_left">10dp</dimen>
+    <dimen name="fragment_order_view_summary_text_view_margin_right">10dp</dimen>
+
+    <!-- Order Summary List -->
+
+    <!-- Item List Row -->
+
+    <dimen name="item_list_row_card_corner_radius">5dp</dimen>
+    <dimen name="item_list_size_byte">8dp</dimen>
+    <dimen name="item_list_size_word">16dp</dimen>
+
+    <!-- Item List Row -->
+
+    <!-- Item List -->
+
+    <dimen name="fragment_item_list_recycler_height">0dp</dimen>
+    <dimen name="fragment_item_list_recycler_margin">5dp</dimen>
+
+
+    <!-- Item List -->
+
+    <!-- delivery -->
+
+    <dimen name="fragment_delivery_table_layout_padding">15dp</dimen>
+    <dimen name="fragment_delivery_text_view_size">16sp</dimen>
+    <dimen name="fragment_delivery_text_view_column_margin_left">5dp</dimen>
+    <dimen name="fragment_delivery_text_view_column_margin_right">5dp</dimen>
+    <dimen name="fragment_delivery_table_row_padding">10dp</dimen>
+
+    <dimen name="fragment_delivery_button_receive_padding_left">20dp</dimen>
+    <dimen name="fragment_delivery_button_receive_padding_right">20dp</dimen>
+
+
+    <!-- delivery -->
+
+    <!-- Returns -->
+
+    <dimen name="fragment_returns_table_layout_padding">15dp</dimen>
+    <dimen name="fragment_returns_text_view_size">16sp</dimen>
+    <dimen name="fragment_returns_text_view_column_margin_left">5dp</dimen>
+    <dimen name="fragment_returns_text_view_column_margin_right">5dp</dimen>
+    <dimen name="fragment_returns_table_row_padding">10dp</dimen>
+
+    <dimen name="fragment_returns_button_receive_padding_left">20dp</dimen>
+    <dimen name="fragment_returns_button_receive_padding_right">20dp</dimen>
+
+
+    <!-- Returns -->
+
+
+    <!-- Discounts List -->
+
+    <dimen name="discount_list_row_card_corner_radius">5dp</dimen>
+    <dimen name="discount_list_size_byte">16dp</dimen>
+    <dimen name="discount_list_size_word">8dp</dimen>
+
+    <dimen name="fragment_discount_list_recycler_height">0dp</dimen>
+    <dimen name="fragment_discount_list_recycler_margin">5dp</dimen>
+
+    <dimen name="fragment_discount_list_header_text_size">16sp</dimen>
+    <dimen name="fragment_discount_list_header_padding">5dp</dimen>
+
+    <dimen name="discount_list_row_discount_code_size">18sp</dimen>
+    <dimen name="discount_list_row_txt_view_size">15sp</dimen>
+
+    <dimen name="discount_list_txt_discount_type_name_margin_top">14dp</dimen>
+    <dimen name="discount_list_target_item_margin_top">14dp</dimen>
+    <dimen name="discount_list_offer_item_margin_top">14dp</dimen>
+
+
+    <!-- Discounts List -->
+
+
+    <!-- Discounts List -->
+
+    <dimen name="scheme_list_row_card_corner_radius">5dp</dimen>
+    <dimen name="scheme_list_size_byte">16dp</dimen>
+    <dimen name="scheme_list_size_word">8dp</dimen>
+
+    <dimen name="fragment_scheme_list_recycler_height">0dp</dimen>
+    <dimen name="fragment_scheme_list_recycler_margin">5dp</dimen>
+
+    <dimen name="fragment_scheme_list_header_text_size">16sp</dimen>
+    <dimen name="fragment_scheme_list_header_padding">5dp</dimen>
+
+    <dimen name="scheme_list_row_scheme_code_size">18sp</dimen>
+    <dimen name="scheme_list_row_txt_view_size">15sp</dimen>
+
+    <dimen name="scheme_list_txt_scheme_description_margin_top">14dp</dimen>
+    <dimen name="scheme_list_target_item_margin_top">14dp</dimen>
+    <dimen name="scheme_list_offer_item_margin_top">14dp</dimen>
+
+
+    <!-- Discounts List -->
+
+    <!-- Dashboard  -->
+
+    <!-- Dashboard -->
+
+
+    <!-- Outlet List Row New -->
+
+    <dimen name="outlet_list_row_new_card_corner_radius">5dp</dimen>
+    <dimen name="outlet_list_row_new_layout_margin">5dp</dimen>
+    <dimen name="outlet_list_row_new_graph_margin_left">5dp</dimen>
+    <dimen name="outlet_list_row_new_outlet_info_margin_left">5dp</dimen>
+    <dimen name="outlet_list_row_new_txt_outlet_name_size">20sp</dimen>
+    <dimen name="outlet_list_row_new_layout_margin_top">10dp</dimen>
+    <dimen name="outlet_list_row_new_text_size">16sp</dimen>
+    <dimen name="outlet_list_new_text_route_size">16sp</dimen>
+    <dimen name="fragment_outlet_list_new_top_layout_margin">5dp</dimen>
+
+
+    <!-- Outlet List Row New -->
+
+
+    <!-- Outlet Dashboard New -->
+
+    <dimen name="outlet_dashboard_new_text_outlet_name_size">20sp</dimen>
+    <dimen name="outlet_dashboard_new_text_route_size">18sp</dimen>
+    <dimen name="outlet_dashboard_new_text_outlet_type_size">18sp</dimen>
+    <dimen name="outlet_dashboard_new_text_view_size">16sp</dimen>
+    <dimen name="outlet_dashboard_layout_margin_top">10dp</dimen>
+    <dimen name="outlet_dashboard_layout_text_owner_name_margin_top">10dp</dimen>
+    <dimen name="outlet_dashboard_layout_margin_left">10dp</dimen>
+    <dimen name="outlet_dashboard_layout_margin">10dp</dimen>
+    <dimen name="outlet_dashboard_layout_menu_margin">10dp</dimen>
+    <dimen name="btn_check_in_margin_left">20dp</dimen>
+    <dimen name="btn_check_in_margin_right">20dp</dimen>
+    <dimen name="btn_check_in_text_size">22sp</dimen>
+    <dimen name="btn_check_in_margin_top">25dp</dimen>
+    <dimen name="btn_check_in_text_view_size">18sp</dimen>
+    <dimen name="outlet_dashboard_layout_recycler_margin_bottom">25dp</dimen>
+
+
+    <!-- Outlet Dashboard New -->
+
+
+    <!-- SKU List Row New -->
+
+    <dimen name="sku_list_row_new_txt_mrp_size">16sp</dimen>
+    <dimen name="sku_list_row_new_txt_trade_price_size">16sp</dimen>
+    <dimen name="sku_list_row_new_txt_brand_name_size">18sp</dimen>
+    <dimen name="sku_list_row_new_day_history_layout_margin_top">15dp</dimen>
+    <dimen name="sku_list_row_new_txt_day_qty_size">16sp</dimen>
+    <dimen name="sku_list_row_new_txt_day_size">10sp</dimen>
+    <dimen name="sku_list_row_new_layout_bottle_case_margin_top">10dp</dimen>
+    <dimen name="sku_list_row_new_edit_text_margin">5dp</dimen>
+    <dimen name="sku_list_row_new_edit_text_padding">5dp</dimen>
+    <dimen name="sku_list_row_new_edit_text_size">18sp</dimen>
+    <dimen name="sku_list_row_new_btn_add_to_cart_text_size">14sp</dimen>
+    <dimen name="sku_list_row_new_text_mrp_trade_text_size">10sp</dimen>
+    <dimen name="sku_list_row_new_main_layout_margin">5dp</dimen>
+    <dimen name="fragment_sku_list_new_layout_padding_top">10dp</dimen>
+    <dimen name="fragment_sku_list_new_layout_padding_bottom">10dp</dimen>
+    <dimen name="fragment_sku_list_new_layout_margin_right">10dp</dimen>
+    <dimen name="fragment_sku_list_new_brand_filter_text_size">18sp</dimen>
+    <dimen name="fragment_sku_list_new_brand_filter_text_margin_left">10dp</dimen>
+    <dimen name="sku_list_row_new_txt_discount_width">40dp</dimen>
+    <dimen name="sku_list_row_new_txt_discount_height">40dp</dimen>
+    <dimen name="sku_list_row_new_txt_discount_elevation">7dp</dimen>
+    <dimen name="sku_list_row_new_txt_discount_padding">6dp</dimen>
+    <dimen name="sku_list_row_new_main_layout_margin_top">10dp</dimen>
+    <dimen name="sku_list_row_new_main_layout_margin_bottom">10dp</dimen>
+    <dimen name="sku_list_row_new_main_layout_margin_left">5dp</dimen>
+    <dimen name="sku_list_row_new_main_layout_margin_right">5dp</dimen>
+
+
+    <!-- SKU List Row New -->
+
+
+    <!-- dialog scheme -->
+
+    <dimen name="dialog_scheme_text_sku_name_size">20sp</dimen>
+    <dimen name="dialog_scheme_layout_margin_top">10dp</dimen>
+
+    <!-- dialog scheme -->
+
+    <!-- dialog discount -->
+
+
+    <dimen name="dialog_discount_product_name_size">20sp</dimen>
+    <dimen name="dialog_discount_text_discount_text_size">18sp</dimen>
+    <dimen name="dialog_discount_text_discount_margin_top">10dp</dimen>
+
+    <!-- dialog discount -->
+
+
+    <!-- About -->
+
+    <dimen name="fragment_about_layout_margin">10dp</dimen>
+    <dimen name="fragment_about_txt_version_margin_top">57dp</dimen>
+    <dimen name="fragment_about_txt_version_margin_left">15dp</dimen>
+
+
+    <!-- About -->
+
+
+</resources>

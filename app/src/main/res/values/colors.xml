@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#30739f</color>
+    <color name="colorPrimaryDark">#008cec</color>
+    <color name="colorAccent">#1F9EF6</color>
+    <color name="textInputLayoutHint">#2a328a</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="red">#bc1e1e</color>
+    <color name="labelBackground">#f6f0ba</color>
+    <color name="scanLabelBackground">#fed5a4</color>
+    <color name="warningColor">#eab63d</color>
+    <color name="activity_main_bottom_bar_background_color">@color/colorPrimary</color>
+    <color name="activity_main_bottom_bar_foreground_color">@color/white</color>
+    <color name="activity_main_top_bar_background_color">@color/colorPrimary</color>
+    <color name="activity_main_top_bar_foreground_color">@color/white</color>
+    <color name="colorControlNormal">#c5c5c5</color>
+    <!-- Recycler View List Selectors -->
+
+    <color name="list_background_pressed">#161868</color>
+    <color name="list_background">#E6E6E6</color>
+    <color name="green">#2a8e23</color>
+
+    <color name="locationColor">#00A8FE</color>
+    <color name="palletColor">#08BC50</color>
+    <color name="skuColor">#08B0BC</color>
+    <color name="parentColor">#03A9F4</color>
+    <color name="childColor">#3F51B5</color>
+
+    <color name="grey">#A4A4A4</color>
+
+
+    <!-- Application Main Outlook Colors -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

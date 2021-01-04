@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="isLessThan7Inches">true</bool>
+    <bool name="isBetween7And10Inches">true</bool>
+    <bool name="is10Inches">true</bool>
+    <bool name="isOrientationLandscape">true</bool>
+</resources>

@@ -1,0 +1,231 @@
+<resources>
+    <!-- <string name="app_name">Falcon WMS</string>-->
+    <string name="app_name">ATC</string>
+    <!-- Navigation Drawer -->
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="userHint">Enter Username</string>
+    <string name="passHint">Enter Password</string>
+
+    <string name="login">Login</string>
+    <string name="btnSubmit">Login</string>
+    <string name="rememberMe">Remember me</string>
+    <string name="username">Username</string>
+
+    <string name="hintUser">Enter Username</string>
+    <string name="hintPass">Enter Password</string>
+
+    <string name="selectStRef">St Ref. #</string>
+    <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
+    <string name="go">Go</string>
+    <string name="selectSt">St. Ref. #</string>
+    <string name="sloc">SLoc.</string>
+    <string name="invQty">Inv. Qty</string>
+    <string name="scanPart">Scan Part#</string>
+    <string name="pending">Pending</string>
+    <string name="received">Received</string>
+    <string name="scanContainer">Scan Container</string>
+    <string name="back">Back</string>
+
+    <string name="hintBatch">Batch#</string>
+    <string name="hintSerial">Serial No.</string>
+    <string name="hintMfgDate">Mfg. Date</string>
+    <string name="hintExpDate">Exp. Date</string>
+    <string name="hintProjectRef">Project Ref.#</string>
+    <string name="hintKitId">Kit Id</string>
+    <string name="hintQuantity">Enter Qty.</string>
+    <string name="hintQty">Qty.</string>
+    <string name="hintCCQty">CC Qty.</string>
+    <string name="hintServiceURL">Service URL</string>
+    <string name="serialNo">Serial No. :</string>
+    <string name="hintOldMrp">Old MRP</string>
+    <string name="hintNewMrp">New MRP</string>
+    <string name="hintPallet">Pallet</string>
+    <string name="hintDock">Dock</string>
+    <string name="hintLocation">Location</string>
+    <string name="hintBoxQty">Box Qty.</string>
+    <string name="hintAvailQty">Avail. Qty.</string>
+    <string name="title_activity_jobOrder">Job Order</string>
+    <string name="excessOrShortage">Excess/Shortage</string>
+    <string name="clear">Clear</string>
+    <string name="receive">Receive</string>
+    <string name="selectResson">Select Reason </string>
+    <string name="suggestedLoc">Suggested Loc. </string>
+    <string name="suggestedDock">Suggested Dock </string>
+    <string name="scanLocation">Scan Location</string>
+    <string name="suggestedQty">Sug. Qty </string>
+    <string name="inbRec">INB Rec. </string>
+    <string name="btnSkip">Skip</string>
+    <string name="transferComplete">Transfer Complete</string>
+
+    <string name="menu_masterdata">Master Data</string>
+    <string name="menu_orders">Orders</string>
+    <string name="menu_inbound">Inbound</string>
+    <string name="menu_outbound">Outbound</string>
+    <string name="menu_inventory">Inventory</string>
+    <string name="menu_3pl">3pl</string>
+    <string name="menu_reports">Reports</string>
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_admin">Admin</string>
+    <string name="menu_goodsIn">Goods In</string>
+    <string name="menu_putaway">Putaway</string>
+    <string name="menu_liveStock">Live Stock</string>
+    <string name="menu_obdPicking">OBD Picking</string>
+    <string name="menu_outbound_revert">Outbound Revert</string>
+    <string name="menu_obdPicklist">OBD pick list</string>
+    <string name="menu_vlpdList">VLPD List</string>
+    <string name="menu_vlpdPick">VLPD Picking</string>
+    <string name="menu_internalTransfer">Internal Transfer</string>
+    <string name="menu_cycleCount">Cycle Count</string>
+    <string name="menu_binTransfer">Bin Transfer</string>
+
+    <string name="selectTenant">Select Tenant</string>
+    <string name="search">Search</string>
+
+    <string name="obdQty">OBD Qty.</string>
+    <string name="pickedQty">Picked Qty.</string>
+    <string name="scanToContainer">To Container</string>
+    <string name="scanFromContainer">Scan From Container</string>
+    <string name="pick">Pick</string>
+    <string name="selectOBD">select OBD #</string>
+    <string name="obdRef">OBD Ref #</string>
+    <string name="fromCont">From Cont.</string>
+    <string name="pendingQty">Pending Qty.</string>
+    <string name="picked">Picked</string>
+    <string name="assigned">Assigned</string>
+    <string name="vlpd">VLPD #</string>
+
+
+    <string name="confirm">Confirm</string>
+
+    <string name="availableQty">Available Qty.</string>
+    <string name="transfer">Transfer</string>
+    <string name="scanFromLocation">From Location</string>
+    <string name="selectPrinter">Select Printer</string>
+    <string name="save">Save</string>
+
+    <string name="title_activity_navigation_menu">NavigationMenu</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_about">About</string>
+    <string name="title_activity_navigation_bar">NavigationBar</string>
+    <string name="title_activity_receive">Receive</string>
+    <string name="title_activity_goodsIn">Goods In</string>
+    <string name="title_activity_putaway">Putaway</string>
+    <string name="title_activity_live_stock">Live Stock</string>
+    <string name="title_activity_obdpicking">OBD Picking</string>
+    <string name="title_activity_vbpl_list">VLPD List</string>
+    <string name="title_activity_vlpd_pick">VLPD Pick</string>
+    <string name="title_activity_internal_transfer">Transfer</string>
+    <string name="title_activity_pallet_transfer">Pallet Transfers</string>
+    <string name="title_activity_cycle_count">Cycle Count</string>
+    <string name="title_activity_bin_transfer">Bin Transfer</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_picking">Picking</string>
+    <string name="title_activity_loading">Loading</string>
+    <string name="title_activity_housekeeping">House Keeping</string>
+    <string name="title_activity_de_nesting">De Nesting</string>
+    <string name="title_activity_mrpchanges">MRP Changes</string>
+    <string name="title_activity_unloading">Unloading</string>
+    <string name="title_activity_delete">Delete Items</string>
+    <string name="title_vlpd_delete">Delete VLPD Items</string>
+    <string name="title_obd_delete">Delete OBD Items</string>
+    <string name="title_activity_sorting">Sorting</string>
+
+    <string name="update">Update</string>
+    <string name="fragment_about_txt_version">Version :</string>
+    <string name="fragment_about_txt_visit">Visit :</string>
+    <string name="fragment_about_txt_copy_right">Copyright © 2016 Inventrax, All rights reserved.</string>
+    <string name="fragment_about_txt_inventrax_link">www.inventrax.com</string>
+    <string name="nav_item_home">Home</string>
+    <string name="title_about">About</string>
+    <string name="fragment_about_txt_ReleaseDate">Release Date :</string>
+
+    <!--Unloading -->
+    <string name="vehicleNo">"Vehicle No. </string>
+    <string name="storeRefNo">Store Ref.# </string>
+    <string name="dockNo">Dock No. </string>
+    <string name="palletNo">Pallet </string>
+    <string name="palletTo">Pallet To </string>
+    <string name="scanDock">Scan Dock</string>
+    <string name="scanPallet">Scan Pallet</string>
+    <string name="scanMaterial">Scan Material</string>
+    <string name="hintMOP">MOP</string>
+    <string name="hintMRP">MRP</string>
+    <string name="hintColor">Color</string>
+    <string name="hintSLoc">SLoc.</string>
+    <string name="color">Color</string>
+    <string name="remove">Remove</string>
+    <string name="palletComplete">Pallet Complete</string>
+    <string name="putaway_complete">Putaway Complete</string>
+    <string name="title_activity_de_nesting_parent_items">Available Stock</string>
+
+    <string name="binFull">Bin Full</string>
+    <string name="vehicleNoText">Vehicle No.</string>
+    <string name="complete">Complete</string>
+    <string name="location">Location </string>
+    <string name="material">Material </string>
+    <string name="scanToLocation">To Loc.</string>
+
+    <string name="selectPickList">Pick List</string>
+    <string name="pickListNo">Pick List:</string>
+    <string name="skuSuggestions">SKU Suggestions</string>
+    <string name="scanSKU">Scan SKU</string>
+    <string name="requiredQty">Required Qty.</string>
+    <string name="itemNotFound">Item Not Found</string>
+    <string name="materialDamaged">Material Damaged</string>
+    <string name="materialSkipped">Skip</string>
+    <string name="sku">SKU</string>
+
+    <string name="selectLoadSheet">Select Load List</string>
+    <string name="loadSheetNo">Load Sheet No. </string>
+    <string name="loadingComplete">Loading Complete</string>
+    <string name="boxQty">Box Qty. </string>
+    <string name="volume">Vol.(CFT)</string>
+    <string name="weight">Wt.(KG)</string>
+
+    <string name="revert">Revert</string>
+    <string name="selectCC">Cycle Count</string>
+    <string name="enterBoxQty">Box Qty. </string>
+    <string name="cycleCount">Cycle Count </string>
+    <string name="batch">Batch No. </string>
+    <string name="binComplete">Bin Complete</string>
+    <string name="hintRSN">RSN</string>
+
+    <string name="TotalSKUQty">Total SKU Qty.</string>
+    <string name="NoOfLocationsScanned">Locations Scanned</string>
+    <string name="scan_new_rsn">New RSN</string>
+    <string name="selectJobOrder">Select Job Order</string>
+    <string name="jobOrder">Job Order </string>
+    <string name="fromLocation">From Loc.</string>
+    <string name="delete">Delete</string>
+    <string name="container">Container</string>
+    <string name="skip">Skip</string>
+    <string name="ok_">OK</string>
+    <string name="hintContainer">Container</string>
+    <string name="ccexport">Export</string>
+    <string name="select_vehicle">Select Vehicle</string>
+    <string name="select_wh">Select WH</string>
+    <string name="from_pallet">From Pallet</string>
+    <string name="putaway">Putaway</string>
+    <string name="cycle_count">Cycle count</string>
+    <string name="internal_transfer">Internal transfer</string>
+    <string name="live_stock">Live Stock</string>
+    <string name="picking">Picking</string>
+    <string name="receiving">Receiving</string>
+    <string name="scan_so_number">Scan SO Number</string>
+    <string name="scan_carton">Scan Carton</string>
+    <string name="packing">Packing</string>
+    <string name="load_generation">Load Generation</string>
+    <string name="loading">Loading</string>
+    <string name="scancartoon"> Scan Cartoon</string>
+    <string name="carton">Carton</string>
+    <string name="so_number_list">SO Number list</string>
+    <string name="hu">Hu</string>
+</resources>

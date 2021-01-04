@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scan_so_number">Scan SO Number</string>
+    <string name="scan_carton">Scan Carton</string>
+    <string name="packing">Packing</string>
+    <string name="load_generation">Load Generation</string>
+    <string name="loading">Loading</string>
+    <string name="revert">Revert</string>
+    <string name="carton">Carton</string>
+    <string name="so_number_list">SO Number list</string>
+</resources>
