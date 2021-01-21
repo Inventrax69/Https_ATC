@@ -78,7 +78,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
     ImageView ivScanLocation, ivScanPallet, ivScanPalletTo, tvScanRSN, ivScanRSN, ivScanRSNnew;
     Button btnMaterialSkip, btnPick, btn_Skip, btnOk, btnCloseSkip, btnClosefinal;
     TextView lblPickListNo, lblScannedSku, lblHu;
-    TextView lblSKuNo, lblLocationNo, lblMRP, lblrsnNoNew, lblMfgDate, lblExpDate, lblProjectRefNo, lblassignedQty, lblserialNo, lblBatchNo;
+    TextView lblSuggestedPallet,lblSKuNo, lblLocationNo, lblMRP, lblrsnNoNew, lblMfgDate, lblExpDate, lblProjectRefNo, lblassignedQty, lblserialNo, lblBatchNo;
     CardView cvScanPallet, cvScanPalletTo, cvScanRSN, cvScanNewRSN, cvScanLocation;
     EditText lblReceivedQty;
     boolean IsStrictlycomplaince = false;
@@ -164,6 +164,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
 
         lblPickListNo = (TextView) rootView.findViewById(R.id.lblPickListNo);
         lblSKuNo = (TextView) rootView.findViewById(R.id.lblSKUSuggested);
+        lblSuggestedPallet = (TextView) rootView.findViewById(R.id.lblSuggestedPallet);
         lblLocationNo = (TextView) rootView.findViewById(R.id.lblLocationSuggested);
         lblMRP = (TextView) rootView.findViewById(R.id.lblMRP);
         lblHu = (TextView) rootView.findViewById(R.id.lblHu);
@@ -413,6 +414,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
     public void ClearFields() {
 
         lblSKuNo.setText("");
+        lblSuggestedPallet.setText("");
         etPallet.setText("");
         etPalletTo.setText("");
 
@@ -584,9 +586,10 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                         }
                     } else {
                         if (!isPalletScanned) {
-                            if (scannedData.equals(etPallet.getText().toString())) {
+                            if (scannedData.equals(lblSuggestedPallet.getText().toString())) {
                                 isPalletScanned = true;
                                 //ValidatePalletCode(etPallet.getText().toString());
+                                etPallet.setText(scannedData);
                                 cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.white));
                                 ivScanPallet.setImageResource(R.drawable.check);
                             } else {
@@ -715,8 +718,9 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                              lblProjectRefNo.getText().toString().equalsIgnoreCase(scanDTO1.getPrjRef())*/
 
 
-                                            cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
-                                            ivScanRSN.setImageResource(R.drawable.fullscreen_img);
+                                            cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                            ivScanRSN.setImageResource(R.drawable.check);
+
 
                                             isRSNScanned = true;
 
@@ -1101,7 +1105,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                     KitId = "" + oOutboundDTO.getAssignedID();
                                     lblBatchNo.setText(oOutboundDTO.getBatchNo());
                                     lblLocationNo.setText(oOutboundDTO.getLocation());
-                                    etPallet.setText(oOutboundDTO.getPalletNo());
+                                    lblSuggestedPallet.setText(oOutboundDTO.getPalletNo());
                                     pickedQty = oOutboundDTO.getPickedQty();
 
                                     huNo = oOutboundDTO.getHUNo();
@@ -1786,7 +1790,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                         KitId = "" + oOutboundDTO.getAssignedID();
                                         lblBatchNo.setText(oOutboundDTO.getBatchNo());
                                         lblLocationNo.setText(oOutboundDTO.getLocation());
-                                        etPallet.setText(oOutboundDTO.getPalletNo());
+                                        lblSuggestedPallet.setText(oOutboundDTO.getPalletNo());
                                         lblassignedQty.setText(oOutboundDTO.getPickedQty().split("[.]")[0] + "/" + oOutboundDTO.getAssignedQuantity().split("[.]")[0]);
                                         lblMfgDate.setText(oOutboundDTO.getMfgDate());
                                         lblExpDate.setText(oOutboundDTO.getExpDate());

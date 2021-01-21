@@ -1327,6 +1327,7 @@ id cvScanRSN
 id cvScanSKU
 id cvScanSONumber
 id cvScanSku
+id cvScanStoreRefNo
 id cvScanToCont
 id cvScanToLoc
 id dark
@@ -1415,6 +1416,7 @@ id ivScanRSN
 id ivScanSKU
 id ivScanSONumber
 id ivScanSku
+id ivScanStoreRefNo
 id ivScanToCont
 id ivScanToLoc
 id ivSettings
@@ -1472,6 +1474,7 @@ id lblScannedSkuItem
 id lblStatus
 id lblStoreRefNo
 id lblSuggestedLoc
+id lblSuggestedPallet
 id lblTol
 id lblVLPD
 id lblVehicleNo
@@ -1606,7 +1609,6 @@ id showCustom
 id showHome
 id showTitle
 id sku
-id sku_list
 id smallLabel
 id snackbar_action
 id snackbar_text
@@ -1642,6 +1644,7 @@ id status_bar_latest_event_content
 id submenuarrow
 id submit_area
 id tabMode
+id table
 id text
 id text2
 id textSpacerNoButtons
@@ -1717,6 +1720,7 @@ id tvWeight
 id tv_qty
 id tv_sku
 id tvscanSONumber
+id tvscanStoreRefNo
 id txtBatch
 id txtBottomBar
 id txtCCName

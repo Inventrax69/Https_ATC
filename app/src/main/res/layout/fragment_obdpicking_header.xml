@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cvScanSONumber"
             android:layout_centerHorizontal="true"
-            android:text="Scan SO Number"
+            android:text="Scan Pick List Number"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="bold" />

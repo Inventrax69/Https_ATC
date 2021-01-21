@@ -53,6 +53,14 @@ public class ScanValidator {
         }
     }
 
+    public static boolean isStoreRefNumberScanned(String scannedData) {
+        if (scannedData.length() == 10 && scannedData.startsWith("DZ")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public static boolean isNumeric(String ValueToCheck) {
 

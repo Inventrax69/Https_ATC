@@ -1,10 +1,17 @@
 package com.inventrax.atc.fragments;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +19,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cipherlab.barcode.GeneralString;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.internal.LinkedTreeMap;
+import com.honeywell.aidc.AidcManager;
+import com.honeywell.aidc.BarcodeFailureEvent;
+import com.honeywell.aidc.BarcodeReadEvent;
+import com.honeywell.aidc.BarcodeReader;
+import com.honeywell.aidc.ScannerUnavailableException;
+import com.honeywell.aidc.TriggerStateChangeEvent;
+import com.honeywell.aidc.UnsupportedPropertyException;
 import com.inventrax.atc.R;
 import com.inventrax.atc.common.Common;
 import com.inventrax.atc.common.constants.EndpointConstants;
@@ -37,6 +53,7 @@ import com.inventrax.atc.util.ProgressDialogUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,14 +66,16 @@ import retrofit2.Response;
  * Created by Padmaja.B on 20/12/2018.
  */
 
-public class UnloadingFragment extends Fragment implements View.OnClickListener {
+public class UnloadingFragment extends Fragment implements View.OnClickListener,BarcodeReader.TriggerListener, BarcodeReader.BarcodeListener {
 
     private View rootView;
     private static final String classCode = "API_FRAG_UNLOADING";
 
-    private TextView txtSelectStRef;
+    private TextView txtSelectStRef,tvscanStoreRefNo;
     private SearchableSpinner spinnerSelectStRef, spinnerSelectVehicle;
     private Button btnGo;
+    private ImageView ivScanStoreRefNo;
+    private CardView cvScanStoreRefNo;
 
     private Gson gson;
     private WMSCoreMessage core;
@@ -77,6 +96,47 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener 
     private ExceptionLoggerUtils exceptionLoggerUtils;
     private ErrorMessages errorMessages;
 
+    String scanner = null;
+    String getScanner = null;
+    //For Honey well barcode
+    private static BarcodeReader barcodeReader;
+    private AidcManager manager;
+    private IntentFilter filter;
+
+    public void myScannedData(Context context, String barcode){
+        try {
+            ProcessScannedinfo(barcode.trim());
+        }catch (Exception e){
+            //  Toast.makeText(context, ""+e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    // Cipher Barcode Scanner
+    private final BroadcastReceiver myDataReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            scanner = intent.getStringExtra(GeneralString.BcReaderData);  // Scanned Barcode info
+            ProcessScannedinfo(scanner.trim().toString());
+        }
+    };
+
+    // honeywell
+    @Override
+    public void onBarcodeEvent(final BarcodeReadEvent barcodeReadEvent) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                // update UI to reflect the data
+                getScanner = barcodeReadEvent.getBarcodeData();
+                ProcessScannedinfo(getScanner);
+
+            }
+
+        });
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -96,6 +156,10 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener 
         if (NetworkUtils.isInternetAvailable(getContext())) {
 
             txtSelectStRef = (TextView) rootView.findViewById(R.id.tvSelectStRef);
+            tvscanStoreRefNo = (TextView) rootView.findViewById(R.id.tvscanStoreRefNo);
+
+            ivScanStoreRefNo = (ImageView) rootView.findViewById(R.id.ivScanStoreRefNo);
+            cvScanStoreRefNo = (CardView) rootView.findViewById(R.id.cvScanStoreRefNo);
 
             spinnerSelectStRef = (SearchableSpinner) rootView.findViewById(R.id.spinnerSelectStRef);
             spinnerSelectStRef.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -104,7 +168,7 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener 
                     Storerefno = spinnerSelectStRef.getSelectedItem().toString();
 
                     // getting values as per the selected store ref number
-                    getInboundId();
+                    getInboundId(Storerefno);
                 }
 
                 @Override
@@ -163,6 +227,33 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener 
             ProgressDialogUtils.closeProgressDialog();
             common.setIsPopupActive(false);
 
+            // For Cipher Barcode reader
+            Intent RTintent = new Intent("sw.reader.decode.require");
+            RTintent.putExtra("Enable", true);
+            getActivity().sendBroadcast(RTintent);
+            this.filter = new IntentFilter();
+            this.filter.addAction("sw.reader.decode.complete");
+            getActivity().registerReceiver(this.myDataReceiver, this.filter);
+
+
+            //For Honeywell
+            AidcManager.create(getActivity(), new AidcManager.CreatedCallback() {
+
+                @Override
+                public void onCreated(AidcManager aidcManager) {
+
+                    manager = aidcManager;
+                    barcodeReader = manager.createBarcodeReader();
+                    try {
+                        barcodeReader.claim();
+                        HoneyWellBarcodeListeners();
+
+                    } catch (ScannerUnavailableException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
             LoadInbounddetails();
 
         } else {
@@ -172,6 +263,86 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener 
         }
 
     }
+
+    //Assigning scanned value to the respective fields
+    public void ProcessScannedinfo(String scannedData) {
+
+        if(((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)){
+            return;
+        }
+
+        if (ProgressDialogUtils.isProgressActive() || Common.isPopupActive()) {
+            common.showUserDefinedAlertType(errorMessages.EMC_082, getActivity(), getContext(), "Warning");
+            return;
+        }
+
+        if (scannedData != null && !common.isPopupActive) {
+
+            if(getInboundId(scannedData)){
+                cvScanStoreRefNo.setCardBackgroundColor(getResources().getColor(R.color.white));
+                ivScanStoreRefNo.setImageResource(R.drawable.check);
+            }else {
+                common.showUserDefinedAlertType("Please scan valid Store Ref. Number", getActivity(), getContext(), "Error");
+                cvScanStoreRefNo.setCardBackgroundColor(getResources().getColor(R.color.white));
+                ivScanStoreRefNo.setImageResource(R.drawable.invalid_cross);
+            }
+
+        }
+
+    }
+
+
+    @Override
+    public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
+
+    }
+
+    @Override
+    public void onTriggerEvent(TriggerStateChangeEvent triggerStateChangeEvent) {
+
+    }
+
+    //Honeywell Barcode reader Properties
+    public void HoneyWellBarcodeListeners() {
+
+        barcodeReader.addTriggerListener(this);
+
+        if (barcodeReader != null) {
+            // set the trigger mode to client control
+            barcodeReader.addBarcodeListener(this);
+            try {
+                barcodeReader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
+                        BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
+            } catch (UnsupportedPropertyException e) {
+                // Toast.makeText(this, "Failed to apply properties", Toast.LENGTH_SHORT).show();
+            }
+
+            Map<String, Object> properties = new HashMap<String, Object>();
+            // Set Symbologies On/Off
+            properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+            properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
+            properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
+            properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
+            // Set Max Code 39 barcode length
+            properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
+            // Turn on center decoding
+            properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
+            // Enable bad read response
+            properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
+            // Apply the settings
+            barcodeReader.setProperties(properties);
+        }
+
+    }
+
+
 
     @Override
     public void onClick(View v) {
@@ -334,18 +505,23 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener 
         }
     }
 
-    public void getInboundId() {
+    public boolean getInboundId(String selectedStRefNo) {
 
         vehicles = new ArrayList<>();
         lstEntry = new ArrayList<>();
 
+        int pos = 0;
+
         for (InboundDTO oInbound : lstInbound) {
-            if (oInbound.getStoreRefNo().equals(Storerefno)) {
+            pos++;
+            if (oInbound.getStoreRefNo().equals(selectedStRefNo)) {
 
                 inboundId = oInbound.getInboundID();
                 invoiceQty = oInbound.getInvoiceQty();
                 receivedQty = oInbound.getReceivedQty();
-                lstEntry.add(oInbound.getEntry());                 // to get vehicle numbers and dock values
+                lstEntry.add(oInbound.getEntry());
+                // to get vehicle numbers and dock values
+
 
                 for (int x = 0; x < lstEntry.size(); x++) {
                     for (int y = 0; y < lstEntry.get(x).size(); y++) {
@@ -355,11 +531,66 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener 
 
                 ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, vehicles);
                 spinnerSelectVehicle.setAdapter(arrayAdapter);
+                ArrayAdapter adp = (ArrayAdapter) spinnerSelectStRef.getAdapter();
+                int i = adp.getPosition(selectedStRefNo);
+                spinnerSelectStRef.setSelection(i);
+                return true;
 
             }
 
 
         }
+        return false;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (barcodeReader != null) {
+            // release the scanner claim so we don't get any scanner
+            try {
+                barcodeReader.claim();
+            } catch (ScannerUnavailableException e) {
+                e.printStackTrace();
+            }
+            // notifications while paused.
+            barcodeReader.release();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (barcodeReader != null) {
+            try {
+                barcodeReader.claim();
+            } catch (ScannerUnavailableException e) {
+                e.printStackTrace();
+                // Toast.makeText(this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
+            }
+        }
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_unloading));
+    }
+
+    //Barcode scanner API
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (barcodeReader != null) {
+            // unregister barcode event listener honeywell
+            barcodeReader.removeBarcodeListener((BarcodeReader.BarcodeListener) this);
+
+            // unregister trigger state change listener
+            barcodeReader.removeTriggerListener((BarcodeReader.TriggerListener) this);
+        }
+
+        Intent RTintent = new Intent("sw.reader.decode.require");
+        RTintent.putExtra("Enable", false);
+        getActivity().sendBroadcast(RTintent);
+        getActivity().unregisterReceiver(this.myDataReceiver);
+        super.onDestroyView();
     }
 
     // sending exception to the database

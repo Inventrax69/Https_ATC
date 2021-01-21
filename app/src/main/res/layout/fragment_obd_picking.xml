@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:layout_margin="4dp">
 
 
     <RelativeLayout
@@ -22,12 +23,12 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:orientation="vertical"
-            android:weightSum="10.5">
+            android:weightSum="11.5">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="0.8"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="2">
@@ -85,7 +86,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
@@ -111,6 +111,44 @@
 
                     <TextView
                         android:id="@+id/lblSKUSuggested"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3.7"
+                        android:gravity="left"
+                        android:text=""
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:text="Sugg. Pallet"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/lblSuggestedPallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="3.7"
@@ -199,9 +237,9 @@
                         android:id="@+id/tvScanPallet"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
                         android:layout_below="@+id/cvScanLocation"
-                        android:text="@string/container"
+                        android:layout_alignParentStart="true"
+                        android:text="From Pallet"
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         android:textStyle="normal" />
@@ -242,7 +280,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:layout_below="@+id/cvScanLocation"
-                        android:text="@string/scanToContainer"
+                        android:text="@string/palletTo"
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         android:textStyle="normal" />
@@ -316,7 +354,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="@string/container"
+                            android:hint="From Pallet"
                             android:inputType="text"
                             android:singleLine="true"
                             android:textSize="12dp" />
@@ -342,7 +380,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-                            android:hint="@string/scanToContainer"
+                            android:hint="@string/palletTo"
                             android:inputType="text"
                             android:singleLine="true"
                             android:textSize="12dp" />
@@ -419,7 +457,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:enabled="false"
-                        android:hint="@string/boxQty"
+                        android:hint="@string/hintQty"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/colorAccent"

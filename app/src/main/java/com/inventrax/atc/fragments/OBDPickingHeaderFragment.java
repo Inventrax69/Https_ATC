@@ -181,7 +181,19 @@ public class OBDPickingHeaderFragment extends Fragment implements View.OnClickLi
 
         if (scannedData != null && !common.isPopupActive) {
             pickRefNo = ""; pickobdId="";
-            GetOBDNosUnderSO(scannedData);
+            //GetOBDNosUnderSO(scannedData);
+            ArrayAdapter adp = (ArrayAdapter) spinnerSelectPickList.getAdapter();
+            int i = adp.getPosition(scannedData);
+            if(i==-1){
+                cvScanSONumber.setCardBackgroundColor(getResources().getColor(R.color.white));
+                ivScanSONumber.setImageResource(R.drawable.invalid_cross);
+                common.showUserDefinedAlertType("Please scan valid Pick list number", getActivity(), getContext(), "Error");
+            }else {
+                cvScanSONumber.setCardBackgroundColor(getResources().getColor(R.color.white));
+                ivScanSONumber.setImageResource(R.drawable.check);
+                spinnerSelectPickList.setSelection(i);
+            }
+
         }
 
     }

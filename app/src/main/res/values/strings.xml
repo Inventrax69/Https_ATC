@@ -16,7 +16,7 @@
     <string name="hintUser">Enter Username</string>
     <string name="hintPass">Enter Password</string>
 
-    <string name="selectStRef">St Ref. #</string>
+    <string name="selectStRef">Store Ref. No.</string>
     <string name="close">Close</string>
     <string name="cancel">Cancel</string>
     <string name="go">Go</string>
@@ -43,7 +43,7 @@
     <string name="hintOldMrp">Old MRP</string>
     <string name="hintNewMrp">New MRP</string>
     <string name="hintPallet">Pallet</string>
-    <string name="hintDock">Dock</string>
+    <string name="hintDock">Dock/Gate</string>
     <string name="hintLocation">Location</string>
     <string name="hintBoxQty">Box Qty.</string>
     <string name="hintAvailQty">Avail. Qty.</string>
@@ -152,7 +152,7 @@
     <string name="storeRefNo">Store Ref.# </string>
     <string name="dockNo">Dock No. </string>
     <string name="palletNo">Pallet </string>
-    <string name="palletTo">Pallet To </string>
+    <string name="palletTo">To Pallet </string>
     <string name="scanDock">Scan Dock</string>
     <string name="scanPallet">Scan Pallet</string>
     <string name="scanMaterial">Scan Material</string>

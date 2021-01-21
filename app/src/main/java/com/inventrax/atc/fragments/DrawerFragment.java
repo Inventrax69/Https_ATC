@@ -100,15 +100,15 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         // Adding child data List one
         List<String> mainListInbound = new ArrayList<String>();
         mainListInbound.add("Receiving");
-        // mainListInbound.add("Putaway");
-        mainListInbound.add("Pallet Transfers");
+        mainListInbound.add("Putaway");
+        //mainListInbound.add("Pallet Transfers");
 
         // Adding child data List two
         List<String> mainListOutbound  = new ArrayList<String>();
         mainListOutbound.add("OBD Picking");
-        mainListOutbound.add("Packing");
+        //mainListOutbound.add("Packing");
         mainListOutbound.add("Packing Info");
-        mainListOutbound.add("Load Generation");
+        //mainListOutbound.add("Load Generation");
         mainListOutbound.add("Loading");
         mainListOutbound.add("Outbound Revert");
 
@@ -164,15 +164,15 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
         // Adding child data List one
         List<String> mainListInbound = new ArrayList<String>();
         mainListInbound.add("Receiving");
-        //mainListInbound.add("Putaway");
-        mainListInbound.add("Pallet Transfers");
+        mainListInbound.add("Putaway");
+        //mainListInbound.add("Pallet Transfers");
 
         // Adding child data List two
         List<String> mainListOutbound  = new ArrayList<String>();
        // mainListOutbound.add("OBD Picking");
-        mainListOutbound.add("Packing");
+        //mainListOutbound.add("Packing");
         mainListOutbound.add("Packing Info");
-        mainListOutbound.add("Load Generation");
+        //mainListOutbound.add("Load Generation");
         mainListOutbound.add("Loading");
 
         // Adding child data List three
@@ -409,7 +409,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
             }
             break;
             case "Putaway": {
-                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, new PutawayFragment());
+                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, new PalletTransfersFragment());
             }
             break;
             case "Pallet Transfers": {
@@ -472,11 +472,11 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
                 // Inbound
                 menuList.add(new NavDrawerItem("Receiving", R.drawable.go));
                 menuList.add(new NavDrawerItem("Putaway", R.drawable.go));
-                menuList.add(new NavDrawerItem("Pallet Transfers", R.drawable.go));
+                //menuList.add(new NavDrawerItem("Pallet Transfers", R.drawable.go));
                 // Outbound
                 menuList.add(new NavDrawerItem("OBD Picking", R.drawable.go));
-                menuList.add(new NavDrawerItem("Packing", R.drawable.go));
-                menuList.add(new NavDrawerItem("Load Generation", R.drawable.go));
+                //menuList.add(new NavDrawerItem("Packing", R.drawable.go));
+                //menuList.add(new NavDrawerItem("Load Generation", R.drawable.go));
                 menuList.add(new NavDrawerItem("Loading", R.drawable.go));
                 // HouseKeeping
                 menuList.add(new NavDrawerItem("Bin to Bin", R.drawable.go));

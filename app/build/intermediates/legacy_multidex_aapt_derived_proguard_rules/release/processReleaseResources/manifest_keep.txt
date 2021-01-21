@@ -1,2 +1,0 @@
-# Referenced at E:\Pandu\Demo\Https_ATC\app\build\intermediates\merged_manifests\release\AndroidManifest.xml:73
--keep class com.inventrax.atc.application.AppController { <init>(); }

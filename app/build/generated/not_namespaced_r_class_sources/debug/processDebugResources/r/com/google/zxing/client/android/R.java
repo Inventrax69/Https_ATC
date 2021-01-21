@@ -40,20 +40,20 @@ public final class R {
         private id() {}
 
         public static final int centerCrop = 0x7f080053;
-        public static final int fitCenter = 0x7f0800a6;
-        public static final int fitXY = 0x7f0800a7;
-        public static final int zxing_back_button = 0x7f080231;
-        public static final int zxing_barcode_scanner = 0x7f080232;
-        public static final int zxing_barcode_surface = 0x7f080233;
-        public static final int zxing_camera_error = 0x7f080234;
-        public static final int zxing_decode = 0x7f080235;
-        public static final int zxing_decode_failed = 0x7f080236;
-        public static final int zxing_decode_succeeded = 0x7f080237;
-        public static final int zxing_possible_result_points = 0x7f080238;
-        public static final int zxing_preview_failed = 0x7f080239;
-        public static final int zxing_prewiew_size_ready = 0x7f08023a;
-        public static final int zxing_status_view = 0x7f08023b;
-        public static final int zxing_viewfinder_view = 0x7f08023c;
+        public static final int fitCenter = 0x7f0800a7;
+        public static final int fitXY = 0x7f0800a8;
+        public static final int zxing_back_button = 0x7f080235;
+        public static final int zxing_barcode_scanner = 0x7f080236;
+        public static final int zxing_barcode_surface = 0x7f080237;
+        public static final int zxing_camera_error = 0x7f080238;
+        public static final int zxing_decode = 0x7f080239;
+        public static final int zxing_decode_failed = 0x7f08023a;
+        public static final int zxing_decode_succeeded = 0x7f08023b;
+        public static final int zxing_possible_result_points = 0x7f08023c;
+        public static final int zxing_preview_failed = 0x7f08023d;
+        public static final int zxing_prewiew_size_ready = 0x7f08023e;
+        public static final int zxing_status_view = 0x7f08023f;
+        public static final int zxing_viewfinder_view = 0x7f080240;
     }
     public static final class layout {
         private layout() {}

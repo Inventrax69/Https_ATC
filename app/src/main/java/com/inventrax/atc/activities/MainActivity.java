@@ -170,6 +170,9 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
                 if (fragment != null && fragment.isVisible() && fragment instanceof CycleCountDetailsFragment) {
                     ((CycleCountDetailsFragment) fragment).myScannedData(MainActivity.this, ScannedData);
                 }
+                if (fragment != null && fragment.isVisible() && fragment instanceof UnloadingFragment) {
+                    ((UnloadingFragment) fragment).myScannedData(MainActivity.this, ScannedData);
+                }
                 if (fragment != null && fragment.isVisible() && fragment instanceof DeleteOBDPickedItemsFragment) {
                     ((DeleteOBDPickedItemsFragment) fragment).myScannedData(MainActivity.this, ScannedData);
                 }

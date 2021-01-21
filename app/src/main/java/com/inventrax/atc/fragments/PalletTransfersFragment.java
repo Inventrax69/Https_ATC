@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +27,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.cipherlab.barcode.GeneralString;
@@ -97,8 +103,10 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
     List<HouseKeepingDTO> lstTenants = null;
     List<HouseKeepingDTO> lstWarehouse = null;
     TextView txtWarehousetName,txtTendentName,txtFromPallet,txtLocation;
-    ListView sku_list;
+    //ListView sku_list;
     SDKAdapter adapter;
+
+    TableLayout tl;
 
     // Cipher Barcode Scanner
     private final BroadcastReceiver myDataReceiver = new BroadcastReceiver() {
@@ -190,7 +198,7 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
         btnBinComplete = (Button) rootView.findViewById(R.id.btnBinComplete);
         btn_clear = (Button) rootView.findViewById(R.id.btn_clear);
         btnGo = (Button) rootView.findViewById(R.id.btnGo);
-        sku_list=(ListView)rootView.findViewById(R.id.sku_list);
+        //sku_list=(ListView)rootView.findViewById(R.id.sku_list);
 
         btnBinComplete.setOnClickListener(this);
         btn_clear.setOnClickListener(this);
@@ -214,6 +222,8 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
         core = new WMSCoreMessage();
         ProgressDialogUtils.closeProgressDialog();
         common.setIsPopupActive(false);
+
+        tl = (TableLayout) rootView.findViewById(R.id.table);
 
         //For Honeywell Broadcast receiver intiation
         AidcManager.create(getActivity(), new AidcManager.CreatedCallback() {
@@ -252,7 +262,7 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
 
 
             case R.id.btnGo:
-                if (!whId.equals("") && !tenantId.equals("")) {
+                if (!whId.equals("")) {
                     rlSelect.setVisibility(View.GONE);
                     rlIPalletTransfer.setVisibility(View.VISIBLE);
                     // method to get the storage locations
@@ -280,21 +290,18 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
         cvScanFromCont.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
         ivScanFromCont.setImageResource(R.drawable.fullscreen_img);
 
-        cvScanLocation.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
+        cvScanLocation.setCardBackgroundColor(getResources().getColor(R.color.locationColor));
         ivScanLocation.setImageResource(R.drawable.fullscreen_img);
 
         isPalletScaned = false;
 
         txtFromPallet.setText("");
         txtLocation.setText("");
-        sku_list.setAdapter(null);
+        ///sku_list.setAdapter(null);
+        tl.removeAllViews();
     }
 
-    public void  loadList(List<InventoryDTO> inventoryDTO_list){
-        adapter=new SDKAdapter(getActivity(),inventoryDTO_list);
 
-        sku_list.setAdapter(adapter);
-    }
 
     //Assigning scanned value to the respective fields
     public void ProcessScannedinfo(String scannedData) {
@@ -780,6 +787,74 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
         }
     }
 
+    private TextView getTextView(String title, int color, int typeface, int bgColor) {
+        TextView tv = new TextView(getContext());
+        tv.setText(title);
+        tv.setTextColor(color);
+        tv.setPadding(10, 10, 10, 10);
+        tv.setTypeface(Typeface.DEFAULT, typeface);
+        tv.setBackgroundColor(bgColor);
+        tv.setLayoutParams(getLayoutParams());
+        tv.setOnClickListener(this);
+        return tv;
+    }
+
+    @NonNull
+    private TableRow.LayoutParams getLayoutParams() {
+        TableRow.LayoutParams params = new TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                TableRow.LayoutParams.WRAP_CONTENT);
+        params.setMargins(2, 0, 0, 2);
+        return params;
+    }
+
+    @NonNull
+    private TableLayout.LayoutParams getTblLayoutParams() {
+        return new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT);
+    }
+
+    public void addHeaders() {
+
+        TableRow tr = new TableRow(getContext());
+
+        tr.setLayoutParams(getLayoutParams());
+        tr.addView(getTextView("SKU", Color.WHITE, Typeface.BOLD, Color.BLUE));
+        tr.addView(getTextView("Batch", Color.WHITE, Typeface.BOLD, Color.BLUE));
+        tr.addView(getTextView("MfgDate", Color.WHITE, Typeface.BOLD, Color.BLUE));
+        tr.addView(getTextView("ExpDate", Color.WHITE, Typeface.BOLD, Color.BLUE));
+        tr.addView(getTextView("Qty.", Color.WHITE, Typeface.BOLD, Color.BLUE));
+        tr.addView(getTextView("Project Ref. No", Color.WHITE, Typeface.BOLD, Color.BLUE));
+
+
+        tl.addView(tr, getTblLayoutParams());
+    }
+
+    /**
+     * This function add the data to the table
+     **/
+    public void addData(List<InventoryDTO> liveStock) {
+
+        TableLayout tl = (TableLayout) rootView.findViewById(R.id.table);
+        for (InventoryDTO data : liveStock) {
+            TableRow tr = new TableRow(getContext());
+            tr.setLayoutParams(getLayoutParams());
+
+            tr.addView(getTextView(data.getMaterialCode(), Color.BLACK, Typeface.BOLD, ContextCompat.getColor(getContext(), R.color.scanLabelBackground)));
+            tr.addView(getTextView(data.getBatchNo().toString(), Color.BLACK, Typeface.BOLD, ContextCompat.getColor(getContext(), R.color.scanLabelBackground)));
+            tr.addView(getTextView(data.getMfgDate(), Color.BLACK, Typeface.BOLD, ContextCompat.getColor(getContext(), R.color.scanLabelBackground)));
+            tr.addView(getTextView(data.getExpDate(), Color.BLACK, Typeface.BOLD, ContextCompat.getColor(getContext(), R.color.scanLabelBackground)));
+            tr.addView(getTextView(data.getQuantity(), Color.BLACK, Typeface.BOLD, ContextCompat.getColor(getContext(), R.color.scanLabelBackground)));
+            tr.addView(getTextView(data.getProjectNo(), Color.BLACK, Typeface.BOLD, ContextCompat.getColor(getContext(), R.color.scanLabelBackground)));
+
+
+            tl.addView(tr, getTblLayoutParams());
+        }
+
+
+    }
+
 
 
     // honeywell Barcode reader
@@ -979,7 +1054,7 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
                 // Toast.makeText(this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
             }
         }
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_pallet_transfer));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_putaway));
     }
 
     @Override
@@ -1406,8 +1481,8 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                sku_list.setAdapter(null);
+                tl.removeAllViews();
+                //sku_list.setAdapter(null);
                 ProgressDialogUtils.closeProgressDialog();
                 common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
 
@@ -1497,7 +1572,8 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
 
                                 }
 
-                                sku_list.setAdapter(null);
+                                tl.removeAllViews();
+                                //sku_list.setAdapter(null);
 
                                 ProgressDialogUtils.closeProgressDialog();
                                 common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
@@ -1517,18 +1593,23 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
                                             inventorydto = new InventoryDTO(_lInventory.get(i).entrySet());
                                             lstInventory.add(inventorydto);
                                         }
-                                        loadList(lstInventory);
+                                        //loadList(lstInventory);
+                                        addHeaders();
+                                        addData(lstInventory);
                                     } else {
-                                        sku_list.setAdapter(null);
+                                        //sku_list.setAdapter(null);
+                                        tl.removeAllViews();
                                         common.showUserDefinedAlertType(errorMessages.EMC_0060, getActivity(), getContext(), "Warning");
                                     }
                                 }else{
-                                    sku_list.setAdapter(null);
+                                    tl.removeAllViews();
+                                    //sku_list.setAdapter(null);
                                     common.showUserDefinedAlertType(errorMessages.EMC_0060, getActivity(), getContext(), "Warning");
                                 }
                             }
                         } else {
-                            sku_list.setAdapter(null);
+                            tl.removeAllViews();
+                            //sku_list.setAdapter(null);
                             ProgressDialogUtils.closeProgressDialog();
                             common.showUserDefinedAlertType(errorMessages.EMC_0021, getActivity(), getContext(), "Error");
                             return;
@@ -1537,7 +1618,8 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
 
                     @Override
                     public void onFailure(Call<String> call, Throwable throwable) {
-                        sku_list.setAdapter(null);
+                        tl.removeAllViews();
+                        // sku_list.setAdapter(null);
                         ProgressDialogUtils.closeProgressDialog();
                         common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
                         return;
@@ -1551,7 +1633,8 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
                     e.printStackTrace();
                 }
 
-                sku_list.setAdapter(null);
+                //sku_list.setAdapter(null);
+                tl.removeAllViews();
                 ProgressDialogUtils.closeProgressDialog();
                 common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
 
