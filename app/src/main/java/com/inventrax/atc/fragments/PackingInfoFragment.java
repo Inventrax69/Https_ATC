@@ -73,14 +73,14 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
 
     private static final String classCode = "API_FRAG_PackingInfo";
     private View rootView;
-    private TextView  tvScanSONumber, tvScanCartoon;
+    private TextView tvScanSONumber;
     private SearchableSpinner spinnerSelectTenant, spinnerSelectWH;
     private CardView cvScanSONumber, cvScanCartoon;
     private ImageView ivScanSONumber, ivScanCartoon;
     private Button btnSearch, btnClear;
     private RecyclerView recyclerViewPackInfo;
     private LinearLayoutManager linearLayoutManager;
-    private RadioButton radioSONumber,radioCartoon,radioSKU;
+
     RadioGroup radioGroup;
 
     String scanner = null;
@@ -98,7 +98,6 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
     List<HouseKeepingDTO> lstTenants = null;
     List<HouseKeepingDTO> lstWarehouse = null;
 
-    private Boolean isSONumberScanned = false, isSKUScanned = false, isCartoonScanned = false;
     private String scannedLocation = null, scannedPallet = "", scannedSKU = null;
     private String userId = "", scanType = "", accountId = "", selectedTenant = "",
             selectedWH = "", tenantId = "", warehouseId = "";
@@ -117,10 +116,10 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
 
     }
 
-    public void myScannedData(Context context, String barcode){
+    public void myScannedData(Context context, String barcode) {
         try {
             ProcessScannedinfo(barcode.trim());
-        }catch (Exception e){
+        } catch (Exception e) {
             //  Toast.makeText(context, ""+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -144,19 +143,16 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
         accountId = sp.getString("AccountId", "");
 
         cvScanSONumber = (CardView) rootView.findViewById(R.id.cvScanSONumber);
-        cvScanCartoon = (CardView) rootView.findViewById(R.id.cvScanCartoon);
+
 
         ivScanSONumber = (ImageView) rootView.findViewById(R.id.ivScanSONumber);
-        ivScanCartoon = (ImageView) rootView.findViewById(R.id.ivScanCartoon);
+
 
         btnClear = (Button) rootView.findViewById(R.id.btnClear);
         btnSearch = (Button) rootView.findViewById(R.id.btnSearch);
 
         tvScanSONumber = (TextView) rootView.findViewById(R.id.tvScanSONumber);
-        tvScanCartoon = (TextView) rootView.findViewById(R.id.tvScanCartoon);
 
-        radioSONumber = (RadioButton) rootView.findViewById(R.id.radioSONumber);
-        radioCartoon = (RadioButton) rootView.findViewById(R.id.radioCartoon);
 
         radioGroup = (RadioGroup) rootView.findViewById(R.id.radioGroup);
 
@@ -237,34 +233,9 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
             }
         });
 
-        // To get Tenants
-      //  getTenants();
+        //getTenants();
 
         getWarehouse();
-
-
-        radioSONumber.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b){
-                    radioSONumber.setChecked(true);
-                    radioCartoon.setChecked(false);
-                    clearFields();
-                }
-
-            }
-        });
-
-        radioCartoon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b) {
-                    radioSONumber.setChecked(false);
-                    radioCartoon.setChecked(true);
-                    clearFields();
-                }
-            }
-        });
 
 
     }
@@ -280,17 +251,7 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
 
             case R.id.btnSearch:
 
-                if (isSONumberScanned ||  isCartoonScanned) {
-                    if(radioSONumber.isChecked()){
-                        GetPackingCartonInfo(tvScanSONumber.getText().toString());
-                    }else{
-                        GetPackingCartonInfo(tvScanCartoon.getText().toString());
-                    }
-                } else {
-                    common.showUserDefinedAlertType(errorMessages.EMC_081, getActivity(), getContext(), "Error");
-                    return;
-                }
-
+                GetPackingCartonInfo(tvScanSONumber.getText().toString());
 
                 break;
 
@@ -299,23 +260,18 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
 
     public void getTenantId() {
 
-        for (HouseKeepingDTO oHouseKeeping : lstTenants)
-
-        {
+        for (HouseKeepingDTO oHouseKeeping : lstTenants) {
             if (oHouseKeeping.getTenantName().equals(selectedTenant)) {
 
                 tenantId = oHouseKeeping.getTenantID();
 
-                //getWarehouse();
             }
         }
     }
 
     public void getWarehouseId() {
 
-        for (HouseKeepingDTO oHouseKeeping : lstWarehouse)
-
-        {
+        for (HouseKeepingDTO oHouseKeeping : lstWarehouse) {
             if (oHouseKeeping.getWarehouse().equals(selectedWH)) {
 
                 warehouseId = oHouseKeeping.getWarehouseId();
@@ -394,7 +350,7 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
     //Assigning scanned value to the respective fields
     public void ProcessScannedinfo(String scannedData) {
 
-        if(((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)){
+        if (((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)) {
             return;
         }
 
@@ -404,23 +360,12 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
                 common.showUserDefinedAlertType(errorMessages.EMC_082, getActivity(), getContext(), "Warning");
                 return;
             }
-            if(radioSONumber.isChecked()){
-              //  ValidateLocation(scannedData);
-                cvScanSONumber.setCardBackgroundColor(getResources().getColor(R.color.white));
-                ivScanSONumber.setImageResource(R.drawable.check);
-                tvScanSONumber.setText(scannedData);
-                isSONumberScanned = true;
-                return;
-            }
 
-            if(radioCartoon.isChecked()){
-              //  ValidatePallet(scannedData);
-                cvScanCartoon.setCardBackgroundColor(getResources().getColor(R.color.white));
-                ivScanCartoon.setImageResource(R.drawable.check);
-                tvScanCartoon.setText(scannedData);
-                isCartoonScanned = true;
-                return;
-            }
+            //  ValidateLocation(scannedData);
+            cvScanSONumber.setCardBackgroundColor(getResources().getColor(R.color.white));
+            ivScanSONumber.setImageResource(R.drawable.check);
+            tvScanSONumber.setText(scannedData);
+
 
         }
     }
@@ -431,21 +376,12 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
         cvScanSONumber.setCardBackgroundColor(getResources().getColor(R.color.locationColor));
         ivScanSONumber.setImageResource(R.drawable.fullscreen_img);
 
-        cvScanCartoon.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
-        ivScanCartoon.setImageResource(R.drawable.fullscreen_img);
-        
         recyclerViewPackInfo.setAdapter(null);
-
-        scannedSKU = "";
-        isSONumberScanned = false;
-        isCartoonScanned = false;
 
         scannedLocation = "";
         scannedPallet = "";
-        scannedSKU = "";
 
         tvScanSONumber.setText(R.string.scan_so_number);
-        tvScanCartoon.setText(R.string.scan_carton);
 
         serialNo = "";
         batch = "";
@@ -734,14 +670,7 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
             outbountDTO.setTenatID(tenantId);
             outbountDTO.setWareHouseID(warehouseId);
             outbountDTO.setAccountID(accountId);
-            if(radioSONumber.isChecked()){
-                outbountDTO.setSONumber(ScannedData);
-                outbountDTO.setCartonSerialNo("");
-            }else{
-                outbountDTO.setSONumber("");
-                outbountDTO.setCartonSerialNo(ScannedData);
-            }
-
+            outbountDTO.setSONumber(ScannedData);
             message.setEntityObject(outbountDTO);
 
             Call<String> call = null;
@@ -793,23 +722,23 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
                             } else {
                                 List<LinkedTreeMap<?, ?>> _lOutBound = new ArrayList<LinkedTreeMap<?, ?>>();
                                 _lOutBound = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
-                                if(_lOutBound!=null){
-                                    final List<OutbountDTO> outbountDTOS=new ArrayList<>();
+                                if (_lOutBound != null) {
+                                    final List<OutbountDTO> outbountDTOS = new ArrayList<>();
                                     for (int i = 0; i < _lOutBound.size(); i++) {
                                         OutbountDTO dto = new OutbountDTO(_lOutBound.get(i).entrySet());
                                         outbountDTOS.add(dto);
                                     }
 
-                                    if(outbountDTOS.size()>0){
+                                    if (outbountDTOS.size() > 0) {
                                         PackingInfoAdapter packingInfoAdapter = new PackingInfoAdapter(getActivity(), outbountDTOS);
                                         recyclerViewPackInfo.setAdapter(packingInfoAdapter);
                                         ProgressDialogUtils.closeProgressDialog();
-                                    }else {
+                                    } else {
                                         common.showUserDefinedAlertType("No Data Found", getActivity(), getContext(), "Error");
                                         recyclerViewPackInfo.setAdapter(null);
                                     }
 
-                                }else{
+                                } else {
                                     common.showUserDefinedAlertType("No Data Found", getActivity(), getContext(), "Error");
                                     recyclerViewPackInfo.setAdapter(null);
                                 }

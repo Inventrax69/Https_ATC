@@ -35,6 +35,7 @@ import com.inventrax.atc.fragments.LiveStockFragment;
 import com.inventrax.atc.fragments.LoadGenerationFragment;
 import com.inventrax.atc.fragments.LoadSheetFragment;
 import com.inventrax.atc.fragments.LoadingFragment;
+import com.inventrax.atc.fragments.LoadingFragmentNew;
 import com.inventrax.atc.fragments.MaterialTransferFragment;
 import com.inventrax.atc.fragments.NewLoadSheetFragment;
 import com.inventrax.atc.fragments.OBDPickingDetailsFragment;
@@ -190,6 +191,8 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
                 }
                 if (fragment != null && fragment.isVisible() && fragment instanceof LoadingFragment) {
                     ((LoadingFragment) fragment).myScannedData(MainActivity.this, ScannedData);
+                }if (fragment != null && fragment.isVisible() && fragment instanceof LoadingFragmentNew) {
+                    ((LoadingFragmentNew) fragment).myScannedData(MainActivity.this, ScannedData);
                 }
                 if (fragment != null && fragment.isVisible() && fragment instanceof OBDPickingDetailsFragment) {
                     ((OBDPickingDetailsFragment) fragment).myScannedData(MainActivity.this, ScannedData);

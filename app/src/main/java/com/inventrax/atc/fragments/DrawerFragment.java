@@ -433,7 +433,7 @@ public class DrawerFragment extends Fragment implements View.OnClickListener {
             }
             break;
             case "Loading": {
-                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, new NewLoadSheetFragment());
+                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, new LoadingFragmentNew());
             }
             break;
             case "Outbound Revert": {

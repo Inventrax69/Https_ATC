@@ -21,7 +21,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     Fragment fragment = null;
     LinearLayout ll_receive, ll_putaway, ll_picking, ll_VLPDPicking;
     LinearLayout  ll_houseKeeping, ll_cycleCount, ll_livestock;
-    LinearLayout ll_packing,ll_loading,ll_load_generation;
+    LinearLayout ll_packingInfo,ll_loading,ll_load_generation;
     LinearLayout ll_linear1,ll_linear2;
     private String userId = null, scanType = null, accountId = null;
 
@@ -45,31 +45,29 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ll_receive = (LinearLayout) rootView.findViewById(R.id.ll_receive);
         ll_putaway = (LinearLayout) rootView.findViewById(R.id.ll_putaway);
         ll_picking = (LinearLayout) rootView.findViewById(R.id.ll_picking);
-        ll_VLPDPicking = (LinearLayout) rootView.findViewById(R.id.ll_VLPDPicking);
+        ll_loading = (LinearLayout) rootView.findViewById(R.id.ll_loading);
         ll_houseKeeping = (LinearLayout) rootView.findViewById(R.id.ll_houseKeeping);
         ll_cycleCount = (LinearLayout) rootView.findViewById(R.id.ll_cycleCount);
         ll_livestock = (LinearLayout) rootView.findViewById(R.id.ll_livestock);
 
-        ll_packing = (LinearLayout) rootView.findViewById(R.id.ll_packing);
-        ll_load_generation = (LinearLayout) rootView.findViewById(R.id.ll_load_generation);
-        ll_loading = (LinearLayout) rootView.findViewById(R.id.ll_loading);
+        ll_packingInfo = (LinearLayout) rootView.findViewById(R.id.ll_packingInfo);
+
+
 
         ll_linear1 = (LinearLayout) rootView.findViewById(R.id.ll_linear1);
-        ll_linear2 = (LinearLayout) rootView.findViewById(R.id.ll_linear2);
+
 
         ll_receive.setOnClickListener(this);
         ll_putaway.setOnClickListener(this);
         ll_picking.setOnClickListener(this);
+        ll_packingInfo.setOnClickListener(this);
 
-        ll_VLPDPicking.setOnClickListener(this);
 
         ll_houseKeeping.setOnClickListener(this);
         ll_cycleCount.setOnClickListener(this);
 
         ll_livestock.setOnClickListener(this);
 
-        ll_packing.setOnClickListener(this);
-        ll_load_generation.setOnClickListener(this);
         ll_loading.setOnClickListener(this);
 
         if (scanType.equals("Auto")) {
@@ -77,7 +75,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             ll_linear2.setVisibility(View.VISIBLE);
         } else {
             ll_linear1.setVisibility(View.VISIBLE);
-            ll_linear2.setVisibility(View.GONE);
         }
 
 
@@ -112,10 +109,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, obdPickingHeaderFragment);
                 break;
 
-            case R.id.ll_VLPDPicking:
-                VLPDPickingHeaderFragment vlpdPickingHeaderFragment = new VLPDPickingHeaderFragment();
-                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, vlpdPickingHeaderFragment);
-                break;
 
             case R.id.ll_houseKeeping:
                 InternalTransferFragment internalTransferheaderFragment = new InternalTransferFragment();
@@ -132,19 +125,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, liveStockFragment_);
                 break;
 
-            case R.id.ll_packing:
-                PackingFragment packingFragment = new PackingFragment();
-                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, packingFragment);
+            case R.id.ll_packingInfo:
+                PackingInfoFragment packingInfoFragment = new PackingInfoFragment();
+                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, packingInfoFragment);
                 break;
 
-            case R.id.ll_load_generation:
-                LoadGenerationFragment loadGenerationFragment = new LoadGenerationFragment();
-                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, loadGenerationFragment);
-                break;
 
             case R.id.ll_loading:
-                NewLoadSheetFragment newLoadSheetFragment = new NewLoadSheetFragment();
-                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, newLoadSheetFragment);
+                LoadingFragmentNew loadingFragmentNew = new LoadingFragmentNew();
+                FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, loadingFragmentNew);
                 break;
 
         }

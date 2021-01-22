@@ -570,7 +570,7 @@ public class UnloadingFragment extends Fragment implements View.OnClickListener,
                 // Toast.makeText(this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
             }
         }
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_unloading));
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.title_activity_receive));
     }
 
     //Barcode scanner API

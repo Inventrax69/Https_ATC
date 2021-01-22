@@ -25,16 +25,23 @@ public class PackingInfoAdapter extends  RecyclerView.Adapter{
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtSONumber,txtCartonNumber,txtSKU,txtQTY;// init the item view's
+        TextView txtSONumber,txtSKU,txtQTY,txtDescription,txtBatch,txtMfg,txtPrjRef,txtExp,txtMrp,txtSerialNo,txtHU;// init the item view's
 
         public MyViewHolder(View itemView) {
 
             super(itemView);
             // get the reference of item view's
             txtSONumber = (TextView) itemView.findViewById(R.id.txtSONumber);
-            txtCartonNumber = (TextView) itemView.findViewById(R.id.txtCartonNumber);
             txtSKU = (TextView) itemView.findViewById(R.id.txtSKU);
             txtQTY = (TextView) itemView.findViewById(R.id.txtQTY);
+            txtDescription = (TextView) itemView.findViewById(R.id.txtDescription);
+            txtBatch = (TextView) itemView.findViewById(R.id.txtBatch);
+            txtPrjRef = (TextView) itemView.findViewById(R.id.txtPrjRef);
+            txtMfg = (TextView) itemView.findViewById(R.id.txtMfg);
+            txtExp = (TextView) itemView.findViewById(R.id.txtExp);
+            txtSerialNo = (TextView) itemView.findViewById(R.id.txtSerialNo);
+            txtMrp = (TextView) itemView.findViewById(R.id.txtMrp);
+            txtHU = (TextView) itemView.findViewById(R.id.txtHU);
 
         }
     }
@@ -57,15 +64,17 @@ public class PackingInfoAdapter extends  RecyclerView.Adapter{
         // set the data in items
 
         ((MyViewHolder) holder).txtSONumber.setText(outbountDTO.getSONumber());
-        ((MyViewHolder) holder).txtQTY.setText("Qty : "+outbountDTO.getPickedQty().split("[.]")[0]);
-        ((MyViewHolder) holder).txtCartonNumber.setText( outbountDTO.getCartonSerialNo());
-        ((MyViewHolder) holder).txtSKU.setText("MCode : "+outbountDTO.getmCode());
- /*       ((MyViewHolder) holder).txtExp.setText("Exp:   " + inventoryDTO.getExpDate());
-        ((MyViewHolder) holder).txtMfg.setText("Mfg:   " + inventoryDTO.getMfgDate());
-        ((MyViewHolder) holder).txtLocation.setText(inventoryDTO.getLocationCode());
-        ((MyViewHolder) holder).txtMCode.setText(inventoryDTO.getMaterialCode());
-        ((MyViewHolder) holder).txtPrjRef.setText("Prj. Ref.#:   " + inventoryDTO.getProjectNo());
-        ((MyViewHolder) holder).txtMRP.setText("MRP:   " + inventoryDTO.getMRP());*/
+        ((MyViewHolder) holder).txtQTY.setText("Qty:   " +outbountDTO.getPickedQty().split("[.]")[0]);
+        ((MyViewHolder) holder).txtSKU.setText("Material : "+outbountDTO.getmCode());
+        ((MyViewHolder) holder).txtDescription.setText(outbountDTO.getMaterialDescription());
+        ((MyViewHolder) holder).txtExp.setText("Exp:   " + outbountDTO.getExpDate());
+        ((MyViewHolder) holder).txtMfg.setText("Mfg:   " + outbountDTO.getMfgDate());
+        ((MyViewHolder) holder).txtBatch.setText("Batch:   " +outbountDTO.getBatchNo());
+        ((MyViewHolder) holder).txtDescription.setText(outbountDTO.getMaterialDescription());
+        ((MyViewHolder) holder).txtPrjRef.setText("Prj. Ref.#:   " + outbountDTO.getProjectNo());
+        ((MyViewHolder) holder).txtSerialNo.setText("Serial No.:   " + outbountDTO.getSerialNo());
+        ((MyViewHolder) holder).txtMrp.setText("MRP:   " + outbountDTO.getMRP());
+        ((MyViewHolder) holder).txtHU.setText("HU:   " + outbountDTO.getHUSize());
 
 
     }

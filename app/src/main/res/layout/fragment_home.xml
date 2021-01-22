@@ -7,32 +7,37 @@
     android:background="@color/white"
     tools:ignore="NestedWeights,UseCompoundDrawables">
 
-    <ImageView
-        android:id="@+id/ivMainImage"
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="TODO"
-        android:scaleType="fitXY"
-        android:src="@drawable/home_img" />
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ivMainImage">
+        >
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/ivMainImage"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription="TODO"
+                android:scaleType="fitXY"
+                android:src="@drawable/home_img" />
+
             <LinearLayout
+                android:layout_below="@id/ivMainImage"
                 android:id="@+id/ll_linear1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:weightSum="4.5">
+                android:weightSum="6">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -147,6 +152,76 @@
                         android:background="#cccc" />
 
                     <LinearLayout
+                        android:id="@+id/ll_packingInfo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_packing" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:text="Packing Info"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="#cccc" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:id="@+id/ll_loading"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+
+                            android:layout_width="75dp"
+                            android:layout_height="75dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_loading_truck" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="5dp"
+                            android:text="Loading"
+                            android:textSize="20sp" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="#cccc" />
+
+                    <LinearLayout
                         android:id="@+id/ll_livestock"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -243,210 +318,15 @@
                     </LinearLayout>
 
 
-
-
-
-
-
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#cccc" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:visibility="gone"
-                    android:weightSum="2">
 
 
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="#cccc" />
 
-
-                    <LinearLayout
-                        android:id="@+id/ll_VLPDPicking"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:visibility="invisible">
-
-                        <ImageView
-                            android:layout_width="85dp"
-                            android:layout_height="85dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/picking" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:text="VLPD picking"
-                            android:textSize="20dp" />
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_linear2"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="3">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        android:id="@+id/ll_packing"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="85dp"
-                            android:layout_height="85dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="TODO"
-                            android:src="@drawable/picking" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:text="@string/packing"
-                            android:textSize="20sp" />
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="#cccc" />
-
-                    <LinearLayout
-                        android:id="@+id/ll_load_generation"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="85dp"
-                            android:layout_height="85dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/picking" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:text="@string/load_generation"
-                            android:textSize="20sp" />
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#cccc" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        android:id="@+id/ll_loading"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="85dp"
-                            android:layout_height="85dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/picking" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:text="@string/loading"
-                            android:textSize="20sp" />
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:background="#cccc" />
-
-
-                    <LinearLayout
-                        android:visibility="gone"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="65dp"
-                            android:layout_height="65dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/housekeeping" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom|center_horizontal"
-                            android:layout_marginBottom="5dp"
-                            android:text="@string/internal_transfer"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="#cccc" />
-
-
-            </LinearLayout>
 
         </RelativeLayout>
     </ScrollView>

@@ -197,6 +197,10 @@ public class OutbountDTO {
     @SerializedName("AccountID")
     private String AccountID;
 
+    @SerializedName("MaterialDescription")
+    private String MaterialDescription;
+
+
     @SerializedName("Vehicle")
     private String Vehicle;
 
@@ -268,9 +272,11 @@ public class OutbountDTO {
 
     @SerializedName("HUNo")
     private String HUNo;
+    @SerializedName("LoadCount")
+    private String loadCount;
 
 
-    private boolean isChecked=false;
+    private boolean isChecked = false;
 
 
     public OutbountDTO() {
@@ -590,158 +596,184 @@ public class OutbountDTO {
                     break;
 
                 case "PickedId":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setPickedId(entry.getValue().toString());
                     }
                     break;
 
                 case "AccountID":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setAccountID(entry.getValue().toString());
                     }
                     break;
 
                 case "Vehicle":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setVehicle(entry.getValue().toString());
                     }
                     break;
 
                 case "OBDNumber":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setOBDNumber(entry.getValue().toString());
                     }
                     break;
 
                 case "DriverName":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setDriverName(entry.getValue().toString());
                     }
                     break;
 
                 case "DriverNo":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setDriverNo(entry.getValue().toString());
                     }
                     break;
 
                 case "LRnumber":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setLRnumber(entry.getValue().toString());
                     }
                     break;
 
                 case "SOQty":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setSOQty(entry.getValue().toString());
                     }
                     break;
 
                 case "TenatID":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setTenatID(entry.getValue().toString());
                     }
                     break;
 
                 case "SONumber":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setSONumber(entry.getValue().toString());
                     }
                     break;
 
-               case "PSNID":
-                    if(entry.getValue()!=null) {
+                case "PSNID":
+                    if (entry.getValue() != null) {
                         this.setPSNID(entry.getValue().toString());
                     }
                     break;
 
-                  case "PackedQty":
-                    if(entry.getValue()!=null) {
+                case "PackedQty":
+                    if (entry.getValue() != null) {
                         this.setPackedQty(entry.getValue().toString());
                     }
                     break;
 
-                  case "CartonSerialNo":
-                    if(entry.getValue()!=null) {
+                case "CartonSerialNo":
+                    if (entry.getValue() != null) {
                         this.setCartonSerialNo(entry.getValue().toString());
                     }
                     break;
 
-                  case "PSNDetailsID":
-                    if(entry.getValue()!=null) {
+                case "PSNDetailsID":
+                    if (entry.getValue() != null) {
                         this.setPSNDetailsID(entry.getValue().toString());
                     }
                     break;
-                  case "PackType":
-                    if(entry.getValue()!=null) {
+                case "PackType":
+                    if (entry.getValue() != null) {
                         this.setPackType(entry.getValue().toString());
                     }
                     break;
 
-                  case "PackComplete":
-                    if(entry.getValue()!=null) {
+                case "PackComplete":
+                    if (entry.getValue() != null) {
                         this.setPackComplete(entry.getValue().toString());
                     }
                     break;
 
-                 case "TotalSOCount":
-                    if(entry.getValue()!=null) {
+                case "TotalSOCount":
+                    if (entry.getValue() != null) {
                         this.setTotalSOCount(entry.getValue().toString());
                     }
                     break;
 
-                 case "ScannedSOCount":
-                    if(entry.getValue()!=null) {
+                case "ScannedSOCount":
+                    if (entry.getValue() != null) {
                         this.setScannedSOCount(entry.getValue().toString());
                     }
                     break;
-                 case "BusinessType":
-                    if(entry.getValue()!=null) {
+                case "BusinessType":
+                    if (entry.getValue() != null) {
                         this.setBusinessType(entry.getValue().toString());
                     }
                     break;
 
-                 case "LoadRefNo":
-                    if(entry.getValue()!=null) {
+                case "LoadRefNo":
+                    if (entry.getValue() != null) {
                         this.setLoadRefNo(entry.getValue().toString());
                     }
                     break;
 
-                 case "CustomerName":
-                    if(entry.getValue()!=null) {
+                case "CustomerName":
+                    if (entry.getValue() != null) {
                         this.setCustomerName(entry.getValue().toString());
                     }
                     break;
 
-                 case "CustomerAddress":
-                    if(entry.getValue()!=null) {
+                case "CustomerAddress":
+                    if (entry.getValue() != null) {
                         this.setCustomerAddress(entry.getValue().toString());
                     }
                     break;
                 case "WareHouseID":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setWareHouseID(entry.getValue().toString());
                     }
                     break;
 
                 case "HUSize":
-                    if(entry.getValue()!=null) {
+                    if (entry.getValue() != null) {
                         this.setHUSize(entry.getValue().toString());
                     }
                     break;
 
-                 case "HUNo":
-                    if(entry.getValue()!=null) {
+                case "HUNo":
+                    if (entry.getValue() != null) {
                         this.setHUNo(entry.getValue().toString());
                     }
                     break;
 
+                case "MaterialDescription":
+                    if (entry.getValue() != null) {
+                        this.setMaterialDescription(entry.getValue().toString());
+                    }
+                    break;
+
+                case "LoadCount":
+                    if (entry.getValue() != null) {
+                        this.setLoadCount(entry.getValue().toString());
+                    }
+                    break;
 
 
             }
         }
     }
 
+    public String getLoadCount() {
+        return loadCount;
+    }
+
+    public void setLoadCount(String loadCount) {
+        this.loadCount = loadCount;
+    }
+
+    public String getMaterialDescription() {
+        return MaterialDescription;
+    }
+
+    public void setMaterialDescription(String materialDescription) {
+        MaterialDescription = materialDescription;
+    }
 
     public String getPickedId() {
         return PickedId;
