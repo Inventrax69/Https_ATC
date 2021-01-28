@@ -180,7 +180,7 @@ public class OBDPickingHeaderFragment extends Fragment implements View.OnClickLi
         }
 
         if (scannedData != null && !common.isPopupActive) {
-            pickRefNo = ""; pickobdId="";
+            //pickRefNo = ""; pickobdId="";
             //GetOBDNosUnderSO(scannedData);
             ArrayAdapter adp = (ArrayAdapter) spinnerSelectPickList.getAdapter();
             int i = adp.getPosition(scannedData);

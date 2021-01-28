@@ -1150,6 +1150,8 @@ drawable ic_action_menu_home
 drawable ic_action_phone_call
 drawable ic_action_youtube_link
 drawable ic_clear_black_24dp
+drawable ic_loading_truck
+drawable ic_packing
 drawable identity
 drawable invalid_cross
 drawable inventrax
@@ -1270,6 +1272,7 @@ id btnExportCC
 id btnGenerate
 id btnGo
 id btnItemNotFound
+id btnLoad
 id btnLoadSKU
 id btnLoadingComplete
 id btnLoadingVerify
@@ -1290,6 +1293,7 @@ id btnSkipClose
 id btn_Skip
 id btn_clear
 id btn_delete_unit
+id btn_pending
 id btnskip
 id buttonPanel
 id cancel_action
@@ -1320,6 +1324,7 @@ id cvScanFromCont
 id cvScanFromLoc
 id cvScanLocation
 id cvScanNewRSN
+id cvScanPackSlip
 id cvScanPallet
 id cvScanPalletTo
 id cvScanRSN
@@ -1408,6 +1413,7 @@ id ivScanFromCont
 id ivScanFromLoc
 id ivScanLocation
 id ivScanNewRSN
+id ivScanPackSlip
 id ivScanPallet
 id ivScanPalletTo
 id ivScanRSN
@@ -1494,15 +1500,12 @@ id listItems
 id listMode
 id list_item
 id llButtons
-id ll_VLPDPicking
 id ll_cycleCount
 id ll_houseKeeping
 id ll_linear1
-id ll_linear2
 id ll_livestock
-id ll_load_generation
 id ll_loading
-id ll_packing
+id ll_packingInfo
 id ll_picking
 id ll_putaway
 id ll_receive
@@ -1582,6 +1585,7 @@ id rlStRefSelect
 id rlccViewOne
 id rr
 id rvPendingCC
+id rv_packSLiplist
 id screen
 id scroll
 id scrollIndicatorDown
@@ -1691,6 +1695,7 @@ id tvScanContainer
 id tvScanDock
 id tvScanLocation
 id tvScanNewRSN
+id tvScanPackSlip
 id tvScanPallet
 id tvScanRSN
 id tvScanSKU
@@ -1719,11 +1724,12 @@ id tvscanStoreRefNo
 id txtBatch
 id txtBottomBar
 id txtCCName
-id txtCartonNumber
 id txtCounter
 id txtDesc
+id txtDescription
 id txtExp
 id txtFromPallet
+id txtHU
 id txtHelpLine
 id txtHome
 id txtInputLayoutBatch
@@ -1744,18 +1750,22 @@ id txtInputLayoutSerial
 id txtInputLayoutServiceUrl
 id txtInputLayoutToLoc
 id txtInputLayoutToPallet
+id txtLoadSheetNo
 id txtLocation
 id txtLocationCode
 id txtLoginUser
 id txtMCode
 id txtMRP
 id txtMfg
+id txtMrp
+id txtPackSlipCount
 id txtPrjRef
 id txtQTY
 id txtQty
 id txtReleaseDate
 id txtSKU
 id txtSONumber
+id txtScanPackSlip
 id txtSerialNo
 id txtSloc
 id txtTendentName
@@ -1858,6 +1868,7 @@ layout fragment_livestock
 layout fragment_load_sheet
 layout fragment_load_sheet_generation
 layout fragment_loading
+layout fragment_loading_new
 layout fragment_materialtransfer
 layout fragment_navigation_drawer
 layout fragment_navigation_drawer_withlist
@@ -1900,6 +1911,7 @@ layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout packinginfo_row
+layout packsliplist_row
 layout sdk_list
 layout searchable_list_dialog
 layout select_dialog_item_material

@@ -3,7 +3,7 @@
     package="com.inventrax.atc"
     android:targetSandboxVersion="2"
     android:versionCode="1"
-    android:versionName="1.0.1" >
+    android:versionName="1.0.0" >
 
     <uses-sdk
         android:minSdkVersion="15"
@@ -81,7 +81,6 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/in_launcher"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.inventrax.atc.activities.LoginActivity"

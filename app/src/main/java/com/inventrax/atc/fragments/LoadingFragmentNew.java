@@ -46,6 +46,7 @@ import com.honeywell.aidc.TriggerStateChangeEvent;
 import com.honeywell.aidc.UnsupportedPropertyException;
 import com.inventrax.atc.R;
 import com.inventrax.atc.activities.MainActivity;
+import com.inventrax.atc.adapters.PackiSlipListAdapter;
 import com.inventrax.atc.adapters.PackingInfoAdapter;
 import com.inventrax.atc.common.Common;
 import com.inventrax.atc.common.constants.EndpointConstants;
@@ -79,14 +80,14 @@ import retrofit2.Response;
  * Created by Padmaja on 06/26/2018.
  */
 
-public class LoadingFragmentNew extends Fragment implements View.OnClickListener,BarcodeReader.TriggerListener, BarcodeReader.BarcodeListener, AdapterView.OnItemSelectedListener {
+public class LoadingFragmentNew extends Fragment implements View.OnClickListener, BarcodeReader.TriggerListener, BarcodeReader.BarcodeListener, AdapterView.OnItemSelectedListener {
 
     private static final String classCode = "API_FRAG_009";
 
     private View rootView;
-    Button btnGo, btnCloseOne,btn_pending,btnLoad;
-    RelativeLayout rlLoadingOne,rlLoadListTwo;
-    TextView txtLoadSheetNo,txtPackSlipCount,txtScanPackSlip;
+    Button btnGo, btnCloseOne, btn_pending, btnLoad;
+    RelativeLayout rlLoadingOne, rlLoadListTwo;
+    TextView txtLoadSheetNo, txtPackSlipCount, txtScanPackSlip;
     CardView cvScanPackSlip;
     ImageView ivScanPackSlip;
     SearchableSpinner spinnerSelectLoadList;
@@ -104,18 +105,18 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
     private AidcManager manager;
     private Common common;
     private WMSCoreMessage core;
-    List<LoadDTO> lstloaddata= null;
-    String loadSheetNo=null,loadNoCustomerCode=null;
+    List<LoadDTO> lstloaddata = null;
+    String loadSheetNo = null, loadNoCustomerCode = null;
     private String Materialcode = null;
-    private boolean IsUserConfirmedRedo=false;
+    private boolean IsUserConfirmedRedo = false;
     private ExceptionLoggerUtils exceptionLoggerUtils;
     private ErrorMessages errorMessages;
 
     private SearchableSpinner spinnerSelectTenant, spinnerSelectWH;
     List<HouseKeepingDTO> lstTenants = null;
     List<HouseKeepingDTO> lstWarehouse = null;
-    private RecyclerView recyclerViewPackInfo,rv_packSLiplist;
-    private LinearLayoutManager linearLayoutManager,linearLayoutManagerPackSlip;
+    private RecyclerView recyclerViewPackInfo, rv_packSLiplist;
+    private LinearLayoutManager linearLayoutManager, linearLayoutManagerPackSlip;
 
     TableLayout tl;
 
@@ -128,15 +129,15 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
         }
     };
 
-    public void myScannedData(Context context, String barcode){
+    public void myScannedData(Context context, String barcode) {
         try {
             ProcessScannedinfo(barcode.trim());
-        }catch (Exception e){
+        } catch (Exception e) {
             //  Toast.makeText(context, ""+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public LoadingFragmentNew(){
+    public LoadingFragmentNew() {
 
     }
 
@@ -144,7 +145,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        rootView  = inflater.inflate(R.layout.fragment_loading_new,container,false);
+        rootView = inflater.inflate(R.layout.fragment_loading_new, container, false);
         barcodeReader = MainActivity.getBarcodeObject();
         loadFormControls();
 
@@ -166,8 +167,8 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
         btnGo = (Button) rootView.findViewById(R.id.btnGo);
         btnCloseOne = (Button) rootView.findViewById(R.id.btnCloseOne);
-        btn_pending = (Button)rootView.findViewById(R.id.btn_pending);
-        btnLoad = (Button)rootView.findViewById(R.id.btnLoad );
+        btn_pending = (Button) rootView.findViewById(R.id.btn_pending);
+        btnLoad = (Button) rootView.findViewById(R.id.btnLoad);
 
         recyclerViewPackInfo = (RecyclerView) rootView.findViewById(R.id.recycler_view_packinfo);
         rv_packSLiplist = (RecyclerView) rootView.findViewById(R.id.rv_packSLiplist);
@@ -211,7 +212,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
         lstWarehouse = new ArrayList<HouseKeepingDTO>();
 
         common = new Common();
-        core= new WMSCoreMessage();
+        core = new WMSCoreMessage();
 
         ProgressDialogUtils.closeProgressDialog();
         common.setIsPopupActive(false);
@@ -276,7 +277,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnGo:
                 if (loadSheetNo.equalsIgnoreCase("")) {
                     common.showUserDefinedAlertType("No Pending Load Sheet Number", getActivity(), getContext(), "Warning");
@@ -292,9 +293,15 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 break;
             case R.id.btn_pending:
                 //FragmentUtils.replaceFragmentWithBackStack(getActivity(), R.id.container_body, new HomeFragment());
+                PendingPackSlipList();
                 break;
             case R.id.btnLoad:
-                //LoadingComplete();
+                if (txtScanPackSlip.getText().toString().isEmpty()) {
+                    common.showUserDefinedAlertType("Please scan Packing Slip", getActivity(), getContext(), "Error");
+                } else {
+                    LoadPacking();
+                }
+
                 break;
         }
     }
@@ -660,7 +667,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                 }
 
                                 if (lstDto.size() > 0) {
-                                    txtPackSlipCount.setText("Load Qty.: "+lstDto.get(0).getLoadCount());
+                                    txtPackSlipCount.setText("Load Qty.: " + lstDto.get(0).getLoadCount());
                                 }
 
 
@@ -781,10 +788,13 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                     }
 
                                     if (outbountDTOS.size() > 0) {
+                                        recyclerViewPackInfo.setVisibility(View.VISIBLE);
+                                        rv_packSLiplist.setVisibility(View.GONE);
                                         PackingInfoAdapter packingInfoAdapter = new PackingInfoAdapter(getActivity(), outbountDTOS);
                                         recyclerViewPackInfo.setAdapter(packingInfoAdapter);
                                         ProgressDialogUtils.closeProgressDialog();
                                     } else {
+                                        rv_packSLiplist.setVisibility(View.GONE);
                                         common.showUserDefinedAlertType("No Data Found", getActivity(), getContext(), "Error");
                                         recyclerViewPackInfo.setAdapter(null);
                                     }
@@ -855,14 +865,17 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
         });
     }
+
     @Override
     public void onFailureEvent(BarcodeFailureEvent barcodeFailureEvent) {
 
     }
+
     @Override
     public void onTriggerEvent(TriggerStateChangeEvent triggerStateChangeEvent) {
 
     }
+
     //Honeywell Barcode reader Properties
     public void HoneyWellBarcodeListeners() {
 
@@ -907,7 +920,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
     //Assigning scanned value to the respective fields
     public void ProcessScannedinfo(String scannedData) {
 
-        if(((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)){
+        if (((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)) {
             return;
         }
 
@@ -918,11 +931,11 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
         if (scannedData != null) {
 
-                cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
-                ivScanPackSlip.setImageResource(R.drawable.check);
-                txtScanPackSlip.setText(scannedData);
+            cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
+            ivScanPackSlip.setImageResource(R.drawable.check);
+            txtScanPackSlip.setText(scannedData);
 
-                GetPackingCartonInfo(scannedData);
+            GetPackingCartonInfo(scannedData);
 
         }
     }
@@ -936,7 +949,6 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
 
 
     public void GetOpenLoadsheetList() {
@@ -1067,12 +1079,11 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
         }
     }
 
-    public  void FetchInventoryForLoadSheet()
-    {
+    public void FetchInventoryForLoadSheet() {
 
         try {
             WMSCoreMessage message = new WMSCoreMessage();
-            message= common.SetAuthentication(EndpointConstants.Outbound,getContext());
+            message = common.SetAuthentication(EndpointConstants.Outbound, getContext());
             OutbountDTO outbountDTO = new OutbountDTO();
             outbountDTO.setUserId(userId);
             outbountDTO.setSelectedLoadSheetNumber(loadSheetNo);
@@ -1095,7 +1106,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"006_01",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "006_01", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1134,7 +1145,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                             }
                         } catch (Exception ex) {
                             try {
-                                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"006_02",getActivity());
+                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "006_02", getActivity());
                                 logException();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -1154,7 +1165,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 });
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"006_03",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "006_03", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1163,10 +1174,9 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
                 DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
             }
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
             try {
-                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"006_04",getActivity());
+                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "006_04", getActivity());
                 logException();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -1177,17 +1187,16 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
         }
     }
 
-    public  void ConfirmLoading()
-    {
+    public void ConfirmLoading() {
 
         try {
             WMSCoreMessage message = new WMSCoreMessage();
-            message= common.SetAuthentication(EndpointConstants.Inventory,getContext());
+            message = common.SetAuthentication(EndpointConstants.Inventory, getContext());
             InventoryDTO inventoryDTO = new InventoryDTO();
             inventoryDTO.setRSN(Materialcode);
-            inventoryDTO.setReferenceDocumentNumber(txtLoadSheetNo.getText().toString().split("[-]",2)[0]);
-          //  inventoryDTO.setVehicleNumber(lblVehicleNo.getText().toString());
-            String Qty="1";
+            inventoryDTO.setReferenceDocumentNumber(txtLoadSheetNo.getText().toString().split("[-]", 2)[0]);
+            //  inventoryDTO.setVehicleNumber(lblVehicleNo.getText().toString());
+            String Qty = "1";
             inventoryDTO.setQuantity(Qty);
             message.setEntityObject(inventoryDTO);
 
@@ -1208,7 +1217,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"003_01",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "003_01", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1254,12 +1263,9 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                         cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
                                         ivScanPackSlip.setImageResource(R.drawable.warning_img);
                                         return;
-                                    }
-                                    else
-
-                                    {
+                                    } else {
                                         ProgressDialogUtils.closeProgressDialog();
-                                        common.showAlertType(owmsExceptionMessage, getActivity(),getContext());
+                                        common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
                                         cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
                                         ivScanPackSlip.setImageResource(R.drawable.warning_img);
                                     }
@@ -1267,7 +1273,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                     return;
                                 }
 
-                            }  else {
+                            } else {
 
                                 ProgressDialogUtils.closeProgressDialog();
                                 List<LinkedTreeMap<?, ?>> _lInventory = new ArrayList<LinkedTreeMap<?, ?>>();
@@ -1286,13 +1292,13 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                     if (dto.getQuantity() != "0") {
                                         txtPackSlipCount.setText(String.valueOf(dto.getQuantity()));
                                     }
-                                   // lblDesc.setText(dto.getMaterialShortDescription());
+                                    // lblDesc.setText(dto.getMaterialShortDescription());
                                 }
                             }
 
                         } catch (Exception ex) {
                             try {
-                                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"003_02",getActivity());
+                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "003_02", getActivity());
                                 logException();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -1312,7 +1318,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 });
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"003_03",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "003_03", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1320,10 +1326,9 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 ProgressDialogUtils.closeProgressDialog();
                 DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
             }
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
             try {
-                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"003_04",getActivity());
+                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "003_04", getActivity());
                 logException();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -1333,19 +1338,17 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
         }
     }
 
-    public  void RevertLoading()
-    {
+    public void RevertLoading() {
 
         try {
             WMSCoreMessage message = new WMSCoreMessage();
-            message= common.SetAuthentication(EndpointConstants.Inventory,getContext());
+            message = common.SetAuthentication(EndpointConstants.Inventory, getContext());
             final InventoryDTO inventoryDTO = new InventoryDTO();
-            inventoryDTO.setReferenceDocumentNumber(txtLoadSheetNo.getText().toString().split("[-]",2)[0]);
+            inventoryDTO.setReferenceDocumentNumber(txtLoadSheetNo.getText().toString().split("[-]", 2)[0]);
             //inventoryDTO.setMaterialCode(lblScannedSku.getText().toString());
             inventoryDTO.setRSN(Materialcode);
             message.setEntityObject(inventoryDTO);
-            if(IsUserConfirmedRedo)
-            {
+            if (IsUserConfirmedRedo) {
                 inventoryDTO.setUserConfirmReDo(true);
             }
 
@@ -1365,7 +1368,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"004_01",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "004_01", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1392,15 +1395,13 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                     owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
                                     ProgressDialogUtils.closeProgressDialog();
 
-                                    if(owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_008"))
-                                    {
-                                        IsUserConfirmedRedo= true;
+                                    if (owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_008")) {
+                                        IsUserConfirmedRedo = true;
                                         inventoryDTO.setQuantity("0");
 
 
                                     }
-                                    if(owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_009"))
-                                    {
+                                    if (owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_009")) {
                                         etQty.setVisibility(View.VISIBLE);
                                         txtInputLayoutQty.setVisibility(View.VISIBLE);
                                     }
@@ -1410,8 +1411,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                             public void onClick(DialogInterface dialog, int which) {
                                                 switch (which) {
                                                     case DialogInterface.BUTTON_POSITIVE:
-                                                        if(inventoryDTO.getQuantity().equals("0"))
-                                                        {
+                                                        if (inventoryDTO.getQuantity().equals("0")) {
                                                             RevertLoading();
                                                         }
                                                         break;
@@ -1422,25 +1422,19 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                             }
                                         });
                                         return;
-                                    }
-                                    else if(owmsExceptionMessage.isShowAsSuccess())
-                                    {
+                                    } else if (owmsExceptionMessage.isShowAsSuccess()) {
                                         cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
                                         ivScanPackSlip.setImageResource(R.drawable.check);
                                         return;
-                                    }
-                                    else
-                                    {
-                                        common.showAlertType(owmsExceptionMessage, getActivity(),getContext());
+                                    } else {
+                                        common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
                                     }
                                     cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
                                     ivScanPackSlip.setImageResource(R.drawable.warning_img);
                                     return;
                                 }
-                            }
-                            else
-                            {
-                                InventoryDTO oInventoryDTO= null;
+                            } else {
+                                InventoryDTO oInventoryDTO = null;
                                 List<LinkedTreeMap<?, ?>> _lLoadingList = new ArrayList<LinkedTreeMap<?, ?>>();
                                 _lLoadingList = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
                                 for (int i = 0; i < _lLoadingList.size(); i++) {
@@ -1454,7 +1448,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
                         } catch (Exception ex) {
                             try {
-                                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"004_02",getActivity());
+                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "004_02", getActivity());
                                 logException();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -1473,7 +1467,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 });
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"004_03",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "004_03", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1481,10 +1475,9 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 ProgressDialogUtils.closeProgressDialog();
                 DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
             }
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
             try {
-                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"004_04",getActivity());
+                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "004_04", getActivity());
                 logException();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -1494,21 +1487,16 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
         }
     }
 
-    public  void LoadingComplete()
-    {
+    public void LoadPacking() {
 
         try {
             WMSCoreMessage message = new WMSCoreMessage();
-            message= common.SetAuthentication(EndpointConstants.Inventory,getContext());
-            final InventoryDTO inventoryDTO = new InventoryDTO();
-            inventoryDTO.setReferenceDocumentNumber(txtLoadSheetNo.getText().toString().split("[-]",2)[0]);
-            //inventoryDTO.setMaterialCode(lblScannedSku.getText().toString());
-            inventoryDTO.setRSN(Materialcode);
-            message.setEntityObject(inventoryDTO);
-            if(IsUserConfirmedRedo)
-            {
-                inventoryDTO.setUserConfirmReDo(true);
-            }
+            message = common.SetAuthentication(EndpointConstants.Outbound, getContext());
+            final OutbountDTO outbountDTO = new OutbountDTO();
+            outbountDTO.setPackingSlipNo(txtScanPackSlip.getText().toString());
+            outbountDTO.setLoadSheetNo(txtLoadSheetNo.getText().toString());
+            outbountDTO.setUserId(userId);
+            message.setEntityObject(outbountDTO);
 
             Call<String> call = null;
             ApiInterface apiService = RetrofitBuilderHttpsEx.getInstance(getActivity()).create(ApiInterface.class);
@@ -1517,7 +1505,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 // if (NetworkUtils.isInternetAvailable()) {
                 // Calling the Interface method
                 ProgressDialogUtils.showProgressDialog("Please Wait");
-                call = apiService.LoadingComplete(message);
+                call = apiService.LoadPacking(message);
                 // } else {
                 // DialogUtils.showAlertDialog(getActivity(), "Please enable internet");
                 // return;
@@ -1526,7 +1514,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"005_01",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_01", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1553,15 +1541,12 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                     owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
 
                                     ProgressDialogUtils.closeProgressDialog();
-                                    if(owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_008"))
-                                    {
-                                        IsUserConfirmedRedo= true;
-                                        inventoryDTO.setQuantity("0");
+                                    if (owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_008")) {
+                                        IsUserConfirmedRedo = true;
 
 
                                     }
-                                    if(owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_009"))
-                                    {
+                                    if (owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_009")) {
                                         etQty.setVisibility(View.VISIBLE);
                                         txtInputLayoutQty.setVisibility(View.VISIBLE);
                                     }
@@ -1571,10 +1556,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                             public void onClick(DialogInterface dialog, int which) {
                                                 switch (which) {
                                                     case DialogInterface.BUTTON_POSITIVE:
-                                                        if(inventoryDTO.getQuantity().equals("0"))
-                                                        {
-                                                            RevertLoading();
-                                                        }
+
                                                         break;
                                                     case DialogInterface.BUTTON_NEGATIVE:
 
@@ -1583,29 +1565,44 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                             }
                                         });
                                         return;
-                                    }
-                                    else if(owmsExceptionMessage.isShowAsSuccess())
-                                    {
+                                    } else if (owmsExceptionMessage.isShowAsSuccess()) {
                                         cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
                                         ivScanPackSlip.setImageResource(R.drawable.check);
                                         return;
-                                    }
-                                    else
-                                    {
-                                        common.showAlertType(owmsExceptionMessage, getActivity(),getContext());
+                                    } else {
+                                        common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
                                     }
                                     cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
                                     ivScanPackSlip.setImageResource(R.drawable.warning_img);
                                     return;
                                 }
-                            }else {
-                                InventoryDTO oInventoryDTO= null;
+                            } else {
+                                OutbountDTO oOutboundDto = null;
                                 List<LinkedTreeMap<?, ?>> _lLoadingList = new ArrayList<LinkedTreeMap<?, ?>>();
                                 _lLoadingList = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
                                 for (int i = 0; i < _lLoadingList.size(); i++) {
-                                    oInventoryDTO = new InventoryDTO(_lLoadingList.get(i).entrySet());
+                                    oOutboundDto = new OutbountDTO(_lLoadingList.get(i).entrySet());
                                 }
-                                txtPackSlipCount.setText(oInventoryDTO.getQuantity());
+
+                                if (oOutboundDto != null) {
+                                    if (oOutboundDto.getStatus().equalsIgnoreCase("LOADING DONE")) {
+                                        txtPackSlipCount.setText(oOutboundDto.getLoadCount());
+                                        txtScanPackSlip.setText("");
+                                        recyclerViewPackInfo.setAdapter(null);
+                                        common.showUserDefinedAlertType(oOutboundDto.getStatus(), getActivity(), getActivity(), "Success");
+                                    } else if (oOutboundDto.getStatus().equalsIgnoreCase("LOADING COMPLETED")) {
+                                        txtPackSlipCount.setText(oOutboundDto.getLoadCount());
+                                        txtScanPackSlip.setText("");
+                                        common.showUserDefinedAlertType(oOutboundDto.getStatus(), getActivity(), getActivity(), "Success");
+                                        recyclerViewPackInfo.setAdapter(null);
+                                        rv_packSLiplist.setAdapter(null);
+                                    } else {
+                                        txtPackSlipCount.setText(oOutboundDto.getLoadCount());
+                                        txtScanPackSlip.setText("");
+                                        common.showUserDefinedAlertType(oOutboundDto.getStatus(), getActivity(), getActivity(), "Warning");
+                                    }
+
+                                }
                                 cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
                                 ivScanPackSlip.setImageResource(R.drawable.fullscreen_img);
                                 ProgressDialogUtils.closeProgressDialog();
@@ -1613,7 +1610,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
                         } catch (Exception ex) {
                             try {
-                                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"005_02",getActivity());
+                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_02", getActivity());
                                 logException();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -1632,7 +1629,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 });
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"005_03",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_03", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1640,10 +1637,9 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 ProgressDialogUtils.closeProgressDialog();
                 DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
             }
-        }catch (Exception ex)
-        {
+        } catch (Exception ex) {
             try {
-                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"005_04",getActivity());
+                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_04", getActivity());
                 logException();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -1652,6 +1648,166 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
             DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0003);
         }
     }
+
+
+    public void PendingPackSlipList() {
+
+        try {
+            WMSCoreMessage message = new WMSCoreMessage();
+            message = common.SetAuthentication(EndpointConstants.Outbound, getContext());
+            final OutbountDTO outbountDTO = new OutbountDTO();
+            outbountDTO.setLoadSheetNo(txtLoadSheetNo.getText().toString());
+            outbountDTO.setUserId(userId);
+            message.setEntityObject(outbountDTO);
+
+            Call<String> call = null;
+            ApiInterface apiService = RetrofitBuilderHttpsEx.getInstance(getActivity()).create(ApiInterface.class);
+            try {
+                //Checking for Internet Connectivity
+                // if (NetworkUtils.isInternetAvailable()) {
+                // Calling the Interface method
+                ProgressDialogUtils.showProgressDialog("Please Wait");
+                call = apiService.PendingPackSlipList(message);
+                // } else {
+                // DialogUtils.showAlertDialog(getActivity(), "Please enable internet");
+                // return;
+
+                // }
+
+            } catch (Exception ex) {
+                try {
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_01", getActivity());
+                    logException();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ProgressDialogUtils.closeProgressDialog();
+                DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0002);
+
+            }
+            try {
+                //Getting response from the method
+                call.enqueue(new Callback<String>() {
+
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                        try {
+                            core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
+                            if ((core.getType().toString().equals("Exception"))) {
+                                List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
+                                _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+
+                                WMSExceptionMessage owmsExceptionMessage = null;
+                                for (int i = 0; i < _lExceptions.size(); i++) {
+                                    owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
+
+                                    ProgressDialogUtils.closeProgressDialog();
+                                    if (owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_008")) {
+                                        IsUserConfirmedRedo = true;
+
+
+                                    }
+                                    if (owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_BL_009")) {
+                                        etQty.setVisibility(View.VISIBLE);
+                                        txtInputLayoutQty.setVisibility(View.VISIBLE);
+                                    }
+                                    if (owmsExceptionMessage.isShowUserConfirmDialogue()) {
+                                        DialogUtils.showConfirmDialog(getActivity(), "Confirm", owmsExceptionMessage.getWMSMessage().toString(), new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                switch (which) {
+                                                    case DialogInterface.BUTTON_POSITIVE:
+
+                                                        break;
+                                                    case DialogInterface.BUTTON_NEGATIVE:
+
+                                                        break;
+                                                }
+                                            }
+                                        });
+                                        return;
+                                    } else if (owmsExceptionMessage.isShowAsSuccess()) {
+                                        cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                        ivScanPackSlip.setImageResource(R.drawable.check);
+                                        return;
+                                    } else {
+                                        common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
+                                    }
+                                    cvScanPackSlip.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                    ivScanPackSlip.setImageResource(R.drawable.warning_img);
+                                    return;
+                                }
+                            } else {
+                                List<LinkedTreeMap<?, ?>> _lOutBound = new ArrayList<LinkedTreeMap<?, ?>>();
+                                _lOutBound = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+                                if (_lOutBound != null) {
+                                    final List<OutbountDTO> outbountDTOS = new ArrayList<>();
+                                    for (int i = 0; i < _lOutBound.size(); i++) {
+                                        OutbountDTO dto = new OutbountDTO(_lOutBound.get(i).entrySet());
+                                        outbountDTOS.add(dto);
+                                    }
+                                    ProgressDialogUtils.closeProgressDialog();
+                                    if (outbountDTOS.size() > 0) {
+                                        recyclerViewPackInfo.setVisibility(View.GONE);
+                                        rv_packSLiplist.setVisibility(View.VISIBLE);
+                                        PackiSlipListAdapter packiSlipListAdapter = new PackiSlipListAdapter(getActivity(), outbountDTOS);
+                                        rv_packSLiplist.setAdapter(packiSlipListAdapter);
+                                        ProgressDialogUtils.closeProgressDialog();
+                                    } else {
+                                        recyclerViewPackInfo.setVisibility(View.GONE);
+                                        common.showUserDefinedAlertType("No pending packslips for this Load sheets", getActivity(), getContext(), "Error");
+                                        rv_packSLiplist.setAdapter(null);
+                                    }
+
+                                } else {
+                                    common.showUserDefinedAlertType("No pending packslips for this Load sheets", getActivity(), getContext(), "Error");
+                                    recyclerViewPackInfo.setAdapter(null);
+                                }
+
+                            }
+
+                        } catch (Exception ex) {
+                            try {
+                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_02", getActivity());
+                                logException();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            ProgressDialogUtils.closeProgressDialog();
+                        }
+                    }
+
+                    // response object fails
+                    @Override
+                    public void onFailure(Call<String> call, Throwable throwable) {
+                        //Toast.makeText(LoginActivity.this, throwable.toString(), Toast.LENGTH_LONG).show();
+                        ProgressDialogUtils.closeProgressDialog();
+                        DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
+                    }
+                });
+            } catch (Exception ex) {
+                try {
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_03", getActivity());
+                    logException();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ProgressDialogUtils.closeProgressDialog();
+                DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
+            }
+        } catch (Exception ex) {
+            try {
+                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "005_04", getActivity());
+                logException();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ProgressDialogUtils.closeProgressDialog();
+            DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0003);
+        }
+    }
+
 
     // sending exception to the database
     public void logException() {
@@ -1679,7 +1835,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"002_01",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "002_01", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1707,7 +1863,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                 for (int i = 0; i < _lExceptions.size(); i++) {
                                     owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
                                     ProgressDialogUtils.closeProgressDialog();
-                                    common.showAlertType(owmsExceptionMessage, getActivity(),getContext());
+                                    common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
                                     return;
                                 }
                             } else {
@@ -1730,7 +1886,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                         } catch (Exception ex) {
 
                             try {
-                                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"002_02",getActivity());
+                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "002_02", getActivity());
                                 logException();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -1750,7 +1906,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                 });
             } catch (Exception ex) {
                 try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"002_03",getActivity());
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "002_03", getActivity());
                     logException();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -1760,7 +1916,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
             }
         } catch (Exception ex) {
             try {
-                exceptionLoggerUtils.createExceptionLog(ex.toString(),classCode,"002_04",getActivity());
+                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "002_04", getActivity());
                 logException();
             } catch (IOException e) {
                 e.printStackTrace();

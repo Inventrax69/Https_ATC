@@ -278,16 +278,23 @@ public final class R {
      */
     public static final int activityChooserViewStyle=0x7f030021;
     /**
+     * The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
+     * MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, FLUID or
+     * &lt;width&gt;x&lt;height&gt;.
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      */
     public static final int adSize=0x7f030022;
     /**
+     * A comma-separated list of the supported ad sizes. The sizes must be one of
+     * BANNER, FULL_BANNER, LEADERBOARD, MEDIUM_RECTANGLE, SMART_BANNER,
+     * WIDE_SKYSCRAPER, FLUID or &lt;width&gt;x&lt;height&gt;.
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      */
     public static final int adSizes=0x7f030023;
     /**
+     * The ad unit ID.
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
      */
@@ -635,6 +642,7 @@ public final class R {
      */
     public static final int checkedTextViewStyle=0x7f030050;
     /**
+     * Whether or not this view should have a circular clip applied
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
      */
@@ -1235,10 +1243,13 @@ public final class R {
      */
     public static final int iconifiedByDefault=0x7f0300a0;
     /**
+     * The fixed aspect ratio to use in aspect ratio adjustments.
      * <p>May be a floating point value, such as "<code>1.2</code>".
      */
     public static final int imageAspectRatio=0x7f0300a1;
     /**
+     * What kind of aspect ratio adjustment to do.  It must be one of "none", "adjust_width",
+     * or "adjust_height".
      * <p>Must be one of the following constant values.</p>
      * <table>
      * <colgroup align="left" />
@@ -4245,216 +4256,217 @@ public final class R {
     public static final int rlccViewOne=0x7f08016e;
     public static final int rr=0x7f08016f;
     public static final int rvPendingCC=0x7f080170;
-    public static final int screen=0x7f080171;
-    public static final int scroll=0x7f080172;
-    public static final int scrollIndicatorDown=0x7f080173;
-    public static final int scrollIndicatorUp=0x7f080174;
-    public static final int scrollView=0x7f080175;
-    public static final int scrollable=0x7f080176;
-    public static final int search=0x7f080177;
-    public static final int search_badge=0x7f080178;
-    public static final int search_bar=0x7f080179;
-    public static final int search_button=0x7f08017a;
-    public static final int search_close_btn=0x7f08017b;
-    public static final int search_edit_frame=0x7f08017c;
-    public static final int search_go_btn=0x7f08017d;
-    public static final int search_mag_icon=0x7f08017e;
-    public static final int search_plate=0x7f08017f;
-    public static final int search_src_text=0x7f080180;
-    public static final int search_voice_btn=0x7f080181;
-    public static final int select_dialog_listview=0x7f080182;
-    public static final int shortcut=0x7f080183;
-    public static final int showCustom=0x7f080184;
-    public static final int showHome=0x7f080185;
-    public static final int showTitle=0x7f080186;
-    public static final int sku=0x7f080187;
-    public static final int smallLabel=0x7f080188;
-    public static final int snackbar_action=0x7f080189;
-    public static final int snackbar_text=0x7f08018a;
-    public static final int snap=0x7f08018b;
-    public static final int sno=0x7f08018c;
-    public static final int sortingList=0x7f08018d;
-    public static final int spacer=0x7f08018e;
-    public static final int spinnerSONumber=0x7f08018f;
-    public static final int spinnerSelectCycleCount=0x7f080190;
-    public static final int spinnerSelectDivision=0x7f080191;
-    public static final int spinnerSelectJobOrder=0x7f080192;
-    public static final int spinnerSelectLoadList=0x7f080193;
-    public static final int spinnerSelectPickList=0x7f080194;
-    public static final int spinnerSelectPrinter=0x7f080195;
-    public static final int spinnerSelectReason=0x7f080196;
-    public static final int spinnerSelectSkip=0x7f080197;
-    public static final int spinnerSelectSloc=0x7f080198;
-    public static final int spinnerSelectStRef=0x7f080199;
-    public static final int spinnerSelectTenant=0x7f08019a;
-    public static final int spinnerSelectVLPDList=0x7f08019b;
-    public static final int spinnerSelectVehicle=0x7f08019c;
-    public static final int spinnerSelectWH=0x7f08019d;
-    public static final int spinnerSelectWarehouse=0x7f08019e;
-    public static final int split_action_bar=0x7f08019f;
-    public static final int spread=0x7f0801a0;
-    public static final int spread_inside=0x7f0801a1;
-    public static final int src_atop=0x7f0801a2;
-    public static final int src_in=0x7f0801a3;
-    public static final int src_over=0x7f0801a4;
-    public static final int standard=0x7f0801a5;
-    public static final int start=0x7f0801a6;
-    public static final int status_bar_latest_event_content=0x7f0801a7;
-    public static final int submenuarrow=0x7f0801a8;
-    public static final int submit_area=0x7f0801a9;
-    public static final int tabMode=0x7f0801aa;
-    public static final int table=0x7f0801ab;
-    public static final int text=0x7f0801ac;
-    public static final int text2=0x7f0801ad;
-    public static final int textSpacerNoButtons=0x7f0801ae;
-    public static final int textSpacerNoTitle=0x7f0801af;
-    public static final int textView=0x7f0801b0;
-    public static final int textView1=0x7f0801b1;
-    public static final int textView2=0x7f0801b2;
-    public static final int textView3=0x7f0801b3;
-    public static final int textView4=0x7f0801b4;
-    public static final int text_desc=0x7f0801b5;
-    public static final int text_input_password_toggle=0x7f0801b6;
-    public static final int text_title=0x7f0801b7;
-    public static final int textinput_counter=0x7f0801b8;
-    public static final int textinput_error=0x7f0801b9;
-    public static final int time=0x7f0801ba;
-    public static final int title=0x7f0801bb;
-    public static final int titleDividerNoCustom=0x7f0801bc;
-    public static final int title_template=0x7f0801bd;
-    public static final int toolbar=0x7f0801be;
-    public static final int top=0x7f0801bf;
-    public static final int topPanel=0x7f0801c0;
-    public static final int touch_outside=0x7f0801c1;
-    public static final int transition_current_scene=0x7f0801c2;
-    public static final int transition_scene_layoutid_cache=0x7f0801c3;
-    public static final int tvBoxQty=0x7f0801c4;
-    public static final int tvColumn=0x7f0801c5;
-    public static final int tvDockNo=0x7f0801c6;
-    public static final int tvLevel=0x7f0801c7;
-    public static final int tvLoadSheet=0x7f0801c8;
-    public static final int tvLocationSuggested=0x7f0801c9;
-    public static final int tvMessage=0x7f0801ca;
-    public static final int tvOBDNo=0x7f0801cb;
-    public static final int tvOrderInfromation=0x7f0801cc;
-    public static final int tvOrderInfromationSuccess=0x7f0801cd;
-    public static final int tvPenObdLists=0x7f0801ce;
-    public static final int tvPickedQty=0x7f0801cf;
-    public static final int tvPicklist=0x7f0801d0;
-    public static final int tvQty=0x7f0801d1;
-    public static final int tvRack=0x7f0801d2;
-    public static final int tvRequiredQty=0x7f0801d3;
-    public static final int tvSKU=0x7f0801d4;
-    public static final int tvSKUSuggested=0x7f0801d5;
-    public static final int tvSLoc=0x7f0801d6;
-    public static final int tvSONumber=0x7f0801d7;
-    public static final int tvScanBin=0x7f0801d8;
-    public static final int tvScanCarton=0x7f0801d9;
-    public static final int tvScanContainer=0x7f0801da;
-    public static final int tvScanDock=0x7f0801db;
-    public static final int tvScanLocation=0x7f0801dc;
-    public static final int tvScanNewRSN=0x7f0801dd;
-    public static final int tvScanPackSlip=0x7f0801de;
-    public static final int tvScanPallet=0x7f0801df;
-    public static final int tvScanRSN=0x7f0801e0;
-    public static final int tvScanSKU=0x7f0801e1;
-    public static final int tvScanSONumber=0x7f0801e2;
-    public static final int tvScanSku=0x7f0801e3;
-    public static final int tvSelectCycleCount=0x7f0801e4;
-    public static final int tvSelectDivision=0x7f0801e5;
-    public static final int tvSelectJobOrder=0x7f0801e6;
-    public static final int tvSelectLoadSheet=0x7f0801e7;
-    public static final int tvSelectPrinter=0x7f0801e8;
-    public static final int tvSelectReason=0x7f0801e9;
-    public static final int tvSelectStRef=0x7f0801ea;
-    public static final int tvSelectTenant=0x7f0801eb;
-    public static final int tvSelectVehcle=0x7f0801ec;
-    public static final int tvSelectWH=0x7f0801ed;
-    public static final int tvSelectWarehouse=0x7f0801ee;
-    public static final int tvTitle=0x7f0801ef;
-    public static final int tvVLPDList=0x7f0801f0;
-    public static final int tvVehicleNo=0x7f0801f1;
-    public static final int tvVolume=0x7f0801f2;
-    public static final int tvWeight=0x7f0801f3;
-    public static final int tv_qty=0x7f0801f4;
-    public static final int tv_sku=0x7f0801f5;
-    public static final int tvscanSONumber=0x7f0801f6;
-    public static final int tvscanStoreRefNo=0x7f0801f7;
-    public static final int txtBatch=0x7f0801f8;
-    public static final int txtBottomBar=0x7f0801f9;
-    public static final int txtCCName=0x7f0801fa;
-    public static final int txtCounter=0x7f0801fb;
-    public static final int txtDesc=0x7f0801fc;
-    public static final int txtDescription=0x7f0801fd;
-    public static final int txtExp=0x7f0801fe;
-    public static final int txtFromPallet=0x7f0801ff;
-    public static final int txtHU=0x7f080200;
-    public static final int txtHelpLine=0x7f080201;
-    public static final int txtHome=0x7f080202;
-    public static final int txtInputLayoutBatch=0x7f080203;
-    public static final int txtInputLayoutCCQty=0x7f080204;
-    public static final int txtInputLayoutContainer=0x7f080205;
-    public static final int txtInputLayoutDock=0x7f080206;
-    public static final int txtInputLayoutExpDate=0x7f080207;
-    public static final int txtInputLayoutFromLoc=0x7f080208;
-    public static final int txtInputLayoutKitID=0x7f080209;
-    public static final int txtInputLayoutLocation=0x7f08020a;
-    public static final int txtInputLayoutMRP=0x7f08020b;
-    public static final int txtInputLayoutMfgDate=0x7f08020c;
-    public static final int txtInputLayoutPallet=0x7f08020d;
-    public static final int txtInputLayoutProjectRef=0x7f08020e;
-    public static final int txtInputLayoutQty=0x7f08020f;
-    public static final int txtInputLayoutScannedLocation=0x7f080210;
-    public static final int txtInputLayoutSerial=0x7f080211;
-    public static final int txtInputLayoutServiceUrl=0x7f080212;
-    public static final int txtInputLayoutToLoc=0x7f080213;
-    public static final int txtInputLayoutToPallet=0x7f080214;
-    public static final int txtLoadSheetNo=0x7f080215;
-    public static final int txtLocation=0x7f080216;
-    public static final int txtLocationCode=0x7f080217;
-    public static final int txtLoginUser=0x7f080218;
-    public static final int txtMCode=0x7f080219;
-    public static final int txtMRP=0x7f08021a;
-    public static final int txtMfg=0x7f08021b;
-    public static final int txtMrp=0x7f08021c;
-    public static final int txtPackSlipCount=0x7f08021d;
-    public static final int txtPrjRef=0x7f08021e;
-    public static final int txtQTY=0x7f08021f;
-    public static final int txtQty=0x7f080220;
-    public static final int txtReleaseDate=0x7f080221;
-    public static final int txtSKU=0x7f080222;
-    public static final int txtSONumber=0x7f080223;
-    public static final int txtScanPackSlip=0x7f080224;
-    public static final int txtSerialNo=0x7f080225;
-    public static final int txtSloc=0x7f080226;
-    public static final int txtTendentName=0x7f080227;
-    public static final int txtVersion=0x7f080228;
-    public static final int txtVersionName=0x7f080229;
-    public static final int txtWarehousetName=0x7f08022a;
-    public static final int txtWebSite=0x7f08022b;
-    public static final int txtYouTubeLink=0x7f08022c;
-    public static final int up=0x7f08022d;
-    public static final int useLogo=0x7f08022e;
-    public static final int viewOne=0x7f08022f;
-    public static final int viewTwo=0x7f080230;
-    public static final int view_offset_helper=0x7f080231;
-    public static final int visible=0x7f080232;
-    public static final int wide=0x7f080233;
-    public static final int withText=0x7f080234;
-    public static final int wrap=0x7f080235;
-    public static final int wrap_content=0x7f080236;
-    public static final int zxing_back_button=0x7f080237;
-    public static final int zxing_barcode_scanner=0x7f080238;
-    public static final int zxing_barcode_surface=0x7f080239;
-    public static final int zxing_camera_error=0x7f08023a;
-    public static final int zxing_decode=0x7f08023b;
-    public static final int zxing_decode_failed=0x7f08023c;
-    public static final int zxing_decode_succeeded=0x7f08023d;
-    public static final int zxing_possible_result_points=0x7f08023e;
-    public static final int zxing_preview_failed=0x7f08023f;
-    public static final int zxing_prewiew_size_ready=0x7f080240;
-    public static final int zxing_status_view=0x7f080241;
-    public static final int zxing_viewfinder_view=0x7f080242;
+    public static final int rv_packSLiplist=0x7f080171;
+    public static final int screen=0x7f080172;
+    public static final int scroll=0x7f080173;
+    public static final int scrollIndicatorDown=0x7f080174;
+    public static final int scrollIndicatorUp=0x7f080175;
+    public static final int scrollView=0x7f080176;
+    public static final int scrollable=0x7f080177;
+    public static final int search=0x7f080178;
+    public static final int search_badge=0x7f080179;
+    public static final int search_bar=0x7f08017a;
+    public static final int search_button=0x7f08017b;
+    public static final int search_close_btn=0x7f08017c;
+    public static final int search_edit_frame=0x7f08017d;
+    public static final int search_go_btn=0x7f08017e;
+    public static final int search_mag_icon=0x7f08017f;
+    public static final int search_plate=0x7f080180;
+    public static final int search_src_text=0x7f080181;
+    public static final int search_voice_btn=0x7f080182;
+    public static final int select_dialog_listview=0x7f080183;
+    public static final int shortcut=0x7f080184;
+    public static final int showCustom=0x7f080185;
+    public static final int showHome=0x7f080186;
+    public static final int showTitle=0x7f080187;
+    public static final int sku=0x7f080188;
+    public static final int smallLabel=0x7f080189;
+    public static final int snackbar_action=0x7f08018a;
+    public static final int snackbar_text=0x7f08018b;
+    public static final int snap=0x7f08018c;
+    public static final int sno=0x7f08018d;
+    public static final int sortingList=0x7f08018e;
+    public static final int spacer=0x7f08018f;
+    public static final int spinnerSONumber=0x7f080190;
+    public static final int spinnerSelectCycleCount=0x7f080191;
+    public static final int spinnerSelectDivision=0x7f080192;
+    public static final int spinnerSelectJobOrder=0x7f080193;
+    public static final int spinnerSelectLoadList=0x7f080194;
+    public static final int spinnerSelectPickList=0x7f080195;
+    public static final int spinnerSelectPrinter=0x7f080196;
+    public static final int spinnerSelectReason=0x7f080197;
+    public static final int spinnerSelectSkip=0x7f080198;
+    public static final int spinnerSelectSloc=0x7f080199;
+    public static final int spinnerSelectStRef=0x7f08019a;
+    public static final int spinnerSelectTenant=0x7f08019b;
+    public static final int spinnerSelectVLPDList=0x7f08019c;
+    public static final int spinnerSelectVehicle=0x7f08019d;
+    public static final int spinnerSelectWH=0x7f08019e;
+    public static final int spinnerSelectWarehouse=0x7f08019f;
+    public static final int split_action_bar=0x7f0801a0;
+    public static final int spread=0x7f0801a1;
+    public static final int spread_inside=0x7f0801a2;
+    public static final int src_atop=0x7f0801a3;
+    public static final int src_in=0x7f0801a4;
+    public static final int src_over=0x7f0801a5;
+    public static final int standard=0x7f0801a6;
+    public static final int start=0x7f0801a7;
+    public static final int status_bar_latest_event_content=0x7f0801a8;
+    public static final int submenuarrow=0x7f0801a9;
+    public static final int submit_area=0x7f0801aa;
+    public static final int tabMode=0x7f0801ab;
+    public static final int table=0x7f0801ac;
+    public static final int text=0x7f0801ad;
+    public static final int text2=0x7f0801ae;
+    public static final int textSpacerNoButtons=0x7f0801af;
+    public static final int textSpacerNoTitle=0x7f0801b0;
+    public static final int textView=0x7f0801b1;
+    public static final int textView1=0x7f0801b2;
+    public static final int textView2=0x7f0801b3;
+    public static final int textView3=0x7f0801b4;
+    public static final int textView4=0x7f0801b5;
+    public static final int text_desc=0x7f0801b6;
+    public static final int text_input_password_toggle=0x7f0801b7;
+    public static final int text_title=0x7f0801b8;
+    public static final int textinput_counter=0x7f0801b9;
+    public static final int textinput_error=0x7f0801ba;
+    public static final int time=0x7f0801bb;
+    public static final int title=0x7f0801bc;
+    public static final int titleDividerNoCustom=0x7f0801bd;
+    public static final int title_template=0x7f0801be;
+    public static final int toolbar=0x7f0801bf;
+    public static final int top=0x7f0801c0;
+    public static final int topPanel=0x7f0801c1;
+    public static final int touch_outside=0x7f0801c2;
+    public static final int transition_current_scene=0x7f0801c3;
+    public static final int transition_scene_layoutid_cache=0x7f0801c4;
+    public static final int tvBoxQty=0x7f0801c5;
+    public static final int tvColumn=0x7f0801c6;
+    public static final int tvDockNo=0x7f0801c7;
+    public static final int tvLevel=0x7f0801c8;
+    public static final int tvLoadSheet=0x7f0801c9;
+    public static final int tvLocationSuggested=0x7f0801ca;
+    public static final int tvMessage=0x7f0801cb;
+    public static final int tvOBDNo=0x7f0801cc;
+    public static final int tvOrderInfromation=0x7f0801cd;
+    public static final int tvOrderInfromationSuccess=0x7f0801ce;
+    public static final int tvPenObdLists=0x7f0801cf;
+    public static final int tvPickedQty=0x7f0801d0;
+    public static final int tvPicklist=0x7f0801d1;
+    public static final int tvQty=0x7f0801d2;
+    public static final int tvRack=0x7f0801d3;
+    public static final int tvRequiredQty=0x7f0801d4;
+    public static final int tvSKU=0x7f0801d5;
+    public static final int tvSKUSuggested=0x7f0801d6;
+    public static final int tvSLoc=0x7f0801d7;
+    public static final int tvSONumber=0x7f0801d8;
+    public static final int tvScanBin=0x7f0801d9;
+    public static final int tvScanCarton=0x7f0801da;
+    public static final int tvScanContainer=0x7f0801db;
+    public static final int tvScanDock=0x7f0801dc;
+    public static final int tvScanLocation=0x7f0801dd;
+    public static final int tvScanNewRSN=0x7f0801de;
+    public static final int tvScanPackSlip=0x7f0801df;
+    public static final int tvScanPallet=0x7f0801e0;
+    public static final int tvScanRSN=0x7f0801e1;
+    public static final int tvScanSKU=0x7f0801e2;
+    public static final int tvScanSONumber=0x7f0801e3;
+    public static final int tvScanSku=0x7f0801e4;
+    public static final int tvSelectCycleCount=0x7f0801e5;
+    public static final int tvSelectDivision=0x7f0801e6;
+    public static final int tvSelectJobOrder=0x7f0801e7;
+    public static final int tvSelectLoadSheet=0x7f0801e8;
+    public static final int tvSelectPrinter=0x7f0801e9;
+    public static final int tvSelectReason=0x7f0801ea;
+    public static final int tvSelectStRef=0x7f0801eb;
+    public static final int tvSelectTenant=0x7f0801ec;
+    public static final int tvSelectVehcle=0x7f0801ed;
+    public static final int tvSelectWH=0x7f0801ee;
+    public static final int tvSelectWarehouse=0x7f0801ef;
+    public static final int tvTitle=0x7f0801f0;
+    public static final int tvVLPDList=0x7f0801f1;
+    public static final int tvVehicleNo=0x7f0801f2;
+    public static final int tvVolume=0x7f0801f3;
+    public static final int tvWeight=0x7f0801f4;
+    public static final int tv_qty=0x7f0801f5;
+    public static final int tv_sku=0x7f0801f6;
+    public static final int tvscanSONumber=0x7f0801f7;
+    public static final int tvscanStoreRefNo=0x7f0801f8;
+    public static final int txtBatch=0x7f0801f9;
+    public static final int txtBottomBar=0x7f0801fa;
+    public static final int txtCCName=0x7f0801fb;
+    public static final int txtCounter=0x7f0801fc;
+    public static final int txtDesc=0x7f0801fd;
+    public static final int txtDescription=0x7f0801fe;
+    public static final int txtExp=0x7f0801ff;
+    public static final int txtFromPallet=0x7f080200;
+    public static final int txtHU=0x7f080201;
+    public static final int txtHelpLine=0x7f080202;
+    public static final int txtHome=0x7f080203;
+    public static final int txtInputLayoutBatch=0x7f080204;
+    public static final int txtInputLayoutCCQty=0x7f080205;
+    public static final int txtInputLayoutContainer=0x7f080206;
+    public static final int txtInputLayoutDock=0x7f080207;
+    public static final int txtInputLayoutExpDate=0x7f080208;
+    public static final int txtInputLayoutFromLoc=0x7f080209;
+    public static final int txtInputLayoutKitID=0x7f08020a;
+    public static final int txtInputLayoutLocation=0x7f08020b;
+    public static final int txtInputLayoutMRP=0x7f08020c;
+    public static final int txtInputLayoutMfgDate=0x7f08020d;
+    public static final int txtInputLayoutPallet=0x7f08020e;
+    public static final int txtInputLayoutProjectRef=0x7f08020f;
+    public static final int txtInputLayoutQty=0x7f080210;
+    public static final int txtInputLayoutScannedLocation=0x7f080211;
+    public static final int txtInputLayoutSerial=0x7f080212;
+    public static final int txtInputLayoutServiceUrl=0x7f080213;
+    public static final int txtInputLayoutToLoc=0x7f080214;
+    public static final int txtInputLayoutToPallet=0x7f080215;
+    public static final int txtLoadSheetNo=0x7f080216;
+    public static final int txtLocation=0x7f080217;
+    public static final int txtLocationCode=0x7f080218;
+    public static final int txtLoginUser=0x7f080219;
+    public static final int txtMCode=0x7f08021a;
+    public static final int txtMRP=0x7f08021b;
+    public static final int txtMfg=0x7f08021c;
+    public static final int txtMrp=0x7f08021d;
+    public static final int txtPackSlipCount=0x7f08021e;
+    public static final int txtPrjRef=0x7f08021f;
+    public static final int txtQTY=0x7f080220;
+    public static final int txtQty=0x7f080221;
+    public static final int txtReleaseDate=0x7f080222;
+    public static final int txtSKU=0x7f080223;
+    public static final int txtSONumber=0x7f080224;
+    public static final int txtScanPackSlip=0x7f080225;
+    public static final int txtSerialNo=0x7f080226;
+    public static final int txtSloc=0x7f080227;
+    public static final int txtTendentName=0x7f080228;
+    public static final int txtVersion=0x7f080229;
+    public static final int txtVersionName=0x7f08022a;
+    public static final int txtWarehousetName=0x7f08022b;
+    public static final int txtWebSite=0x7f08022c;
+    public static final int txtYouTubeLink=0x7f08022d;
+    public static final int up=0x7f08022e;
+    public static final int useLogo=0x7f08022f;
+    public static final int viewOne=0x7f080230;
+    public static final int viewTwo=0x7f080231;
+    public static final int view_offset_helper=0x7f080232;
+    public static final int visible=0x7f080233;
+    public static final int wide=0x7f080234;
+    public static final int withText=0x7f080235;
+    public static final int wrap=0x7f080236;
+    public static final int wrap_content=0x7f080237;
+    public static final int zxing_back_button=0x7f080238;
+    public static final int zxing_barcode_scanner=0x7f080239;
+    public static final int zxing_barcode_surface=0x7f08023a;
+    public static final int zxing_camera_error=0x7f08023b;
+    public static final int zxing_decode=0x7f08023c;
+    public static final int zxing_decode_failed=0x7f08023d;
+    public static final int zxing_decode_succeeded=0x7f08023e;
+    public static final int zxing_possible_result_points=0x7f08023f;
+    public static final int zxing_preview_failed=0x7f080240;
+    public static final int zxing_prewiew_size_ready=0x7f080241;
+    public static final int zxing_status_view=0x7f080242;
+    public static final int zxing_viewfinder_view=0x7f080243;
   }
   public static final class integer {
     public static final int abc_config_activityDefaultDur=0x7f090000;
@@ -4574,18 +4586,19 @@ public final class R {
     public static final int notification_template_part_chronometer=0x7f0a0066;
     public static final int notification_template_part_time=0x7f0a0067;
     public static final int packinginfo_row=0x7f0a0068;
-    public static final int sdk_list=0x7f0a0069;
-    public static final int searchable_list_dialog=0x7f0a006a;
-    public static final int select_dialog_item_material=0x7f0a006b;
-    public static final int select_dialog_multichoice_material=0x7f0a006c;
-    public static final int select_dialog_singlechoice_material=0x7f0a006d;
-    public static final int sku_list_iem_view=0x7f0a006e;
-    public static final int sloc_avaiable_list=0x7f0a006f;
-    public static final int sorting_row=0x7f0a0070;
-    public static final int support_simple_spinner_dropdown_item=0x7f0a0071;
-    public static final int toolbar=0x7f0a0072;
-    public static final int zxing_barcode_scanner=0x7f0a0073;
-    public static final int zxing_capture=0x7f0a0074;
+    public static final int packsliplist_row=0x7f0a0069;
+    public static final int sdk_list=0x7f0a006a;
+    public static final int searchable_list_dialog=0x7f0a006b;
+    public static final int select_dialog_item_material=0x7f0a006c;
+    public static final int select_dialog_multichoice_material=0x7f0a006d;
+    public static final int select_dialog_singlechoice_material=0x7f0a006e;
+    public static final int sku_list_iem_view=0x7f0a006f;
+    public static final int sloc_avaiable_list=0x7f0a0070;
+    public static final int sorting_row=0x7f0a0071;
+    public static final int support_simple_spinner_dropdown_item=0x7f0a0072;
+    public static final int toolbar=0x7f0a0073;
+    public static final int zxing_barcode_scanner=0x7f0a0074;
+    public static final int zxing_capture=0x7f0a0075;
   }
   public static final class menu {
     public static final int menu_main=0x7f0b0000;
@@ -5962,9 +5975,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #AdsAttrs_adSize com.inventrax.atc:adSize}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AdsAttrs_adSizes com.inventrax.atc:adSizes}</code></td><td></td></tr>
-     * <tr><td><code>{@link #AdsAttrs_adUnitId com.inventrax.atc:adUnitId}</code></td><td></td></tr>
+     * <tr><td><code>{@link #AdsAttrs_adSize com.inventrax.atc:adSize}</code></td><td>The size of the ad.</td></tr>
+     * <tr><td><code>{@link #AdsAttrs_adSizes com.inventrax.atc:adSizes}</code></td><td>A comma-separated list of the supported ad sizes.</td></tr>
+     * <tr><td><code>{@link #AdsAttrs_adUnitId com.inventrax.atc:adUnitId}</code></td><td>The ad unit ID.</td></tr>
      * </table>
      * @see #AdsAttrs_adSize
      * @see #AdsAttrs_adSizes
@@ -5974,8 +5987,11 @@ public final class R {
       0x7f030022, 0x7f030023, 0x7f030024
     };
     /**
-     * <p>This symbol is the offset where the {@link com.inventrax.atc.R.attr#adSize}
-     * attribute's value can be found in the {@link #AdsAttrs} array.
+     * <p>
+     * @attr description
+     * The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
+     * MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, FLUID or
+     * &lt;width&gt;x&lt;height&gt;.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
@@ -5984,8 +6000,11 @@ public final class R {
      */
     public static final int AdsAttrs_adSize=0;
     /**
-     * <p>This symbol is the offset where the {@link com.inventrax.atc.R.attr#adSizes}
-     * attribute's value can be found in the {@link #AdsAttrs} array.
+     * <p>
+     * @attr description
+     * A comma-separated list of the supported ad sizes. The sizes must be one of
+     * BANNER, FULL_BANNER, LEADERBOARD, MEDIUM_RECTANGLE, SMART_BANNER,
+     * WIDE_SKYSCRAPER, FLUID or &lt;width&gt;x&lt;height&gt;.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
@@ -5994,8 +6013,9 @@ public final class R {
      */
     public static final int AdsAttrs_adSizes=1;
     /**
-     * <p>This symbol is the offset where the {@link com.inventrax.atc.R.attr#adUnitId}
-     * attribute's value can be found in the {@link #AdsAttrs} array.
+     * <p>
+     * @attr description
+     * The ad unit ID.
      *
      * <p>May be a string value, using '\\;' to escape characters such as
      * '\\n' or '\\uxxxx' for a unicode character;
@@ -11863,9 +11883,9 @@ public final class R {
      * <colgroup align="left" />
      * <colgroup align="left" />
      * <tr><th>Attribute</th><th>Description</th></tr>
-     * <tr><td><code>{@link #LoadingImageView_circleCrop com.inventrax.atc:circleCrop}</code></td><td></td></tr>
-     * <tr><td><code>{@link #LoadingImageView_imageAspectRatio com.inventrax.atc:imageAspectRatio}</code></td><td></td></tr>
-     * <tr><td><code>{@link #LoadingImageView_imageAspectRatioAdjust com.inventrax.atc:imageAspectRatioAdjust}</code></td><td></td></tr>
+     * <tr><td><code>{@link #LoadingImageView_circleCrop com.inventrax.atc:circleCrop}</code></td><td>Whether or not this view should have a circular clip applied</td></tr>
+     * <tr><td><code>{@link #LoadingImageView_imageAspectRatio com.inventrax.atc:imageAspectRatio}</code></td><td>The fixed aspect ratio to use in aspect ratio adjustments.</td></tr>
+     * <tr><td><code>{@link #LoadingImageView_imageAspectRatioAdjust com.inventrax.atc:imageAspectRatioAdjust}</code></td><td>What kind of aspect ratio adjustment to do.</td></tr>
      * </table>
      * @see #LoadingImageView_circleCrop
      * @see #LoadingImageView_imageAspectRatio
@@ -11875,8 +11895,9 @@ public final class R {
       0x7f030051, 0x7f0300a1, 0x7f0300a2
     };
     /**
-     * <p>This symbol is the offset where the {@link com.inventrax.atc.R.attr#circleCrop}
-     * attribute's value can be found in the {@link #LoadingImageView} array.
+     * <p>
+     * @attr description
+     * Whether or not this view should have a circular clip applied
      *
      * <p>May be a boolean value, such as "<code>true</code>" or
      * "<code>false</code>".
@@ -11885,8 +11906,9 @@ public final class R {
      */
     public static final int LoadingImageView_circleCrop=0;
     /**
-     * <p>This symbol is the offset where the {@link com.inventrax.atc.R.attr#imageAspectRatio}
-     * attribute's value can be found in the {@link #LoadingImageView} array.
+     * <p>
+     * @attr description
+     * The fixed aspect ratio to use in aspect ratio adjustments.
      *
      * <p>May be a floating point value, such as "<code>1.2</code>".
      *
@@ -11894,8 +11916,10 @@ public final class R {
      */
     public static final int LoadingImageView_imageAspectRatio=1;
     /**
-     * <p>This symbol is the offset where the {@link com.inventrax.atc.R.attr#imageAspectRatioAdjust}
-     * attribute's value can be found in the {@link #LoadingImageView} array.
+     * <p>
+     * @attr description
+     * What kind of aspect ratio adjustment to do.  It must be one of "none", "adjust_width",
+     * or "adjust_height".
      *
      * <p>Must be one of the following constant values.</p>
      * <table>

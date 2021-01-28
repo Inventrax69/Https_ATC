@@ -275,6 +275,12 @@ public class OutbountDTO {
     @SerializedName("LoadCount")
     private String loadCount;
 
+    @SerializedName("PackingSlipNo")
+    private String PackingSlipNo;
+
+    @SerializedName("LoadSheetNo")
+    private String LoadSheetNo;
+
 
     private boolean isChecked = false;
 
@@ -754,9 +760,38 @@ public class OutbountDTO {
                     }
                     break;
 
+                case "PackingSlipNo":
+                    if (entry.getValue() != null) {
+                        this.setPackingSlipNo(entry.getValue().toString());
+                    }
+                    break;
+
+                case "LoadSheetNo":
+                    if (entry.getValue() != null) {
+                        this.setLoadSheetNo(entry.getValue().toString());
+                    }
+                    break;
+
 
             }
         }
+    }
+
+
+    public String getLoadSheetNo() {
+        return LoadSheetNo;
+    }
+
+    public void setLoadSheetNo(String loadSheetNo) {
+        LoadSheetNo = loadSheetNo;
+    }
+
+    public String getPackingSlipNo() {
+        return PackingSlipNo;
+    }
+
+    public void setPackingSlipNo(String packingSlipNo) {
+        PackingSlipNo = packingSlipNo;
     }
 
     public String getLoadCount() {

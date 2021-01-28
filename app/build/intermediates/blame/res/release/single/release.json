@@ -1044,6 +1044,10 @@
         "source": "C:\\Users\\Padmaja.B\\.gradle\\caches\\transforms-2\\files-2.1\\36b45715aad524966d32472a0869ef19\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
     },
     {
+        "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\layout_packsliplist_row.xml.flat",
+        "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\layout\\packsliplist_row.xml"
+    },
+    {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable-mdpi-v4_abc_list_focused_holo.9.png.flat",
         "source": "C:\\Users\\Padmaja.B\\.gradle\\caches\\transforms-2\\files-2.1\\36b45715aad524966d32472a0869ef19\\res\\drawable-mdpi-v4\\abc_list_focused_holo.9.png"
     },
@@ -1206,6 +1210,10 @@
     {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
         "source": "C:\\Users\\Padmaja.B\\.gradle\\caches\\transforms-2\\files-2.1\\36b45715aad524966d32472a0869ef19\\res\\drawable-xhdpi-v4\\abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\layout_fragment_loading_new.xml.flat",
+        "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\layout\\fragment_loading_new.xml"
     },
     {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -1924,6 +1932,10 @@
         "source": "C:\\Users\\Padmaja.B\\.gradle\\caches\\transforms-2\\files-2.1\\cd755b075a5822b1370bb9a2e97473e2\\res\\drawable-xxhdpi\\common_google_signin_btn_icon_dark_normal.9.png"
     },
     {
+        "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable_ic_packing.xml.flat",
+        "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\drawable\\ic_packing.xml"
+    },
+    {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable_button_close_shape.xml.flat",
         "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\drawable\\button_close_shape.xml"
     },
@@ -2194,6 +2206,10 @@
     {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
         "source": "C:\\Users\\Padmaja.B\\.gradle\\caches\\transforms-2\\files-2.1\\36b45715aad524966d32472a0869ef19\\res\\drawable-hdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable_ic_loading_truck.xml.flat",
+        "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\drawable\\ic_loading_truck.xml"
     },
     {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\release\\drawable-xxxhdpi-v4_abc_spinner_mtrl_am_alpha.9.png.flat",
