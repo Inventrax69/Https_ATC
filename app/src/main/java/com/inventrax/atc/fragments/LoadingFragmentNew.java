@@ -252,7 +252,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
         getWarehouse();
 
-        GetOpenLoadsheetList();
+
 
         //For Honeywell
         AidcManager.create(getActivity(), new AidcManager.CreatedCallback() {
@@ -324,6 +324,9 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
 
                 warehouseId = oHouseKeeping.getWarehouseId();
                 getTenants();
+                if(!warehouseId.isEmpty()){
+                    GetOpenLoadsheetList();
+                }
 
             }
         }
@@ -960,6 +963,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
             OutbountDTO outbountDTO = new OutbountDTO();
             outbountDTO.setTenatID(userId);
             outbountDTO.setUserId(userId);
+            outbountDTO.setWareHouseID(warehouseId);
             outbountDTO.setAccountID(accountId);
             message.setEntityObject(outbountDTO);
 
