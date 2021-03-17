@@ -1448,10 +1448,10 @@ public class PalletTransfersFragment extends Fragment implements View.OnClickLis
                                 InventoryDTO lstInventory = new InventoryDTO();
 
                                 if(lstInventory!=null){
-                                    common.showUserDefinedAlertType("Successfully Transfered", getActivity(), getContext(), "Success");
+                                    common.showUserDefinedAlertType("Successfully Transferred", getActivity(), getContext(), "Success");
                                     Clearfields();
                                 }else{
-                                    common.showUserDefinedAlertType("Error While Tranfer", getActivity(), getContext(), "Error");
+                                    common.showUserDefinedAlertType("Error while Transfer", getActivity(), getContext(), "Error");
                                 }
 
 

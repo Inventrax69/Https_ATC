@@ -44,7 +44,7 @@ public class ErrorMessages {
 
     public String EMC_0019 = "Please scan valid Dock location";
 
-    public String EMC_0020 = "Please scan to location";
+    public String EMC_0020 = "Please scan To location";
 
     public String EMC_0021 = "No Response";
 
@@ -152,5 +152,7 @@ public class ErrorMessages {
     public String EMC_086 = "Error while transfer";
 
     public String EMC_087 = "Please Scan To Container";
+
+    public String EMC_088 = "Please Scan From Container";
 
 }

@@ -106,7 +106,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
     private Common common;
     private WMSCoreMessage core;
     List<LoadDTO> lstloaddata = null;
-    String loadSheetNo = null, loadNoCustomerCode = null;
+    String loadSheetNo = "", loadNoCustomerCode = null;
     private String Materialcode = null;
     private boolean IsUserConfirmedRedo = false;
     private ExceptionLoggerUtils exceptionLoggerUtils;
@@ -280,7 +280,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
         switch (v.getId()) {
             case R.id.btnGo:
                 if (loadSheetNo.equalsIgnoreCase("")) {
-                    common.showUserDefinedAlertType("No Pending Load Sheet Number", getActivity(), getContext(), "Warning");
+                    common.showUserDefinedAlertType("No Pending Load Sheet Numbers", getActivity(), getContext(), "Warning");
                 } else {
                     txtLoadSheetNo.setText(loadSheetNo);
                     GetSOCountUnderLoadSheet();

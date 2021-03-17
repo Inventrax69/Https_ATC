@@ -281,6 +281,12 @@ public class OutbountDTO {
     @SerializedName("LoadSheetNo")
     private String LoadSheetNo;
 
+    @SerializedName("StoreageLocationID")
+    private String StoreageLocationID;
+
+    @SerializedName("StoreageLocation")
+    private String StoreageLocation;
+
 
     private boolean isChecked = false;
 
@@ -771,12 +777,38 @@ public class OutbountDTO {
                         this.setLoadSheetNo(entry.getValue().toString());
                     }
                     break;
+                case "StoreageLocation":
+                    if (entry.getValue() != null) {
+                        this.setStoreageLocation(entry.getValue().toString());
+                    }
+                    break;
+                case "StoreageLocationID":
+                    if (entry.getValue() != null) {
+                        this.setStorageLocationID(entry.getValue().toString());
+                    }
+                    break;
 
 
             }
         }
     }
 
+
+    public String getStoreageLocationID() {
+        return StoreageLocationID;
+    }
+
+    public void setStoreageLocationID(String storeageLocationID) {
+        StoreageLocationID = storeageLocationID;
+    }
+
+    public String getStoreageLocation() {
+        return StoreageLocation;
+    }
+
+    public void setStoreageLocation(String storeageLocation) {
+        StoreageLocation = storeageLocation;
+    }
 
     public String getLoadSheetNo() {
         return LoadSheetNo;

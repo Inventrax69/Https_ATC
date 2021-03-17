@@ -1,7 +1,0 @@
-#Internal package file, do not edit.
-#Thu Mar 04 12:11:07 IST 2021
-0.baseType=DIRECTORY
-0.base=E\:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\out
-0.path=classes.dex
-0.set=DEX
-count=1

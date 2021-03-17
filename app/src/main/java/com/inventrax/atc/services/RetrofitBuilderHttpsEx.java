@@ -70,7 +70,7 @@ private static void initHttpLogging() {
 
             SSLContext sslContext = null;
             try {
-                sslContext = createCertificate(context.getResources().openRawResource(R.raw.merlin));
+                sslContext = createCertificate(context.getResources().openRawResource(R.raw.atc));
             } catch (CertificateException | IOException | KeyStoreException | KeyManagementException | NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
@@ -78,7 +78,6 @@ private static void initHttpLogging() {
             if(sslContext!=null){
                 httpClientBuilder.sslSocketFactory(sslContext.getSocketFactory(), systemDefaultTrustManager());
             }
-
         }
 
         private static SSLContext createCertificate(InputStream trustedCertificateIS) throws CertificateException, IOException, KeyStoreException, KeyManagementException, NoSuchAlgorithmException{

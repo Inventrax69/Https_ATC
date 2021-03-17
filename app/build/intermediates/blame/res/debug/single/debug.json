@@ -2204,6 +2204,10 @@
         "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\drawable\\putaway.png"
     },
     {
+        "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\debug\\raw_atc.cer.flat",
+        "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\raw\\atc.cer"
+    },
+    {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\debug\\layout-v11_notification_media_cancel_action.xml.flat",
         "source": "C:\\Users\\Padmaja.B\\.gradle\\caches\\transforms-2\\files-2.1\\36b45715aad524966d32472a0869ef19\\res\\layout-v11\\notification_media_cancel_action.xml"
     },
@@ -2266,6 +2270,10 @@
     {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_common_plus_signin_btn_icon_dark_pressed.9.png.flat",
         "source": "C:\\Users\\Padmaja.B\\.gradle\\caches\\transforms-2\\files-2.1\\cd755b075a5822b1370bb9a2e97473e2\\res\\drawable-xxhdpi\\common_plus_signin_btn_icon_dark_pressed.9.png"
+    },
+    {
+        "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_stocktake.xml.flat",
+        "source": "E:\\Pandu\\Demo\\Https_ATC\\app\\src\\main\\res\\layout\\fragment_stocktake.xml"
     },
     {
         "merged": "E:\\Pandu\\Demo\\Https_ATC\\app\\build\\intermediates\\res\\merged\\debug\\raw_success.mp3.flat",

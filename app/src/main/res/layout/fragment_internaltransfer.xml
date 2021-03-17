@@ -104,7 +104,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/btnClose"
             android:layout_marginBottom="10dp"
             android:orientation="vertical"
             android:weightSum="10">
@@ -192,7 +191,8 @@
                         android:text="@string/container"
                         android:textColor="@color/black"
                         android:textSize="12sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:layout_alignParentLeft="true" />
 
 
                 </LinearLayout>
@@ -232,7 +232,8 @@
                         android:text="@string/sku"
                         android:textColor="@color/black"
                         android:textSize="12sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:layout_alignParentLeft="true" />
 
                 </LinearLayout>
 
@@ -248,7 +249,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:gravity="center"
                     android:orientation="vertical"
                     android:visibility="visible">
@@ -280,11 +281,12 @@
                         android:text="@string/scanToLocation"
                         android:textColor="@color/black"
                         android:textSize="12sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:layout_alignParentLeft="true" />
 
                 </LinearLayout>
 
-                <LinearLayout
+               <!-- <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -321,12 +323,12 @@
                         android:textSize="12sp"
                         android:textStyle="normal" />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
+                    android:layout_weight="0.5"
                     android:weightSum="1">
 
                     <com.inventrax.atc.searchableSpinner.SearchableSpinner
@@ -417,33 +419,6 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txtInputLayoutToPallet"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/etPalletTo"
-                        style="@style/editTextStyleSmall"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:enabled="false"
-                        android:hint="@string/palletTo"
-                        android:inputType="text"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -458,6 +433,34 @@
                         android:inputType="text"
                         android:singleLine="true" />
                 </android.support.design.widget.TextInputLayout>
+
+               <!-- <android.support.design.widget.TextInputLayout
+                    android:id="@+id/txtInputLayoutToPallet"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/etPalletTo"
+                        style="@style/editTextStyleSmall"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:enabled="false"
+                        android:hint="@string/palletTo"
+                        android:inputType="text"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.1"
+                android:gravity="left"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"

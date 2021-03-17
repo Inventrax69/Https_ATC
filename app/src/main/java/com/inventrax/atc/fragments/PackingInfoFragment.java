@@ -381,7 +381,7 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
         scannedLocation = "";
         scannedPallet = "";
 
-        tvScanSONumber.setText(R.string.scan_so_number);
+        tvScanSONumber.setText("Scan Packing slip No.");
 
         serialNo = "";
         batch = "";

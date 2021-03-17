@@ -96,7 +96,7 @@ public class GoodsInFragment extends Fragment implements View.OnClickListener, B
     private String Materialcode = null, huNo = "", huSize = "";
     private String userId = null, scanType = null, accountId = null, lineNo = null,
             receivedQty = null, pendingQty = null, dock = "", vehicleNo = "";
-    String storageLoc = null, inboundId = null, invoiceQty = null, recQty = "";
+    String storageLoc = "", inboundId = null, invoiceQty = null, recQty = "";
     int warehouseID = 0, tenantID = 0;
     ArrayList<String> sloc;
     SoundUtils sound = null;
@@ -328,8 +328,13 @@ public class GoodsInFragment extends Fragment implements View.OnClickListener, B
 
                         cvScanSku.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
                         ivScanSku.setImageResource(R.drawable.fullscreen_img);
+                        if(!storageLoc.isEmpty()){
+                            ValidateRSNAndReceive();
+                        }else {
+                            common.showUserDefinedAlertType(errorMessages.EMC_0052, getActivity(), getContext(), "Warning");
+                        }
 
-                        ValidateRSNAndReceive();
+
 
                     } else {
                         common.showUserDefinedAlertType(errorMessages.EMC_0075, getActivity(), getContext(), "Warning");
@@ -1026,6 +1031,7 @@ public class GoodsInFragment extends Fragment implements View.OnClickListener, B
             InboundDTO inboundDTO = new InboundDTO();
             inboundDTO.setUserId(userId);
             inboundDTO.setAccountID(accountId);
+            inboundDTO.setInboundID(inboundId);
             message.setEntityObject(inboundDTO);
 
             Call<String> call = null;
@@ -1094,12 +1100,12 @@ public class GoodsInFragment extends Fragment implements View.OnClickListener, B
 
                                 ArrayAdapter arrayAdapterSLoc = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, _lstSLocNames);
                                 spinnerSelectSloc.setAdapter(arrayAdapterSLoc);
-                                int getPostion = _lstSLocNames.indexOf("OK");
+                                /*int getPostion = _lstSLocNames.indexOf("OK");
                                 String compareValue = String.valueOf(_lstSLocNames.get(getPostion).toString());
                                 if (compareValue != null) {
                                     int spinnerPosition = arrayAdapterSLoc.getPosition(compareValue);
                                     spinnerSelectSloc.setSelection(spinnerPosition);
-                                }
+                                }*/
 
                                 ProgressDialogUtils.closeProgressDialog();
 

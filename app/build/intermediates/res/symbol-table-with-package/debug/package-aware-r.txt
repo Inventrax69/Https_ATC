@@ -1332,7 +1332,6 @@ id cvScanSKU
 id cvScanSONumber
 id cvScanSku
 id cvScanStoreRefNo
-id cvScanToCont
 id cvScanToLoc
 id dark
 id decor_content_parent
@@ -1421,7 +1420,6 @@ id ivScanSKU
 id ivScanSONumber
 id ivScanSku
 id ivScanStoreRefNo
-id ivScanToCont
 id ivScanToLoc
 id ivSettings
 id ivSucess
@@ -1579,6 +1577,7 @@ id rlReceive
 id rlSelect
 id rlSelectOBD
 id rlSelectVLPD
+id rlSelectWh
 id rlSkip
 id rlSorting
 id rlStRefSelect
@@ -1749,7 +1748,6 @@ id txtInputLayoutScannedLocation
 id txtInputLayoutSerial
 id txtInputLayoutServiceUrl
 id txtInputLayoutToLoc
-id txtInputLayoutToPallet
 id txtLoadSheetNo
 id txtLocation
 id txtLocationCode
@@ -1884,6 +1882,7 @@ layout fragment_putaway
 layout fragment_settings
 layout fragment_sorting
 layout fragment_stock_transfer_picking
+layout fragment_stocktake
 layout fragment_transfer
 layout fragment_transfer_putaway
 layout fragment_unloading
@@ -1928,6 +1927,7 @@ menu menu_main
 mipmap ic_launcher
 mipmap ic_launcher_round
 mipmap in_launcher
+raw atc
 raw critical
 raw error
 raw exception

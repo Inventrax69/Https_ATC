@@ -75,11 +75,11 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
 
     private static final String classCode = "API_FRAG_OBD_PICKING";
     private View rootView;
-    ImageView ivScanLocation, ivScanPallet, ivScanPalletTo, tvScanRSN, ivScanRSN, ivScanRSNnew;
-    Button btnMaterialSkip, btnPick, btn_Skip, btnOk, btnCloseSkip, btnClosefinal;
+    ImageView ivScanLocation, ivScanPallet, tvScanRSN, ivScanRSN, ivScanRSNnew;
+    Button btnMaterialSkip, btnPick, btn_Skip, btnOk, btnCloseSkip, btn_clear;
     TextView lblPickListNo, lblScannedSku, lblHu;
     TextView lblSuggestedPallet,lblSKuNo, lblLocationNo, lblMRP, lblrsnNoNew, lblMfgDate, lblExpDate, lblProjectRefNo, lblassignedQty, lblserialNo, lblBatchNo;
-    CardView cvScanPallet, cvScanPalletTo, cvScanRSN, cvScanNewRSN, cvScanLocation;
+    CardView cvScanPallet, cvScanRSN, cvScanNewRSN, cvScanLocation;
     EditText lblReceivedQty;
     boolean IsStrictlycomplaince = false;
     String Mcode = null, NewMcode = null;
@@ -95,11 +95,10 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
     private ScanValidator scanValidator;
     private ExceptionLoggerUtils exceptionLoggerUtils;
     private ErrorMessages errorMessages;
-    EditText etPallet, etPalletTo;
+    EditText etPallet;
     EditText et_oldrsn, et_printQty, et_newrsn, et_printerIP;
     boolean isValidLocation = false;
     boolean isPalletScanned = false;
-    boolean isToPalletScanned = false;
     boolean pickValidateComplete = false;
     boolean isRSNScanned = false;
     String assignedId = "", KitId = "", soDetailsId = "", Lineno = "", POSOHeaderId = "", sLoc = "", accountId = "", huNo = "", huSize = "";
@@ -151,14 +150,13 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
         cvScanPallet = (CardView) rootView.findViewById(R.id.cvScanPallet);
         cvScanRSN = (CardView) rootView.findViewById(R.id.cvScanRSN);
         cvScanNewRSN = (CardView) rootView.findViewById(R.id.cvScanNewRSN);
-        cvScanPalletTo = (CardView) rootView.findViewById(R.id.cvScanPalletTo);
         ivScanLocation = (ImageView) rootView.findViewById(R.id.ivScanLocation);
         ivScanPallet = (ImageView) rootView.findViewById(R.id.ivScanPallet);
         ivScanRSN = (ImageView) rootView.findViewById(R.id.ivScanRSN);
-        ivScanPalletTo = (ImageView) rootView.findViewById(R.id.ivScanPalletTo);
 
         btnPick = (Button) rootView.findViewById(R.id.btnPick);
         btn_Skip = (Button) rootView.findViewById(R.id.btn_Skip);
+        btn_clear = (Button) rootView.findViewById(R.id.btn_clear);
         btnOk = (Button) rootView.findViewById(R.id.btnOk);
         btnCloseSkip = (Button) rootView.findViewById(R.id.btnCloseSkip);
 
@@ -172,8 +170,6 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
         lblHu.setText("");
 
         etPallet = (EditText) rootView.findViewById(R.id.etPallet);
-
-        etPalletTo = (EditText) rootView.findViewById(R.id.etPalletTo);
 
         lblReceivedQty = (EditText) rootView.findViewById(R.id.lblReceivedQty);
         lblMfgDate = (TextView) rootView.findViewById(R.id.lblMfgDate);
@@ -215,8 +211,8 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
         btn_Skip.setOnClickListener(this);
         btnOk.setOnClickListener(this);
         btnCloseSkip.setOnClickListener(this);
+        btn_clear.setOnClickListener(this);
         cvScanPallet.setOnClickListener(this);
-        cvScanPalletTo.setOnClickListener(this);
 
         common = new Common();
         exceptionLoggerUtils = new ExceptionLoggerUtils();
@@ -337,16 +333,33 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                 rlPickList.setVisibility(View.VISIBLE);
                 rlSkip.setVisibility(View.GONE);
                 break;
-            case R.id.cvScanPallet:
+
+            case R.id.btn_clear:
+                etPallet.setText("");
+
+                isValidLocation = false;
+                isPalletScanned = false;
+
+                isRSNScanned = false;
+
+                btnPick.setEnabled(false);
+
+                cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
+                ivScanRSN.setImageResource(R.drawable.fullscreen_img);
+
+                cvScanLocation.setCardBackgroundColor(getResources().getColor(R.color.locationColor));
+                ivScanLocation.setImageResource(R.drawable.fullscreen_img);
+
+                cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
+                ivScanPallet.setImageResource(R.drawable.fullscreen_img);
+
+                break;
+            /*case R.id.cvScanPallet:
                 isPalletScanned = true;
                 cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.white));
                 ivScanPallet.setImageResource(R.drawable.check);
-                break;
-            case R.id.cvScanPalletTo:
-                isToPalletScanned = true;
-                cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.white));
-                ivScanPalletTo.setImageResource(R.drawable.check);
-                break;
+                break;*/
+
         }
     }
 
@@ -416,7 +429,6 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
         lblSKuNo.setText("");
         lblSuggestedPallet.setText("");
         etPallet.setText("");
-        etPalletTo.setText("");
 
         lblassignedQty.setText("");
         lblBatchNo.setText("");
@@ -432,7 +444,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
 
         isPalletScanned = false;
         isValidLocation = false;
-        isToPalletScanned = false;
+
         isRSNScanned = false;
         pickValidateComplete = false;
 
@@ -440,13 +452,12 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
 
     public void clearData() {
 
-        etPalletTo.setText("");
         etPallet.setText("");
         lblLocationNo.setText("");
 
         isValidLocation = false;
         isPalletScanned = false;
-        isToPalletScanned = false;
+
         isRSNScanned = false;
 
         lblassignedQty.setText("");
@@ -462,8 +473,6 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
         cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
         ivScanPallet.setImageResource(R.drawable.fullscreen_img);
 
-        cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
-        ivScanPalletTo.setImageResource(R.drawable.fullscreen_img);
 
     }
 
@@ -488,89 +497,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
             if (!ProgressDialogUtils.isProgressActive()) {
                 if (!lblLocationNo.getText().toString().isEmpty()) {
 
-/*                if (scanValidator.isContainerScanned(scannedData)) {
-                    if (isValidLocation) {
-                        if (!etPallet.getText().toString().isEmpty()) {
 
-                            if (!isPalletScanned) {
-
-                                if (scannedData.equals(etPallet.getText().toString())) {
-                                    isPalletScanned = true;
-                                    //ValidatePalletCode(etPallet.getText().toString());
-                                    cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                    ivScanPallet.setImageResource(R.drawable.check);
-                                } else {
-                                    common.showUserDefinedAlertType(errorMessages.EMC_0009, getActivity(), getContext(), "Error");
-                                    return;
-                                }
-
-                            } else {
-
-                                etPalletTo.setText(scannedData);
-                                ValidatePalletCode(etPalletTo.getText().toString());
-                            }
-                        }
-                        else {
-                            etPalletTo.setText(scannedData);
-                            ValidatePalletCode(etPalletTo.getText().toString());
-                        }
-                    } else {
-                        common.showUserDefinedAlertType(errorMessages.EMC_0007, getActivity(), getContext(), "Warning");
-
-                    }
-                }
-                else if (ScanValidator.isItemScanned(scannedData)) {
-                *//* ----For RSN reference----
-               0 Sku|1 Qty|2 husize|3 InBoundQty|4 BatchNo|5 RSN|6 MFGDate|7 EXpDate|8 ProjectRefNO|9 SerialNO|10 lneNi|11 Huno*//*
-                    //ToyCar||||||0|001
-                    if (isValidLocation) {
-                        //validate Picking rsn
-                        if (!lblSKuNo.getText().toString().isEmpty() &&
-                                lblSKuNo.getText().toString().equalsIgnoreCase(scannedData.split("[|]")[0])) {
-
-                            if(lblBatchNo.getText().toString().equalsIgnoreCase(scannedData.split("[|]")[1]) &&
-                                    lblserialNo.getText().toString().equalsIgnoreCase(scannedData.split("[|]")[2]) &&
-                                    lblMfgDate.getText().toString().equalsIgnoreCase(scannedData.split("[|]")[3]) &&
-                                    lblExpDate.getText().toString().equalsIgnoreCase(scannedData.split("[|]")[4]) &&
-                                    lblProjectRefNo.getText().toString().equalsIgnoreCase(scannedData.split("[|]")[5])) {
-
-                                cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
-                                ivScanRSN.setImageResource(R.drawable.fullscreen_img);
-
-                                if (scanType.equalsIgnoreCase("Auto")) {
-                                    lblReceivedQty.setText("1");
-                                    UpsertPickItem();
-
-                                } else {
-                                    lblReceivedQty.setEnabled(true);
-                                    btnPick.setEnabled(true);
-                                    soundUtils.alertWarning(getActivity(), getContext());
-                                    DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0073);
-                                }
-                            }else {
-                                common.showUserDefinedAlertType(errorMessages.EMC_0053,getActivity(),getContext(),"Error");
-                            }
-                        } else {
-                            cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.white));
-                            ivScanRSN.setImageResource(R.drawable.warning_img);
-                            common.showUserDefinedAlertType(errorMessages.EMC_0029, getActivity(), getContext(), "Error");
-                        }
-                    } else {
-                        common.showUserDefinedAlertType(errorMessages.EMC_0007, getActivity(), getContext(), "Warning");
-                    }
-                }
-                else if (ScanValidator.isLocationScanned(scannedData)) {
-                    if (!lblLocationNo.getText().toString().isEmpty() && lblLocationNo.getText().toString().equalsIgnoreCase(scannedData)) {
-                        cvScanLocation.setCardBackgroundColor(getResources().getColor(R.color.white));
-                        ivScanLocation.setImageResource(R.drawable.check);
-                        location = scannedData;
-                        isValidLocation = true;
-                    } else {
-                        cvScanLocation.setCardBackgroundColor(getResources().getColor(R.color.white));
-                        ivScanLocation.setImageResource(R.drawable.warning_img);
-                        common.showUserDefinedAlertType(errorMessages.EMC_0033, getActivity(), getContext(), "Warning");
-                    }
-                }else{*/
                     if (!isValidLocation) {
 
                         if (!lblLocationNo.getText().toString().isEmpty() && lblLocationNo.getText().toString().equalsIgnoreCase(scannedData)) {
@@ -597,11 +524,8 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                             }
                         } else {
 
-                            if (!isToPalletScanned) {
-                                ValidatePallet(scannedData);
-                            } else {
                                 ValiDateMaterial(scannedData);
-                            }
+
 
                         }
                         //   ValidateLocation(scannedData);
@@ -786,124 +710,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
         }
     }
 
-    public void ValidatePallet(final String scannedData) {
-        try {
 
-            WMSCoreMessage message = new WMSCoreMessage();
-            message = common.SetAuthentication(EndpointConstants.ScanDTO, getContext());
-            ScanDTO scanDTO = new ScanDTO();
-            scanDTO.setUserID(userId);
-            scanDTO.setAccountID(accountId);
-            // scanDTO.setTenantID(String.valueOf(tenantID));
-            //scanDTO.setWarehouseID(String.valueOf(warehouseID));
-            scanDTO.setScanInput(scannedData);
-            scanDTO.setObdNumber(lblPickListNo.getText().toString());
-            //inboundDTO.setIsOutbound("0");
-            message.setEntityObject(scanDTO);
-
-            Call<String> call = null;
-            ApiInterface apiService = RetrofitBuilderHttpsEx.getInstance(getActivity()).create(ApiInterface.class);
-
-            try {
-                //Checking for Internet Connectivity
-                // if (NetworkUtils.isInternetAvailable()) {
-                // Calling the Interface method
-                call = apiService.ValidatePallet(message);
-                ProgressDialogUtils.showProgressDialog("Please Wait");
-                // } else {
-                // DialogUtils.showAlertDialog(getActivity(), "Please enable internet");
-                // return;
-                // }
-
-            } catch (Exception ex) {
-                try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "002_01", getActivity());
-                    logException();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ProgressDialogUtils.closeProgressDialog();
-                DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0002);
-            }
-            try {
-                //Getting response from the method
-                call.enqueue(new Callback<String>() {
-
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
-
-                        if ((core.getType().toString().equals("Exception"))) {
-                            List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
-                            _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
-
-                            WMSExceptionMessage owmsExceptionMessage = null;
-                            for (int i = 0; i < _lExceptions.size(); i++) {
-
-                                owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
-                            }
-
-                            etPalletTo.setText("");
-                            cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.white));
-                            ivScanPalletTo.setImageResource(R.drawable.invalid_cross);
-                            ProgressDialogUtils.closeProgressDialog();
-                            common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
-                        } else {
-                            LinkedTreeMap<?, ?> _lResult = new LinkedTreeMap<>();
-                            _lResult = (LinkedTreeMap<?, ?>) core.getEntityObject();
-
-                            ScanDTO scanDTO1 = new ScanDTO(_lResult.entrySet());
-                            ProgressDialogUtils.closeProgressDialog();
-                            if (scanDTO1 != null) {
-                                if (scanDTO1.getScanResult()) {
-                                    etPalletTo.setText(scannedData);
-                                    //ValidatePalletCode();
-                                    isToPalletScanned = true;
-                                    cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                    ivScanPalletTo.setImageResource(R.drawable.check);
-                                } else {
-                                    isToPalletScanned = false;
-                                    etPalletTo.setText("");
-                                    cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                    ivScanPalletTo.setImageResource(R.drawable.warning_img);
-                                    common.showUserDefinedAlertType(errorMessages.EMC_0009, getActivity(), getContext(), "Warning");
-                                }
-                            } else {
-                                isToPalletScanned = false;
-                                common.showUserDefinedAlertType("Error while getting data", getActivity(), getContext(), "Error");
-                            }
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable throwable) {
-                        //Toast.makeText(LoginActivity.this, throwable.toString(), Toast.LENGTH_LONG).show();
-                        ProgressDialogUtils.closeProgressDialog();
-                        DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
-                    }
-                });
-            } catch (Exception ex) {
-                try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "002_02", getActivity());
-                    logException();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ProgressDialogUtils.closeProgressDialog();
-                DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0001);
-            }
-        } catch (Exception ex) {
-            try {
-                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "002_03", getActivity());
-                logException();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            ProgressDialogUtils.closeProgressDialog();
-            DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0002);
-        }
-    }
 
     public void ValidateLocation(final String scannedData) {
         try {
@@ -1094,6 +901,14 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                         oOutboundDTO = new OutbountDTO(_lstPickitem.get(i).entrySet());
                                     }
 
+                                    isPalletScanned = false;
+
+                                    cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
+                                    ivScanPallet.setImageResource(R.drawable.fullscreen_img);
+
+                                    etPallet.setText("");
+                                    lblReceivedQty.setText("");
+
                                     // Picking suggestions after successful picking
                                     ProgressDialogUtils.closeProgressDialog();
                                     sLoc = "" + oOutboundDTO.getsLoc();
@@ -1149,11 +964,8 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                         cvScanLocation.setCardBackgroundColor(getResources().getColor(R.color.locationColor));
                                         ivScanLocation.setImageResource(R.drawable.fullscreen_img);
 
-                                        cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
-                                        ivScanPallet.setImageResource(R.drawable.fullscreen_img);
-
-                                        cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
-                                        ivScanPalletTo.setImageResource(R.drawable.fullscreen_img);
+                                        /*cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
+                                        ivScanPallet.setImageResource(R.drawable.fullscreen_img);*/
 
                                     }
 
@@ -1219,130 +1031,6 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
         }
     }
 
-    public void ValidatePalletCode(String pallet) {
-
-        try {
-
-            WMSCoreMessage message = new WMSCoreMessage();
-            message = common.SetAuthentication(EndpointConstants.Outbound, getContext());
-            OutbountDTO outbountDTO = new OutbountDTO();
-            outbountDTO.setPalletNo(pallet);
-            outbountDTO.setOutboundID(pickobdId);
-            outbountDTO.setAccountID(accountId);
-            message.setEntityObject(outbountDTO);
-            Call<String> call = null;
-            ApiInterface apiService = RetrofitBuilderHttpsEx.getInstance(getActivity()).create(ApiInterface.class);
-
-            try {
-                //Checking for Internet Connectivity
-                // if (NetworkUtils.isInternetAvailable()) {
-                // Calling the Interface method
-                ProgressDialogUtils.showProgressDialog("Please Wait");
-                call = apiService.CheckContainerOBD(message);
-                // } else {
-                // DialogUtils.showAlertDialog(getActivity(), "Please enable internet");
-                // return;
-                // }
-            } catch (Exception ex) {
-                try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "004_01", getActivity());
-                    logException();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ProgressDialogUtils.closeProgressDialog();
-                common.showUserDefinedAlertType(errorMessages.EMC_0002, getActivity(), getContext(), "Error");
-            }
-            try {
-                //Getting response from the method
-                call.enqueue(new Callback<String>() {
-
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        if (response.body() != null) {
-                            core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
-                            if ((core.getType().toString().equals("Exception"))) {
-                                List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
-                                _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
-                                WMSExceptionMessage owmsExceptionMessage = null;
-                                for (int i = 0; i < _lExceptions.size(); i++) {
-                                    owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
-
-                                    if (isPalletScanned) {
-                                        cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                        ivScanPallet.setImageResource(R.drawable.invalid_cross);
-                                        etPallet.setText("");
-                                        isPalletScanned = false;
-
-                                    } else {
-                                        cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                        ivScanPalletTo.setImageResource(R.drawable.invalid_cross);
-                                        etPalletTo.setText("");
-                                    }
-                                    ProgressDialogUtils.closeProgressDialog();
-                                    common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
-                                }
-
-                            } else {
-                                List<LinkedTreeMap<?, ?>> _lPalletInventory = new ArrayList<LinkedTreeMap<?, ?>>();
-                                _lPalletInventory = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
-                                if (_lPalletInventory != null) {
-                                    if (_lPalletInventory.size() > 0) {
-
-                                        if (isPalletScanned && etPalletTo.getText().toString().isEmpty()) {
-                                            cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                            ivScanPallet.setImageResource(R.drawable.check);
-                                        } else {
-
-                                            cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                            ivScanPalletTo.setImageResource(R.drawable.check);
-                                        }
-                                        ProgressDialogUtils.closeProgressDialog();
-
-
-                                    } else {
-                                        ProgressDialogUtils.closeProgressDialog();
-                                        common.showUserDefinedAlertType(errorMessages.EMC_0028, getActivity(), getContext(), "Warning");
-                                        return;
-                                    }
-                                }
-                            }
-                        } else {
-                            ProgressDialogUtils.closeProgressDialog();
-                            common.showUserDefinedAlertType(errorMessages.EMC_0021, getActivity(), getContext(), "Error");
-                            return;
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<String> call, Throwable throwable) {
-                        ProgressDialogUtils.closeProgressDialog();
-                        common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
-                        return;
-                    }
-                });
-            } catch (Exception ex) {
-                try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "004_02", getActivity());
-                    logException();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ProgressDialogUtils.closeProgressDialog();
-                common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
-            }
-        } catch (Exception ex) {
-            try {
-                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "004_03", getActivity());
-                logException();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            ProgressDialogUtils.closeProgressDialog();
-            common.showUserDefinedAlertType(errorMessages.EMC_0003, getActivity(), getContext(), "Error");
-            return;
-        }
-    }
 
     public void SkipItem() {
         try {
@@ -1497,7 +1185,7 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
             oOutboundDTO.setPalletNo(etPallet.getText().toString());
             oOutboundDTO.setPickedQty(lblReceivedQty.getText().toString());
             oOutboundDTO.setAssignedID(assignedId);
-            oOutboundDTO.setToCartonNo(etPalletTo.getText().toString());
+            oOutboundDTO.setToCartonNo("");
             oOutboundDTO.setSODetailsID(soDetailsId);
             oOutboundDTO.setLineno(Lineno);
             oOutboundDTO.setMRP(lblMRP.getText().toString());
@@ -1562,11 +1250,8 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                 }
                                 if (owmsExceptionMessage.getWMSExceptionCode().equals("EMC_OB_DAL_010")) {
 
-                                    cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
-                                    ivScanPalletTo.setImageResource(R.drawable.fullscreen_img);
 
-                                    etPalletTo.setText("");
-
+                                    ProgressDialogUtils.closeProgressDialog();
                                 }
 
                                 isRSNScanned = false;
@@ -1745,12 +1430,12 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                         oOutboundDTO = new OutbountDTO(_lstPickitem.get(i).entrySet());
                                     }
 
+                                    etPallet.setText("");
+
                                     location = "";
                                     isValidLocation = false;
                                     isPalletScanned = false;
-                                    isToPalletScanned = false;
 
-                                    etPalletTo.setText("");
 
                                     cvScanRSN.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
                                     ivScanRSN.setImageResource(R.drawable.fullscreen_img);
@@ -1761,8 +1446,6 @@ public class OBDPickingDetailsFragment extends Fragment implements View.OnClickL
                                     cvScanPallet.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
                                     ivScanPallet.setImageResource(R.drawable.fullscreen_img);
 
-                                    cvScanPalletTo.setCardBackgroundColor(getResources().getColor(R.color.palletColor));
-                                    ivScanPalletTo.setImageResource(R.drawable.fullscreen_img);
 
                                     if (oOutboundDTO.getPendingQty().equals("0")) {
 

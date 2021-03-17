@@ -47,6 +47,7 @@ import com.inventrax.atc.fragments.PackingInfoFragment;
 import com.inventrax.atc.fragments.PalletTransfersFragment;
 import com.inventrax.atc.fragments.PutawayFragment;
 import com.inventrax.atc.fragments.SortingFragment;
+import com.inventrax.atc.fragments.StockTakeFragment;
 import com.inventrax.atc.fragments.StockTransferPutAway;
 import com.inventrax.atc.fragments.UnloadingFragment;
 import com.inventrax.atc.fragments.VLPDPickingDetailsFragment;
@@ -238,6 +239,9 @@ public class MainActivity extends AppCompatActivity implements DrawerFragment.Fr
                 }
                 if (fragment != null && fragment.isVisible() && fragment instanceof MaterialTransferFragment) {
                     ((MaterialTransferFragment) fragment).myScannedData(MainActivity.this, ScannedData);
+                }
+                if (fragment != null && fragment.isVisible() && fragment instanceof StockTakeFragment) {
+                    ((StockTakeFragment) fragment).myScannedData(MainActivity.this, ScannedData);
                 }
             }
         }

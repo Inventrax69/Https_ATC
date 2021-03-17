@@ -271,5 +271,12 @@ public interface ApiInterface {
     @POST("Outbound/PendingPackSlipList")
     Call<String> PendingPackSlipList(@Body WMSCoreMessage oRequest);
 
+    @POST("Outbound/GetStoreageLocation")
+    Call<String> GetStoreageLocation(@Body WMSCoreMessage oRequest);
+
+
+    @POST("Outbound/UpsertStockTakeData")
+    Call<String> UpsertStockTakeData(@Body WMSCoreMessage oRequest);
+
 
 }
