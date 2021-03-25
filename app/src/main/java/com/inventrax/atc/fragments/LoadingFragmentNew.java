@@ -670,7 +670,7 @@ public class LoadingFragmentNew extends Fragment implements View.OnClickListener
                                 }
 
                                 if (lstDto.size() > 0) {
-                                    txtPackSlipCount.setText("Load Qty.: " + lstDto.get(0).getLoadCount());
+                                    txtPackSlipCount.setText("Count: " + lstDto.get(0).getLoadCount());
                                 }
 
 

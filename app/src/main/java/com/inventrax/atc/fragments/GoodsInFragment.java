@@ -324,20 +324,24 @@ public class GoodsInFragment extends Fragment implements View.OnClickListener, B
 
                 if (!lblScannedSku.getText().toString().isEmpty() && !Materialcode.equals("")) {
 
+                    if(receivedQty != null && pendingQty != null){
+
                     if (Integer.parseInt(receivedQty.split("[.]")[0]) < Integer.parseInt(pendingQty.split("[.]")[0])) {
 
                         cvScanSku.setCardBackgroundColor(getResources().getColor(R.color.skuColor));
                         ivScanSku.setImageResource(R.drawable.fullscreen_img);
-                        if(!storageLoc.isEmpty()){
+                        if (!storageLoc.isEmpty()) {
                             ValidateRSNAndReceive();
-                        }else {
+                        } else {
                             common.showUserDefinedAlertType(errorMessages.EMC_0052, getActivity(), getContext(), "Warning");
                         }
-
-
-
                     } else {
                         common.showUserDefinedAlertType(errorMessages.EMC_0075, getActivity(), getContext(), "Warning");
+                        return;
+                    }
+
+                    } else {
+                        common.showUserDefinedAlertType(errorMessages.EMC_090, getActivity(), getContext(), "Warning");
                         return;
                     }
                 } else {
@@ -702,7 +706,7 @@ public class GoodsInFragment extends Fragment implements View.OnClickListener, B
                                     huSize = scanDTO1.getHUSize();
                                     if (!huSize.equals("1")) {
                                         lblHu.setText("Hu: " + "" + huNo + "/" + huSize);
-                                    }else {
+                                    } else {
                                         lblHu.setText("");
                                     }
 
@@ -1376,63 +1380,68 @@ public class GoodsInFragment extends Fragment implements View.OnClickListener, B
                         try {
                             if (core != null) {
 
-                                core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
+                                if (response.body() != null) {
+                                    core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
 
-                                if ((core.getType().toString().equals("Exception"))) {
-                                    List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
-                                    _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+                                    if ((core.getType().toString().equals("Exception"))) {
+                                        List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
+                                        _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
 
-                                    WMSExceptionMessage owmsExceptionMessage = null;
-                                    for (int i = 0; i < _lExceptions.size(); i++) {
+                                        WMSExceptionMessage owmsExceptionMessage = null;
+                                        for (int i = 0; i < _lExceptions.size(); i++) {
 
-                                        owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
-
-                                        cvScanSku.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                        ivScanSku.setImageResource(R.drawable.warning_img);
-
-                                        etQty.setText("");
-
-                                        ProgressDialogUtils.closeProgressDialog();
-                                        common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
-                                        return;
-                                    }
-
-                                } else {
-                                    List<LinkedTreeMap<?, ?>> _lINB = new ArrayList<LinkedTreeMap<?, ?>>();
-                                    _lINB = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
-
-                                    InboundDTO dto = null;
-                                    ProgressDialogUtils.closeProgressDialog();
-
-                                    for (int i = 0; i < _lINB.size(); i++) {
-
-                                        dto = new InboundDTO(_lINB.get(i).entrySet());
-
-                                        receivedQty = dto.getReceivedQty().split("[.]")[0];
-                                        pendingQty = dto.getItemPendingQty().split("[.]")[0];
-
-                                        // preventing excess receiving in auto mode
-
-                                        lblInboundQty.setText(receivedQty + "/" + pendingQty);
-
-
-                                        if (receivedQty.equals(pendingQty)) {
-
-                                            isRsnScanned = false;
-                                            etQty.setText("");
-                                            common.showUserDefinedAlertType(errorMessages.EMC_0075, getActivity(), getContext(), "Success");
-
-                                        } else {
-
-                                            isRsnScanned = true;
+                                            owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
 
                                             cvScanSku.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                            ivScanSku.setImageResource(R.drawable.check);
+                                            ivScanSku.setImageResource(R.drawable.warning_img);
 
-                                            soundUtils.alertWarning(getActivity(), getContext());
-                                            DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0073);
+                                            etQty.setText("");
+
+                                            ProgressDialogUtils.closeProgressDialog();
+                                            common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
+                                            return;
+                                        }
+
+                                    } else {
+                                        List<LinkedTreeMap<?, ?>> _lINB = new ArrayList<LinkedTreeMap<?, ?>>();
+                                        _lINB = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+
+                                        InboundDTO dto = null;
+                                        ProgressDialogUtils.closeProgressDialog();
+
+                                        for (int i = 0; i < _lINB.size(); i++) {
+
+                                            dto = new InboundDTO(_lINB.get(i).entrySet());
+
+                                            receivedQty = dto.getReceivedQty().split("[.]")[0];
+                                            pendingQty = dto.getItemPendingQty().split("[.]")[0];
+
+                                            // preventing excess receiving in auto mode
+
+                                            lblInboundQty.setText(receivedQty + "/" + pendingQty);
+
+
+                                            if (receivedQty.equals(pendingQty)) {
+
+                                                isRsnScanned = false;
+                                                etQty.setText("");
+                                                common.showUserDefinedAlertType(errorMessages.EMC_0075, getActivity(), getContext(), "Success");
+
+                                            } else {
+
+                                                isRsnScanned = true;
+
+                                                cvScanSku.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                                ivScanSku.setImageResource(R.drawable.check);
+
+                                                soundUtils.alertWarning(getActivity(), getContext());
+                                                DialogUtils.showAlertDialog(getActivity(), errorMessages.EMC_0073);
+                                            }
                                         }
                                     }
+                                } else {
+                                    common.showUserDefinedAlertType(errorMessages.EMC_090, getActivity(), getActivity(), "Error");
+                                    ProgressDialogUtils.closeProgressDialog();
                                 }
                             }
                         } catch (Exception ex) {

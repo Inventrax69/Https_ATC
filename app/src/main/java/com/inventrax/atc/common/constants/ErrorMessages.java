@@ -155,4 +155,8 @@ public class ErrorMessages {
 
     public String EMC_088 = "Please Scan From Container";
 
+    public String EMC_089 = "From location and To location must be different.";
+
+    public String EMC_090 = "There is no information about pending and received qty from server.";
+
 }

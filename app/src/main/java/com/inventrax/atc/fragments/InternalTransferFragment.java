@@ -112,10 +112,10 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
         }
     };
 
-    public void myScannedData(Context context, String barcode){
+    public void myScannedData(Context context, String barcode) {
         try {
             ProcessScannedinfo(barcode.trim());
-        }catch (Exception e){
+        } catch (Exception e) {
             //  Toast.makeText(context, ""+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -254,9 +254,9 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    MainActivity mainActivity=(MainActivity)getActivity();
-                    mainActivity.barcode="";
-                    return  true;
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.barcode = "";
+                    return true;
                 }
                 return false;
             }
@@ -267,8 +267,6 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
         //getTenants();
 
         getWarehouse();
-
-
 
 
     }
@@ -302,46 +300,46 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
 
             case R.id.btnBinComplete:
 
-                if(!etLocationFrom.getText().toString().isEmpty()){
+                if (!etLocationFrom.getText().toString().isEmpty()) {
 
-                    if(!etPalletFrom.getText().toString().isEmpty()){
+                    if (!etPalletFrom.getText().toString().isEmpty()) {
 
-                        if (!etSku.getText().toString().isEmpty()){
+                        if (!etSku.getText().toString().isEmpty()) {
 
                             if (!etLocationTo.getText().toString().isEmpty()) {
 
-                                    if (!storageloc.isEmpty() && !storageloc.equalsIgnoreCase("SLOC")) {
+                                if (!storageloc.isEmpty() && !storageloc.equalsIgnoreCase("SLOC")) {
 
-                                        if(!etQty.getText().toString().isEmpty()){
+                                    if (!etQty.getText().toString().isEmpty()) {
 
-                                        if(!etQty.getText().toString().equalsIgnoreCase("0")){
+                                        if (!etQty.getText().toString().equalsIgnoreCase("0")) {
                                             UpsertBinToBinTransfer();
-                                        }else {
+                                        } else {
                                             common.showUserDefinedAlertType(errorMessages.EMC_0068, getActivity(), getContext(), "Error");
                                         }
 
-                                        }else {
-                                            common.showUserDefinedAlertType(errorMessages.EMC_0067, getActivity(), getContext(), "Error");
-                                        }
-
-                                    }else {
-                                        common.showUserDefinedAlertType(errorMessages.EMC_0052, getActivity(), getContext(), "Error");
+                                    } else {
+                                        common.showUserDefinedAlertType(errorMessages.EMC_0067, getActivity(), getContext(), "Error");
                                     }
+
+                                } else {
+                                    common.showUserDefinedAlertType(errorMessages.EMC_0052, getActivity(), getContext(), "Error");
+                                }
 
 
                             } else {
                                 common.showUserDefinedAlertType(errorMessages.EMC_0020, getActivity(), getContext(), "Error");
                             }
 
-                        }else {
+                        } else {
                             common.showUserDefinedAlertType(errorMessages.EMC_0028, getActivity(), getContext(), "Error");
                         }
 
-                    }else {
+                    } else {
                         common.showUserDefinedAlertType(errorMessages.EMC_088, getActivity(), getContext(), "Error");
                     }
 
-                }else {
+                } else {
                     common.showUserDefinedAlertType(errorMessages.EMC_0026, getActivity(), getContext(), "Error");
                 }
 
@@ -392,7 +390,7 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
     //Assigning scanned value to the respective fields
     public void ProcessScannedinfo(String scannedData) {
 
-        if(((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)){
+        if (((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)) {
             return;
         }
 
@@ -417,7 +415,10 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
                             ValiDateMaterial(scannedData);
                         } else {
                             if (etLocationTo.getText().toString().isEmpty()) {
-                                ValidateLocation(scannedData);
+                                if (!etLocationFrom.getText().toString().equalsIgnoreCase(scannedData))
+                                    ValidateLocation(scannedData);
+                                else
+                                    common.showUserDefinedAlertType(errorMessages.EMC_089, getActivity(), getActivity(), "Error");
                             }
                         }
                     }
@@ -1032,7 +1033,7 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
                 tenantId = oHouseKeeping.getTenantID();   // Te
 
                 // get warehouses of selected tenant
-               // getWarehouse();
+                // getWarehouse();
             }
         }
     }
@@ -1164,143 +1165,143 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
         }
     }
 
-  /*  public void validateLocationCode(String location, final String from) {
-        try {
+    /*  public void validateLocationCode(String location, final String from) {
+          try {
 
-            WMSCoreMessage message = new WMSCoreMessage();
-            message = common.SetAuthentication(EndpointConstants.Inventory, getActivity());
-            InventoryDTO inventoryDTO = new InventoryDTO();
-            inventoryDTO.setAccountID(accountId);
-            inventoryDTO.setTenantID(tenantId);
-            inventoryDTO.setWarehouse(selectedWH);
-            inventoryDTO.setWarehouseId(whId);
-            inventoryDTO.setLocationCode(location);
-            message.setEntityObject(inventoryDTO);
+              WMSCoreMessage message = new WMSCoreMessage();
+              message = common.SetAuthentication(EndpointConstants.Inventory, getActivity());
+              InventoryDTO inventoryDTO = new InventoryDTO();
+              inventoryDTO.setAccountID(accountId);
+              inventoryDTO.setTenantID(tenantId);
+              inventoryDTO.setWarehouse(selectedWH);
+              inventoryDTO.setWarehouseId(whId);
+              inventoryDTO.setLocationCode(location);
+              message.setEntityObject(inventoryDTO);
 
-            Call<String> call = null;
-            ApiInterface apiService = RestService.getClient().create(ApiInterface.class);
+              Call<String> call = null;
+              ApiInterface apiService = RestService.getClient().create(ApiInterface.class);
 
-            try {
-                //Checking for Internet Connectivity
-                // if (NetworkUtils.isInternetAvailable()) {
-                // Calling the Interface method
-                ProgressDialogUtils.showProgressDialog("Please Wait");
-                call = apiService.CheckLocationForLiveStock(message);
-                // } else {
-                // DialogUtils.showAlertDialog(getActivity(), "Please enable internet");
-                // return;
-                // }
+              try {
+                  //Checking for Internet Connectivity
+                  // if (NetworkUtils.isInternetAvailable()) {
+                  // Calling the Interface method
+                  ProgressDialogUtils.showProgressDialog("Please Wait");
+                  call = apiService.CheckLocationForLiveStock(message);
+                  // } else {
+                  // DialogUtils.showAlertDialog(getActivity(), "Please enable internet");
+                  // return;
+                  // }
 
-            } catch (Exception ex) {
-                try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_01", getActivity());
-                    logException();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ProgressDialogUtils.closeProgressDialog();
-                common.showUserDefinedAlertType(errorMessages.EMC_0002, getActivity(), getContext(), "Error");
-            }
-            try {
-                //Getting response from the method
-                call.enqueue(new Callback<String>() {
+              } catch (Exception ex) {
+                  try {
+                      exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_01", getActivity());
+                      logException();
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+                  ProgressDialogUtils.closeProgressDialog();
+                  common.showUserDefinedAlertType(errorMessages.EMC_0002, getActivity(), getContext(), "Error");
+              }
+              try {
+                  //Getting response from the method
+                  call.enqueue(new Callback<String>() {
 
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                      @Override
+                      public void onResponse(Call<String> call, Response<String> response) {
 
-                        try {
+                          try {
 
-                            core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
+                              core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
 
-                            // if any Exception throws
-                            if ((core.getType().toString().equals("Exception"))) {
-                                List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
-                                _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+                              // if any Exception throws
+                              if ((core.getType().toString().equals("Exception"))) {
+                                  List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
+                                  _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
 
-                                WMSExceptionMessage owmsExceptionMessage = null;
-                                ProgressDialogUtils.closeProgressDialog();
-                                for (int i = 0; i < _lExceptions.size(); i++) {
+                                  WMSExceptionMessage owmsExceptionMessage = null;
+                                  ProgressDialogUtils.closeProgressDialog();
+                                  for (int i = 0; i < _lExceptions.size(); i++) {
 
-                                    owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
-                                    if (from.equalsIgnoreCase("from")) {
-                                        etLocationFrom.setText("");
-                                        isLocationScaned = false;
-                                        cvScanFromLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                        ivScanFromLoc.setImageResource(R.drawable.warning_img);
-                                    } else {
-                                        etLocationTo.setText("");
-                                        cvScanToLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                        ivScanToLoc.setImageResource(R.drawable.warning_img);
-                                    }
-                                    common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
-                                    return;
-                                }
-                            } else {
-                                List<LinkedTreeMap<?, ?>> _lResult = new ArrayList<LinkedTreeMap<?, ?>>();
-                                _lResult = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+                                      owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
+                                      if (from.equalsIgnoreCase("from")) {
+                                          etLocationFrom.setText("");
+                                          isLocationScaned = false;
+                                          cvScanFromLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                          ivScanFromLoc.setImageResource(R.drawable.warning_img);
+                                      } else {
+                                          etLocationTo.setText("");
+                                          cvScanToLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                          ivScanToLoc.setImageResource(R.drawable.warning_img);
+                                      }
+                                      common.showAlertType(owmsExceptionMessage, getActivity(), getContext());
+                                      return;
+                                  }
+                              } else {
+                                  List<LinkedTreeMap<?, ?>> _lResult = new ArrayList<LinkedTreeMap<?, ?>>();
+                                  _lResult = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
 
-                                InventoryDTO dto = null;
-                                ProgressDialogUtils.closeProgressDialog();
+                                  InventoryDTO dto = null;
+                                  ProgressDialogUtils.closeProgressDialog();
 
-                                for (int i = 0; i < _lResult.size(); i++) {
+                                  for (int i = 0; i < _lResult.size(); i++) {
 
-                                    dto = new InventoryDTO(_lResult.get(i).entrySet());
-                                    if (dto.getResult().equals("1")) {
+                                      dto = new InventoryDTO(_lResult.get(i).entrySet());
+                                      if (dto.getResult().equals("1")) {
 
-                                        if (from.equalsIgnoreCase("from")) {
-                                            cvScanFromLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                            ivScanFromLoc.setImageResource(R.drawable.check);
-                                            isLocationScaned = true;
-                                        } else {
-                                            cvScanToLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                            ivScanToLoc.setImageResource(R.drawable.check);
-                                        }
-                                    } else {
-                                        if (from.equalsIgnoreCase("from")) {
-                                            cvScanFromLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                            ivScanFromLoc.setImageResource(R.drawable.invalid_cross);
-                                            isLocationScaned = true;
-                                        } else {
-                                            cvScanToLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
-                                            ivScanToLoc.setImageResource(R.drawable.invalid_cross);
-                                        }
-                                        common.showUserDefinedAlertType(errorMessages.EMC_0016, getActivity(), getContext(), "Error");
-                                    }
-                                }
-                            }
-                        } catch (Exception ex) {
-                            try {
-                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_02", getActivity());
-                                logException();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            ProgressDialogUtils.closeProgressDialog();
-                        }
-                    }
+                                          if (from.equalsIgnoreCase("from")) {
+                                              cvScanFromLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                              ivScanFromLoc.setImageResource(R.drawable.check);
+                                              isLocationScaned = true;
+                                          } else {
+                                              cvScanToLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                              ivScanToLoc.setImageResource(R.drawable.check);
+                                          }
+                                      } else {
+                                          if (from.equalsIgnoreCase("from")) {
+                                              cvScanFromLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                              ivScanFromLoc.setImageResource(R.drawable.invalid_cross);
+                                              isLocationScaned = true;
+                                          } else {
+                                              cvScanToLoc.setCardBackgroundColor(getResources().getColor(R.color.white));
+                                              ivScanToLoc.setImageResource(R.drawable.invalid_cross);
+                                          }
+                                          common.showUserDefinedAlertType(errorMessages.EMC_0016, getActivity(), getContext(), "Error");
+                                      }
+                                  }
+                              }
+                          } catch (Exception ex) {
+                              try {
+                                  exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_02", getActivity());
+                                  logException();
+                              } catch (IOException e) {
+                                  e.printStackTrace();
+                              }
+                              ProgressDialogUtils.closeProgressDialog();
+                          }
+                      }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable throwable) {
-                        ProgressDialogUtils.closeProgressDialog();
-                        common.showUserDefinedAlertType(errorMessages.EMC_0002, getActivity(), getContext(), "Error");
-                    }
-                });
-            } catch (Exception ex) {
-                try {
-                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_03", getActivity());
-                    logException();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ProgressDialogUtils.closeProgressDialog();
-                common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
-            }
-        } catch (Exception ex) {
-            ProgressDialogUtils.closeProgressDialog();
-            common.showUserDefinedAlertType(errorMessages.EMC_0003, getActivity(), getContext(), "Error");
-        }
-    }
-*/
+                      @Override
+                      public void onFailure(Call<String> call, Throwable throwable) {
+                          ProgressDialogUtils.closeProgressDialog();
+                          common.showUserDefinedAlertType(errorMessages.EMC_0002, getActivity(), getContext(), "Error");
+                      }
+                  });
+              } catch (Exception ex) {
+                  try {
+                      exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_03", getActivity());
+                      logException();
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+                  ProgressDialogUtils.closeProgressDialog();
+                  common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
+              }
+          } catch (Exception ex) {
+              ProgressDialogUtils.closeProgressDialog();
+              common.showUserDefinedAlertType(errorMessages.EMC_0003, getActivity(), getContext(), "Error");
+          }
+      }
+  */
     public void GetAvailbleQtyList() {
         try {
             WMSCoreMessage message = new WMSCoreMessage();

@@ -49,6 +49,7 @@ import com.inventrax.atc.common.constants.EndpointConstants;
 import com.inventrax.atc.common.constants.ErrorMessages;
 import com.inventrax.atc.interfaces.ApiInterface;
 import com.inventrax.atc.pojos.CycleCountDTO;
+import com.inventrax.atc.pojos.InventoryDTO;
 import com.inventrax.atc.pojos.ScanDTO;
 import com.inventrax.atc.pojos.WMSCoreMessage;
 import com.inventrax.atc.pojos.WMSExceptionMessage;
@@ -113,15 +114,15 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
     boolean isValidLocation = false;
     boolean isPalletScanned = false;
     boolean isRSNScanned = false;
-    String Rack = "", Column = "", Level = "",CycleCountSeqCode="";
+    String Rack = "", Column = "", Level = "", CycleCountSeqCode = "";
     TextView tvRack, tvColumn, tvLevel;
     SearchableSpinner spinnerSelectSloc;
     String storageLoc;
 
-    public void myScannedData(Context context, String barcode){
+    public void myScannedData(Context context, String barcode) {
         try {
             ProcessScannedinfo(barcode.trim());
-        }catch (Exception e){
+        } catch (Exception e) {
             //  Toast.makeText(context, ""+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -205,9 +206,9 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    MainActivity mainActivity=(MainActivity)getActivity();
-                    mainActivity.barcode="";
-                    return  true;
+                    MainActivity mainActivity = (MainActivity) getActivity();
+                    mainActivity.barcode = "";
+                    return true;
                 }
                 return false;
             }
@@ -293,9 +294,7 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
 
 
         // To get Storage Locations
-        getSLocs();
-
-
+        GetBinToBinStorageLocations();
 
 
     }
@@ -335,25 +334,28 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
                         common.showUserDefinedAlertType("Please enter quantity", getActivity(), getContext(), "Error");
                         return;
                     } else {
-                        DialogUtils.showConfirmDialog(getActivity(), "Confirm", "Are you sure to submit this sku? ", new DialogInterface.OnClickListener() {
+                        if(!storageLoc.isEmpty()) {
+                            DialogUtils.showConfirmDialog(getActivity(), "Confirm", "Are you sure to submit this sku? ", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
 
-                                switch (which) {
-                                    case DialogInterface.BUTTON_POSITIVE:
-                                        common.setIsPopupActive(false);
-                                        upsertCycleCount();
-                                        break;
+                                    switch (which) {
+                                        case DialogInterface.BUTTON_POSITIVE:
+                                            common.setIsPopupActive(false);
+                                            upsertCycleCount();
+                                            break;
 
-                                    case DialogInterface.BUTTON_NEGATIVE:
-                                        common.setIsPopupActive(false);
-                                        break;
+                                        case DialogInterface.BUTTON_NEGATIVE:
+                                            common.setIsPopupActive(false);
+                                            break;
+                                    }
+
                                 }
-
-                            }
-                        });
-
+                            });
+                        }else {
+                            common.showUserDefinedAlertType("Please select SLOC", getActivity(), getContext(), "Error");
+                        }
                     }
                 } else {
                     common.showUserDefinedAlertType(errorMessages.EMC_0065, getActivity(), getContext(), "Error");
@@ -400,22 +402,118 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
         }
     }
 
-    public void getSLocs() {
+    public void GetBinToBinStorageLocations() {
+        try {
+            WMSCoreMessage message = new WMSCoreMessage();
+            message = common.SetAuthentication(EndpointConstants.Inventory, getContext());
+            InventoryDTO inboundDTO = new InventoryDTO();
+            inboundDTO.setUserId(userId);
+            inboundDTO.setAccountID(accountId);
+            inboundDTO.setWarehouseId(warehouseId);
+            message.setEntityObject(inboundDTO);
 
+            Call<String> call = null;
+            ApiInterface apiService = RetrofitBuilderHttpsEx.getInstance(getActivity()).create(ApiInterface.class);
 
-        List<String> _lstSLocNames = new ArrayList<>();
-        _lstSLocNames.add("OK");
-        _lstSLocNames.add("Damage");
+            try {
+                //Checking for Internet Connectivity
+                // if (NetworkUtils.isInternetAvailable()) {
+                // Calling the Interface method
+                call = apiService.GetBinToBinStorageLocations(message);
+                ProgressDialogUtils.showProgressDialog("Please Wait");
+                // } else {
+                // DialogUtils.showAlertDialog(getActivity(), "Please enable internet");
+                // return;
+                // }
+            } catch (Exception ex) {
+                try {
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_01", getActivity());
+                    logException();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ProgressDialogUtils.closeProgressDialog();
+                common.showUserDefinedAlertType(errorMessages.EMC_0002, getActivity(), getContext(), "Error");
+            }
 
-        ArrayAdapter arrayAdapterSLoc = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, _lstSLocNames);
-        spinnerSelectSloc.setAdapter(arrayAdapterSLoc);
-        int getPostion = _lstSLocNames.indexOf("OK");
-        String compareValue = String.valueOf(_lstSLocNames.get(getPostion).toString());
-        if (compareValue != null) {
-            int spinnerPosition = arrayAdapterSLoc.getPosition(compareValue);
-            spinnerSelectSloc.setSelection(spinnerPosition);
+            try {
+                //Getting response from the method
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        try {
+                            core = gson.fromJson(response.body().toString(), WMSCoreMessage.class);
+                            if ((core.getType().toString().equals("Exception"))) {
+                                List<LinkedTreeMap<?, ?>> _lExceptions = new ArrayList<LinkedTreeMap<?, ?>>();
+                                _lExceptions = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+                                WMSExceptionMessage owmsExceptionMessage = null;
+                                for (int i = 0; i < _lExceptions.size(); i++) {
+                                    owmsExceptionMessage = new WMSExceptionMessage(_lExceptions.get(i).entrySet());
+                                }
+                                ProgressDialogUtils.closeProgressDialog();
+                                DialogUtils.showAlertDialog(getActivity(), owmsExceptionMessage.getWMSMessage());
+                            } else {
+                                ProgressDialogUtils.closeProgressDialog();
+                                List<LinkedTreeMap<?, ?>> _lstInbound = new ArrayList<LinkedTreeMap<?, ?>>();
+                                _lstInbound = (List<LinkedTreeMap<?, ?>>) core.getEntityObject();
+
+                                List<InventoryDTO> lstDto = new ArrayList<>();
+                                List<String> lstInboundNo = new ArrayList<>();
+                                for (int i = 0; i < _lstInbound.size(); i++) {
+                                    InventoryDTO oInbound = new InventoryDTO(_lstInbound.get(i).entrySet());
+                                    lstDto.add(oInbound);
+                                }
+
+                                lstInboundNo.add("SLOC");
+
+                                for (int i = 0; i < lstDto.size(); i++) {
+                                    lstInboundNo.add(lstDto.get(i).getLocationCode());
+                                }
+
+                                ArrayAdapter arrayAdapter1;
+                                arrayAdapter1 = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, lstInboundNo);
+                                spinnerSelectSloc.setAdapter(arrayAdapter1);
+                                ProgressDialogUtils.closeProgressDialog();
+                            }
+                        } catch (Exception ex) {
+                            try {
+                                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_02", getActivity());
+                                logException();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            ProgressDialogUtils.closeProgressDialog();
+                        }
+                    }
+
+                    // response object fails
+                    @Override
+                    public void onFailure(Call<String> call, Throwable throwable) {
+                        //Toast.makeText(LoginActivity.this, throwable.toString(), Toast.LENGTH_LONG).show();
+                        ProgressDialogUtils.closeProgressDialog();
+                        common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
+                    }
+                });
+            } catch (Exception ex) {
+                try {
+                    exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_03", getActivity());
+                    logException();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ProgressDialogUtils.closeProgressDialog();
+                common.showUserDefinedAlertType(errorMessages.EMC_0001, getActivity(), getContext(), "Error");
+            }
+        } catch (Exception ex) {
+            try {
+                exceptionLoggerUtils.createExceptionLog(ex.toString(), classCode, "001_04", getActivity());
+                logException();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ProgressDialogUtils.closeProgressDialog();
+            common.showUserDefinedAlertType(errorMessages.EMC_0003, getActivity(), getContext(), "Error");
         }
-
     }
 
     // honeywell
@@ -488,7 +586,7 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
     //Assigning scanned value to the respective fields
     public void ProcessScannedinfo(String scannedData) {
 
-        if(((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)){
+        if (((DrawerLayout) getActivity().findViewById(R.id.drawer_layout)).isDrawerOpen(GravityCompat.START)) {
             return;
         }
 
@@ -1085,7 +1183,6 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
                                 ProgressDialogUtils.closeProgressDialog();
 
 
-
                                 for (int i = 0; i < lstDto.size(); i++) {
 
                                     if (lstDto.get(i).getResult().equals("Confirmed successfully")) {
@@ -1107,7 +1204,7 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
                                         etCCQty.setEnabled(false);
                                         etCCQty.clearFocus();
 
-                                        getSLocs();
+                                        GetBinToBinStorageLocations();
 
                                     } else {
                                         common.showUserDefinedAlertType(lstDto.get(i).getResult(), getActivity(), getContext(), "Error");
@@ -1437,7 +1534,7 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
         etProjectRef.setText("");
         etCCQty.setText("");
         // To get Storage Locations
-        getSLocs();
+        GetBinToBinStorageLocations();
 
         etCCQty.setEnabled(false);
         etCCQty.clearFocus();
@@ -1484,7 +1581,7 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
         isPalletScanned = false;
         isRSNScanned = false;
         // To get Storage Locations
-        getSLocs();
+        GetBinToBinStorageLocations();
 
     }
 
@@ -2142,7 +2239,7 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
 
                             ScanDTO scanDTO1 = new ScanDTO(_lResult.entrySet());
                             ProgressDialogUtils.closeProgressDialog();
-                            
+
                             if (scanDTO1 != null) {
                                 if (scanDTO1.getScanResult()) {
                                     isPalletScanned = true;
@@ -2195,7 +2292,10 @@ public class CycleCountDetailsFragment extends Fragment implements View.OnClickL
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        storageLoc = spinnerSelectSloc.getSelectedItem().toString();
+        if (!spinnerSelectSloc.getSelectedItem().toString().equalsIgnoreCase("SLOC"))
+            storageLoc = spinnerSelectSloc.getSelectedItem().toString();
+        else
+            storageLoc = "";
     }
 
     @Override
