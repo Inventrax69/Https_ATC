@@ -694,8 +694,6 @@ public class InternalTransferFragment extends Fragment implements View.OnClickLi
 
 
 
-
-
 /*                                    } else {
                                         Materialcode = scannedData.split("[|]")[0];
                                         etBatch.setText(scannedData.split("[|]")[1]);

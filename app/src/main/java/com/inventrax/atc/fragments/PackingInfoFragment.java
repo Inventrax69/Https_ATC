@@ -251,7 +251,10 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
 
             case R.id.btnSearch:
 
+                if(!tvScanSONumber.getText().toString().equalsIgnoreCase("Scan Packing slip No. / SO Number"))
                 GetPackingCartonInfo(tvScanSONumber.getText().toString());
+                else
+                    common.showUserDefinedAlertType("Please scan packing slip/SO number to proceed.", getActivity(),getActivity(),"Error");
 
                 break;
 
@@ -381,7 +384,7 @@ public class PackingInfoFragment extends Fragment implements View.OnClickListene
         scannedLocation = "";
         scannedPallet = "";
 
-        tvScanSONumber.setText("Scan Packing slip No.");
+        tvScanSONumber.setText("Scan Packing slip No. / SO Number");
 
         serialNo = "";
         batch = "";

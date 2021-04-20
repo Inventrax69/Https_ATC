@@ -124,19 +124,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="fill_horizontal"
-                        android:text="Scan Packing slip No. "
+                        android:text="Scan Packing slip No. / SO Number"
                         android:textColor="@color/black"
                         android:textSize="12sp"
                         android:textStyle="normal" />
 
                 </LinearLayout>
 
-
-
-
             </LinearLayout>
-
-
 
 
             <android.support.v7.widget.RecyclerView

@@ -86,7 +86,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
             lblReleaseDate = (TextView) rootView.findViewById(R.id.lblReleaseDate);
             txtReleaseDate = (TextView) rootView.findViewById(R.id.txtReleaseDate);
-            txtReleaseDate.setText("23-03-2020");
+            txtReleaseDate.setText("12-04-2020");
 
         } catch (Exception ex) {
             Log.d(AboutFragment.class.getName(), ex.toString());
